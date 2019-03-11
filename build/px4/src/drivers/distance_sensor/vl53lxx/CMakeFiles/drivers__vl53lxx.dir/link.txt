@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/idris/catkin_ws/devel/.private/px4/lib/libdrivers__vl53lxx.a  CMakeFiles/drivers__vl53lxx.dir/vl53lxx.cpp.o
+/usr/bin/ranlib /home/idris/catkin_ws/devel/.private/px4/lib/libdrivers__vl53lxx.a

@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/idris/catkin_ws/devel/.private/px4/lib/libdrivers__accelsim.a  CMakeFiles/drivers__accelsim.dir/accelsim.cpp.o
+/usr/bin/ranlib /home/idris/catkin_ws/devel/.private/px4/lib/libdrivers__accelsim.a

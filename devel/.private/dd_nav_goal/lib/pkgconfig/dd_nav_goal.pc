@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/devel/.private/dd_nav_goal
+
+Name: dd_nav_goal
+Description: Description of dd_nav_goal
+Version: 0.1.0
+Cflags: -I/home/idris/catkin_ws/src/dd_nav_goal/include
+Libs: -L/home/idris/catkin_ws/devel/.private/dd_nav_goal/lib 
+Requires: 

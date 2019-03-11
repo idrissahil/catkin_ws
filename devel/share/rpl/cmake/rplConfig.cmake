@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/rpl/share/rpl/cmake/rplConfig.cmake

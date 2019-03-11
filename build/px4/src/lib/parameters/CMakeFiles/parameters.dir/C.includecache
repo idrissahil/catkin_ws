@@ -1,0 +1,28 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/idris/catkin_ws/build/px4/src/lib/parameters/px4_parameters.c
+px4_parameters.h
+/home/idris/catkin_ws/build/px4/src/lib/parameters/px4_parameters.h
+
+/home/idris/catkin_ws/build/px4/src/lib/parameters/px4_parameters.h
+stdint.h
+-
+parameters/param.h
+-
+
+/home/idris/catkin_ws/src/px4/src/lib/parameters/param.h
+stdint.h
+-
+stdbool.h
+-
+sys/types.h
+-
+cstdio
+-
+

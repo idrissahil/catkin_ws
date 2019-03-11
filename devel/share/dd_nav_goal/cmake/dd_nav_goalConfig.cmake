@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/dd_nav_goal/share/dd_nav_goal/cmake/dd_nav_goalConfig.cmake

@@ -1,0 +1,16 @@
+\subsubsection parameters ROS parameters
+
+Reads and maintains the following parameters on the ROS server
+
+- \b "~max_xy_vel" : \b [double] The maximum xy velocity min: 0.0, default: 1.0, max: 10.0
+- \b "~max_z_vel" : \b [double] The maximum z velocity min: 0.0, default: 1.0, max: 10.0
+- \b "~k_p_xy" : \b [double] The proportional xy gain min: 0.0, default: 1.0, max: 10.0
+- \b "~k_i_xy" : \b [double] The integral xy gain min: 0.0, default: 1.0, max: 10.0
+- \b "~k_d_xy" : \b [double] The derivative xy gain min: 0.0, default: 1.0, max: 10.0
+- \b "~bias_xy" : \b [double] The xy bias min: 0.0, default: 0.0, max: 10.0
+- \b "~k_p_z" : \b [double] The proportional z gain min: 0.0, default: 1.0, max: 10.0
+- \b "~k_i_z" : \b [double] The integral z gain min: 0.0, default: 1.0, max: 10.0
+- \b "~k_d_z" : \b [double] The derivative z gain min: 0.0, default: 1.0, max: 10.0
+- \b "~bias_z" : \b [double] The z bias min: 0.0, default: 0.0, max: 10.0
+- \b "~frequency" : \b [double] Publish frequency min: 0.0, default: 10.0, max: 100.0
+

@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/cmake/dd_controlConfig.cmake

@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/idris/catkin_ws/devel/.private/px4/lib/libdrivers__batt_smbus.a  CMakeFiles/drivers__batt_smbus.dir/batt_smbus_main.cpp.o CMakeFiles/drivers__batt_smbus.dir/batt_smbus.cpp.o CMakeFiles/drivers__batt_smbus.dir/batt_smbus_i2c.cpp.o
+/usr/bin/ranlib /home/idris/catkin_ws/devel/.private/px4/lib/libdrivers__batt_smbus.a

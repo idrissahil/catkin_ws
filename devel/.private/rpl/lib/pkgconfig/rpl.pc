@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/devel/.private/rpl
+
+Name: rpl
+Description: Description of rpl
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/idris/catkin_ws/devel/.private/rpl/lib 
+Requires: 

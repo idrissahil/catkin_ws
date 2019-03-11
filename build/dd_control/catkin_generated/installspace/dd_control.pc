@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/install
+
+Name: dd_control
+Description: Description of dd_control
+Version: 0.1.0
+Cflags: -I/home/idris/catkin_ws/install/include
+Libs: -L/home/idris/catkin_ws/install/lib -ldd_control_nodelet
+Requires: geometry_msgs mavros_msgs nodelet roscpp std_msgs

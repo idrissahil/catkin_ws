@@ -1,0 +1,9 @@
+[35m[1mScanning dependencies of target dd_nav_goal_autogen[0m
+[ 20%] [34m[1mAutomatic MOC for target dd_nav_goal[0m
+[ 20%] Built target dd_nav_goal_autogen
+[35m[1mScanning dependencies of target dd_nav_goal[0m
+[ 40%] [32mBuilding CXX object CMakeFiles/dd_nav_goal.dir/src/dd_nav_goal.cpp.o[0m
+[ 60%] [32mBuilding CXX object CMakeFiles/dd_nav_goal.dir/src/dd_q_combo_box.cpp.o[0m
+[ 80%] [32mBuilding CXX object CMakeFiles/dd_nav_goal.dir/dd_nav_goal_autogen/mocs_compilation.cpp.o[0m
+[100%] [32m[1mLinking CXX shared library /home/idris/catkin_ws/devel/.private/dd_nav_goal/lib/libdd_nav_goal.so[0m
+[100%] Built target dd_nav_goal

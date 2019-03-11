@@ -1,0 +1,2 @@
+/usr/bin/ar qc /home/idris/catkin_ws/devel/.private/px4/lib/libecl_attitude_fw.a  CMakeFiles/ecl_attitude_fw.dir/ecl_controller.cpp.o CMakeFiles/ecl_attitude_fw.dir/ecl_pitch_controller.cpp.o CMakeFiles/ecl_attitude_fw.dir/ecl_roll_controller.cpp.o CMakeFiles/ecl_attitude_fw.dir/ecl_wheel_controller.cpp.o CMakeFiles/ecl_attitude_fw.dir/ecl_yaw_controller.cpp.o
+/usr/bin/ranlib /home/idris/catkin_ws/devel/.private/px4/lib/libecl_attitude_fw.a

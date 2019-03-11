@@ -1,0 +1,52 @@
+Not searching for unused variables given on the command line.
+[36m--[0m PX4 VERSION: v1.8.0-1354-g3a910555a1
+[36m--[0m CONFIG: posix_sitl_default
+[36m--[0m Build Type: RelWithDebInfo
+[36m--[0m The CXX compiler identification is GNU 7.3.0
+[36m--[0m The C compiler identification is GNU 7.3.0
+[36m--[0m The ASM compiler identification is GNU
+[36m--[0m Found assembler: /usr/bin/cc
+[36m--[0m Check for working CXX compiler: /usr/bin/c++
+[36m--[0m Check for working CXX compiler: /usr/bin/c++ -- works
+[36m--[0m Detecting CXX compiler ABI info
+[36m--[0m Detecting CXX compiler ABI info - done
+[36m--[0m Detecting CXX compile features
+[36m--[0m Detecting CXX compile features - done
+[36m--[0m Check for working C compiler: /usr/bin/cc
+[36m--[0m Check for working C compiler: /usr/bin/cc -- works
+[36m--[0m Detecting C compiler ABI info
+[36m--[0m Detecting C compiler ABI info - done
+[36m--[0m Detecting C compile features
+[36m--[0m Detecting C compile features - done
+[36m--[0m catkin ENABLED
+[36m--[0m Using CATKIN_DEVEL_PREFIX: /home/idris/catkin_ws/devel/.private/px4
+[36m--[0m Using CMAKE_PREFIX_PATH: /home/idris/catkin_ws/devel;/opt/ros/melodic
+[36m--[0m This workspace overlays: /home/idris/catkin_ws/devel;/opt/ros/melodic
+[36m--[0m Found PythonInterp: /usr/bin/python2 (found suitable version "2.7.15", minimum required is "2")
+[36m--[0m Using PYTHON_EXECUTABLE: /usr/bin/python2
+[36m--[0m Using Debian Python package layout
+[36m--[0m Using empy: /usr/bin/empy
+[36m--[0m Using CATKIN_ENABLE_TESTING: ON
+[36m--[0m Call enable_testing()
+[36m--[0m Using CATKIN_TEST_RESULTS_DIR: /home/idris/catkin_ws/build/px4/test_results
+[36m--[0m Found gmock sources under '/usr/src/googletest': gmock will be built
+[36m--[0m Found PythonInterp: /usr/bin/python2 (found version "2.7.15")
+[36m--[0m Looking for pthread.h
+[36m--[0m Looking for pthread.h - found
+[36m--[0m Looking for pthread_create
+[36m--[0m Looking for pthread_create - not found
+[36m--[0m Looking for pthread_create in pthreads
+[36m--[0m Looking for pthread_create in pthreads - not found
+[36m--[0m Looking for pthread_create in pthread
+[36m--[0m Looking for pthread_create in pthread - found
+[36m--[0m Found Threads: TRUE
+[36m--[0m Found gtest sources under '/usr/src/googletest': gtests will be built
+[36m--[0m Using Python nosetests: /usr/bin/nosetests-2.7
+[36m--[0m catkin 0.7.14
+[36m--[0m Found PY_jinja2: /usr/lib/python2.7/dist-packages/jinja2
+[36m--[0m C compiler: cc (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0
+[36m--[0m C++ compiler: c++ (Ubuntu 7.3.0-27ubuntu1~18.04) 7.3.0
+[36m--[0m PX4 ECL: Very lightweight Estimation & Control Library v0.9.0-590-g2354c30
+[36m--[0m Configuring done
+[36m--[0m Generating done
+[36m--[0m Build files have been written to: /home/idris/catkin_ws/build/px4

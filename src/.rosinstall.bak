@@ -1,0 +1,12 @@
+- git:
+    local-name: dd_nav_goal
+    uri: https://github.com/danielduberg/dd_nav_goal.git
+    version: master
+- git:
+    local-name: px4
+    uri: https://github.com/PX4/Firmware.git
+    version: 3a910555a190f7aa087c7a3b45f0b44d2c5c04f2
+- git:
+    local-name: rpl_uav
+    uri: https://github.com/danielduberg/rpl_uav.git
+    version: master

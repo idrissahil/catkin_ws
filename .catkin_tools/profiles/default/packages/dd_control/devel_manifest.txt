@@ -1,0 +1,27 @@
+dd_control
+/home/idris/catkin_ws/devel/.private/dd_control/lib/libdd_control_nodelet.so /home/idris/catkin_ws/devel/lib/libdd_control_nodelet.so
+/home/idris/catkin_ws/devel/.private/dd_control/lib/dd_control/dd_control_node /home/idris/catkin_ws/devel/lib/dd_control/dd_control_node
+/home/idris/catkin_ws/devel/.private/dd_control/lib/pkgconfig/dd_control.pc /home/idris/catkin_ws/devel/lib/pkgconfig/dd_control.pc
+/home/idris/catkin_ws/devel/.private/dd_control/lib/python2.7/dist-packages/dd_control/__init__.py /home/idris/catkin_ws/devel/lib/python2.7/dist-packages/dd_control/__init__.py
+/home/idris/catkin_ws/devel/.private/dd_control/lib/python2.7/dist-packages/dd_control/msg/__init__.py /home/idris/catkin_ws/devel/lib/python2.7/dist-packages/dd_control/msg/__init__.py
+/home/idris/catkin_ws/devel/.private/dd_control/lib/python2.7/dist-packages/dd_control/msg/_Velocity.py /home/idris/catkin_ws/devel/lib/python2.7/dist-packages/dd_control/msg/_Velocity.py
+/home/idris/catkin_ws/devel/.private/dd_control/lib/python2.7/dist-packages/dd_control/cfg/__init__.py /home/idris/catkin_ws/devel/lib/python2.7/dist-packages/dd_control/cfg/__init__.py
+/home/idris/catkin_ws/devel/.private/dd_control/lib/python2.7/dist-packages/dd_control/cfg/ControlConfig.py /home/idris/catkin_ws/devel/lib/python2.7/dist-packages/dd_control/cfg/ControlConfig.py
+/home/idris/catkin_ws/devel/.private/dd_control/share/common-lisp/ros/dd_control/msg/dd_control-msg.asd /home/idris/catkin_ws/devel/share/common-lisp/ros/dd_control/msg/dd_control-msg.asd
+/home/idris/catkin_ws/devel/.private/dd_control/share/common-lisp/ros/dd_control/msg/_package.lisp /home/idris/catkin_ws/devel/share/common-lisp/ros/dd_control/msg/_package.lisp
+/home/idris/catkin_ws/devel/.private/dd_control/share/common-lisp/ros/dd_control/msg/_package_Velocity.lisp /home/idris/catkin_ws/devel/share/common-lisp/ros/dd_control/msg/_package_Velocity.lisp
+/home/idris/catkin_ws/devel/.private/dd_control/share/common-lisp/ros/dd_control/msg/Velocity.lisp /home/idris/catkin_ws/devel/share/common-lisp/ros/dd_control/msg/Velocity.lisp
+/home/idris/catkin_ws/devel/.private/dd_control/share/roseus/ros/dd_control/manifest.l /home/idris/catkin_ws/devel/share/roseus/ros/dd_control/manifest.l
+/home/idris/catkin_ws/devel/.private/dd_control/share/roseus/ros/dd_control/msg/Velocity.l /home/idris/catkin_ws/devel/share/roseus/ros/dd_control/msg/Velocity.l
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/docs/ControlConfig-usage.dox /home/idris/catkin_ws/devel/share/dd_control/docs/ControlConfig-usage.dox
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/docs/ControlConfig.wikidoc /home/idris/catkin_ws/devel/share/dd_control/docs/ControlConfig.wikidoc
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/docs/ControlConfig.dox /home/idris/catkin_ws/devel/share/dd_control/docs/ControlConfig.dox
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/cmake/dd_control-msg-paths.cmake /home/idris/catkin_ws/devel/share/dd_control/cmake/dd_control-msg-paths.cmake
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/cmake/dd_control-msg-extras.cmake /home/idris/catkin_ws/devel/share/dd_control/cmake/dd_control-msg-extras.cmake
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/cmake/dd_controlConfig-version.cmake /home/idris/catkin_ws/devel/share/dd_control/cmake/dd_controlConfig-version.cmake
+/home/idris/catkin_ws/devel/.private/dd_control/share/dd_control/cmake/dd_controlConfig.cmake /home/idris/catkin_ws/devel/share/dd_control/cmake/dd_controlConfig.cmake
+/home/idris/catkin_ws/devel/.private/dd_control/share/gennodejs/ros/dd_control/_index.js /home/idris/catkin_ws/devel/share/gennodejs/ros/dd_control/_index.js
+/home/idris/catkin_ws/devel/.private/dd_control/share/gennodejs/ros/dd_control/msg/_index.js /home/idris/catkin_ws/devel/share/gennodejs/ros/dd_control/msg/_index.js
+/home/idris/catkin_ws/devel/.private/dd_control/share/gennodejs/ros/dd_control/msg/Velocity.js /home/idris/catkin_ws/devel/share/gennodejs/ros/dd_control/msg/Velocity.js
+/home/idris/catkin_ws/devel/.private/dd_control/include/dd_control/Velocity.h /home/idris/catkin_ws/devel/include/dd_control/Velocity.h
+/home/idris/catkin_ws/devel/.private/dd_control/include/dd_control/ControlConfig.h /home/idris/catkin_ws/devel/include/dd_control/ControlConfig.h
