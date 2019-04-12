@@ -1,0 +1,32 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::wifiDistCallback(const PoseStamped&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:582:10:[m[K [01;31m[Kerror: [m[Kredeclaration of ‘[01m[Kdouble wifi_sigma_x[m[K’
+   double [01;31m[Kwifi_sigma_x[m[K  = msg.pose.position.y;
+          [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:581:10:[m[K [01;36m[Knote: [m[K‘[01m[Kdouble wifi_sigma_x[m[K’ previously declared here
+   double [01;36m[Kwifi_sigma_x[m[K = msg.pose.position.x;
+          [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:583:10:[m[K [01;31m[Kerror: [m[Kredeclaration of ‘[01m[Kdouble wifi_sigma_x[m[K’
+   double [01;31m[Kwifi_sigma_x[m[K  = msg.pose.position.z;
+          [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:581:10:[m[K [01;36m[Knote: [m[K‘[01m[Kdouble wifi_sigma_x[m[K’ previously declared here
+   double [01;36m[Kwifi_sigma_x[m[K = msg.pose.position.x;
+          [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::wifiDistCallback(const PoseStamped&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:582:10:[m[K [01;31m[Kerror: [m[Kredeclaration of ‘[01m[Kdouble wifi_sigma_x[m[K’
+   double [01;31m[Kwifi_sigma_x[m[K  = msg.pose.position.y;
+          [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:581:10:[m[K [01;36m[Knote: [m[K‘[01m[Kdouble wifi_sigma_x[m[K’ previously declared here
+   double [01;36m[Kwifi_sigma_x[m[K = msg.pose.position.x;
+          [01;36m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:583:10:[m[K [01;31m[Kerror: [m[Kredeclaration of ‘[01m[Kdouble wifi_sigma_x[m[K’
+   double [01;31m[Kwifi_sigma_x[m[K  = msg.pose.position.z;
+          [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:581:10:[m[K [01;36m[Knote: [m[K‘[01m[Kdouble wifi_sigma_x[m[K’ previously declared here
+   double [01;36m[Kwifi_sigma_x[m[K = msg.pose.position.x;
+          [01;36m[K^~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make: *** [all] Error 2

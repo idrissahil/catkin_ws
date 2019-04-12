@@ -1,0 +1,1 @@
+/usr/bin/c++ -fPIC -O2 -g -DNDEBUG  -shared -Wl,-soname,libgtest_main.so -o libgtest_main.so CMakeFiles/gtest_main.dir/src/gtest_main.cc.o  -L/home/idris/catkin_ws/build/aeplanner/gtest/googlemock/gtest/src -Wl,-rpath,/home/idris/catkin_ws/build/aeplanner/gtest/googlemock/gtest/src:/home/idris/catkin_ws/build/aeplanner/gtest/googlemock/gtest -lpthread libgtest.so -lpthread 

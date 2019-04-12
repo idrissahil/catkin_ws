@@ -1,0 +1,12 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:579:71:[m[K [01;31m[Kerror: [m[Kno ‘[01m[Kvoid aeplanner::AEPlanner::wifiDistCallback(const PoseStamped&)[m[K’ member function declared in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void AEPlanner::wifiDistCallback(const geometry_msgs::PoseStamped& msg[01;31m[K)[m[K
+                                                                       [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:579:71:[m[K [01;31m[Kerror: [m[Kno ‘[01m[Kvoid aeplanner::AEPlanner::wifiDistCallback(const PoseStamped&)[m[K’ member function declared in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void AEPlanner::wifiDistCallback(const geometry_msgs::PoseStamped& msg[01;31m[K)[m[K
+                                                                       [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make: *** [all] Error 2

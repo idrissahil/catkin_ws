@@ -1,0 +1,28 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In constructor ‘[01m[Kaeplanner::AEPlanner::AEPlanner(const ros::NodeHandle&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:11:5:[m[K [01;31m[Kerror: [m[Kclass ‘[01m[Kaeplanner::AEPlanner[m[K’ does not have any field named ‘[01m[Kwifi_dist_sub_[m[K’
+   , [01;31m[Kwifi_dist_sub_[m[K(nh_.subscribe("wifi_dist", 1, &AEPlanner::wifiDistCallback, this))
+     [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:11:62:[m[K [01;31m[Kerror: [m[K‘[01m[KwifiDistCallback[m[K’ is not a member of ‘[01m[Kaeplanner::AEPlanner[m[K’
+   , wifi_dist_sub_(nh_.subscribe("wifi_dist", 1, &AEPlanner::[01;31m[KwifiDistCallback[m[K, this))
+                                                              [01;31m[K^~~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In constructor ‘[01m[Kaeplanner::AEPlanner::AEPlanner(const ros::NodeHandle&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:11:5:[m[K [01;31m[Kerror: [m[Kclass ‘[01m[Kaeplanner::AEPlanner[m[K’ does not have any field named ‘[01m[Kwifi_dist_sub_[m[K’
+   , [01;31m[Kwifi_dist_sub_[m[K(nh_.subscribe("wifi_dist", 1, &AEPlanner::wifiDistCallback, this))
+     [01;31m[K^~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:11:62:[m[K [01;31m[Kerror: [m[K‘[01m[KwifiDistCallback[m[K’ is not a member of ‘[01m[Kaeplanner::AEPlanner[m[K’
+   , wifi_dist_sub_(nh_.subscribe("wifi_dist", 1, &AEPlanner::[01;31m[KwifiDistCallback[m[K, this))
+                                                              [01;31m[K^~~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:579:71:[m[K [01;31m[Kerror: [m[Kno ‘[01m[Kvoid aeplanner::AEPlanner::wifiDistCallback(const PoseStamped&)[m[K’ member function declared in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void AEPlanner::wifiDistCallback(const geometry_msgs::PoseStamped& msg[01;31m[K)[m[K
+                                                                       [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:579:71:[m[K [01;31m[Kerror: [m[Kno ‘[01m[Kvoid aeplanner::AEPlanner::wifiDistCallback(const PoseStamped&)[m[K’ member function declared in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void AEPlanner::wifiDistCallback(const geometry_msgs::PoseStamped& msg[01;31m[K)[m[K
+                                                                       [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make: *** [all] Error 2

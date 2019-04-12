@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/kdtree/lib/pkgconfig/kdtree.pc

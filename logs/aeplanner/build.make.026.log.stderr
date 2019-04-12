@@ -1,0 +1,22 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[KEigen::Vector4d aeplanner::AEPlanner::sampleNewPoint()[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:254:54:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+            pow(params_.max_sampling_radius, 2.0) and [01;31m[Kwifi_sig[m[K<0.2);
+                                                      [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:254:54:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+            pow(params_.max_sampling_radius, 2.0) and [01;36m[Kwifi_sig[m[K<0.2);
+                                                      [01;36m[K^~~~~~~~[m[K
+                                                      [32m[Kiseqsig[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[KEigen::Vector4d aeplanner::AEPlanner::sampleNewPoint()[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:254:54:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+            pow(params_.max_sampling_radius, 2.0) and [01;31m[Kwifi_sig[m[K<0.2);
+                                                      [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:254:54:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+            pow(params_.max_sampling_radius, 2.0) and [01;36m[Kwifi_sig[m[K<0.2);
+                                                      [01;36m[K^~~~~~~~[m[K
+                                                      [32m[Kiseqsig[m[K
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make: *** [all] Error 2

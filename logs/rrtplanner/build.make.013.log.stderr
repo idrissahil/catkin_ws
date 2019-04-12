@@ -1,0 +1,192 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:397:3:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kif[m[K’
+   [01;31m[Kif[m[K (!ot_res)
+   [01;31m[K^~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:400:3:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kfor[m[K’
+   [01;31m[Kfor[m[K (octomap::OcTree::leaf_bbx_iterator it = ot->begin_leafs_bbx(min, max),
+   [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:402:8:[m[K [01;31m[Kerror: [m[K‘[01m[Kit[m[K’ does not name a type; did you mean ‘[01m[Kint[m[K’?
+        [01;31m[Kit[m[K != it_end; ++it)
+        [01;31m[K^~[m[K
+        [32m[Kint[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:402:22:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[K++[m[K’ token
+        it != it_end; [01;31m[K++[m[Kit)
+                      [01;31m[K^~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:434:3:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kreturn[m[K’
+   [01;31m[Kreturn[m[K false;
+   [01;31m[K^~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:606:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizeNode(geometry_msgs::Point pos, int id)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In function ‘[01m[Kvoid visualizeNode(geometry_msgs::Point, int)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:611:23:[m[K [01;31m[Kerror: [m[K‘[01m[Kframe_id_[m[K’ was not declared in this scope
+   a.header.frame_id = [01;31m[Kframe_id_[m[K;
+                       [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:628:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kpath_pub_[m[K’ was not declared in this scope
+   [01;31m[Kpath_pub_[m[K.publish(a);
+   [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:631:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizePose(geometry_msgs::Pose pose, int id)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In function ‘[01m[Kvoid visualizePose(geometry_msgs::Pose, int)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:636:23:[m[K [01;31m[Kerror: [m[K‘[01m[Kframe_id_[m[K’ was not declared in this scope
+   a.header.frame_id = [01;31m[Kframe_id_[m[K;
+                       [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:652:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kpath_pub_[m[K’ was not declared in this scope
+   [01;31m[Kpath_pub_[m[K.publish(a);
+   [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizeEdge(RrtNode* node, int id)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:25:[m[K [01;31m[Kerror: [m[Kvariable or field ‘[01m[KvisualizeEdge[m[K’ declared void
+ void Rrt::visualizeEdge([01;31m[KRrtNode[m[K* node, int id)
+                         [01;31m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:25:[m[K [01;31m[Kerror: [m[K‘[01m[KRrtNode[m[K’ was not declared in this scope
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:25:[m[K [01;36m[Knote: [m[Ksuggested alternative:
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/include/rrtplanner/rrt.h:21:8:[m[K [01;36m[Knote: [m[K  ‘[01m[Kaeplanner_ns::RrtNode[m[K’
+ struct [01;36m[KRrtNode[m[K
+        [01;36m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:34:[m[K [01;31m[Kerror: [m[K‘[01m[Knode[m[K’ was not declared in this scope
+ void Rrt::visualizeEdge(RrtNode* [01;31m[Knode[m[K, int id)
+                                  [01;31m[K^~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:34:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Knice[m[K’
+ void Rrt::visualizeEdge(RrtNode* [01;36m[Knode[m[K, int id)
+                                  [01;36m[K^~~~[m[K
+                                  [32m[Knice[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:40:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[Kint[m[K’
+ void Rrt::visualizeEdge(RrtNode* node, [01;31m[Kint[m[K id)
+                                        [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizePath(RrtNode* node)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:25:[m[K [01;31m[Kerror: [m[Kvariable or field ‘[01m[KvisualizePath[m[K’ declared void
+ void Rrt::visualizePath([01;31m[KRrtNode[m[K* node)
+                         [01;31m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:25:[m[K [01;31m[Kerror: [m[K‘[01m[KRrtNode[m[K’ was not declared in this scope
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:25:[m[K [01;36m[Knote: [m[Ksuggested alternative:
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/include/rrtplanner/rrt.h:21:8:[m[K [01;36m[Knote: [m[K  ‘[01m[Kaeplanner_ns::RrtNode[m[K’
+ struct [01;36m[KRrtNode[m[K
+        [01;36m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:34:[m[K [01;31m[Kerror: [m[K‘[01m[Knode[m[K’ was not declared in this scope
+ void Rrt::visualizePath(RrtNode* [01;31m[Knode[m[K)
+                                  [01;31m[K^~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:34:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Knice[m[K’
+ void Rrt::visualizePath(RrtNode* [01;36m[Knode[m[K)
+                                  [01;36m[K^~~~[m[K
+                                  [32m[Knice[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:734:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizeGoals(std::vector<geometry_msgs::Pose> goals)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In function ‘[01m[Kvoid visualizeGoals(std::vector<geometry_msgs::Pose_<std::allocator<void> > >)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:741:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kframe_id_[m[K’ was not declared in this scope
+     a.header.frame_id = [01;31m[Kframe_id_[m[K;
+                         [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:757:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kpath_pub_[m[K’ was not declared in this scope
+     [01;31m[Kpath_pub_[m[K.publish(a);
+     [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:397:3:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kif[m[K’
+   [01;31m[Kif[m[K (!ot_res)
+   [01;31m[K^~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:400:3:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kfor[m[K’
+   [01;31m[Kfor[m[K (octomap::OcTree::leaf_bbx_iterator it = ot->begin_leafs_bbx(min, max),
+   [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:402:8:[m[K [01;31m[Kerror: [m[K‘[01m[Kit[m[K’ does not name a type; did you mean ‘[01m[Kint[m[K’?
+        [01;31m[Kit[m[K != it_end; ++it)
+        [01;31m[K^~[m[K
+        [32m[Kint[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:402:22:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[K++[m[K’ token
+        it != it_end; [01;31m[K++[m[Kit)
+                      [01;31m[K^~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:434:3:[m[K [01;31m[Kerror: [m[Kexpected unqualified-id before ‘[01m[Kreturn[m[K’
+   [01;31m[Kreturn[m[K false;
+   [01;31m[K^~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:606:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizeNode(geometry_msgs::Point pos, int id)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:761:1:[m[K [01;31m[Kerror: [m[Kexpected declaration before ‘[01m[K}[m[K’ token
+ [01;31m[K}[m[K  // namespace aeplanner_ns
+ [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In function ‘[01m[Kvoid visualizeNode(geometry_msgs::Point, int)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:611:23:[m[K [01;31m[Kerror: [m[K‘[01m[Kframe_id_[m[K’ was not declared in this scope
+   a.header.frame_id = [01;31m[Kframe_id_[m[K;
+                       [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:628:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kpath_pub_[m[K’ was not declared in this scope
+   [01;31m[Kpath_pub_[m[K.publish(a);
+   [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:631:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizePose(geometry_msgs::Pose pose, int id)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In function ‘[01m[Kvoid visualizePose(geometry_msgs::Pose, int)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:636:23:[m[K [01;31m[Kerror: [m[K‘[01m[Kframe_id_[m[K’ was not declared in this scope
+   a.header.frame_id = [01;31m[Kframe_id_[m[K;
+                       [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:652:3:[m[K [01;31m[Kerror: [m[K‘[01m[Kpath_pub_[m[K’ was not declared in this scope
+   [01;31m[Kpath_pub_[m[K.publish(a);
+   [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizeEdge(RrtNode* node, int id)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:25:[m[K [01;31m[Kerror: [m[Kvariable or field ‘[01m[KvisualizeEdge[m[K’ declared void
+ void Rrt::visualizeEdge([01;31m[KRrtNode[m[K* node, int id)
+                         [01;31m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:25:[m[K [01;31m[Kerror: [m[K‘[01m[KRrtNode[m[K’ was not declared in this scope
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:25:[m[K [01;36m[Knote: [m[Ksuggested alternative:
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/include/rrtplanner/rrt.h:21:8:[m[K [01;36m[Knote: [m[K  ‘[01m[Kaeplanner_ns::RrtNode[m[K’
+ struct [01;36m[KRrtNode[m[K
+        [01;36m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:34:[m[K [01;31m[Kerror: [m[K‘[01m[Knode[m[K’ was not declared in this scope
+ void Rrt::visualizeEdge(RrtNode* [01;31m[Knode[m[K, int id)
+                                  [01;31m[K^~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:34:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Knice[m[K’
+ void Rrt::visualizeEdge(RrtNode* [01;36m[Knode[m[K, int id)
+                                  [01;36m[K^~~~[m[K
+                                  [32m[Knice[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:655:40:[m[K [01;31m[Kerror: [m[Kexpected primary-expression before ‘[01m[Kint[m[K’
+ void Rrt::visualizeEdge(RrtNode* node, [01;31m[Kint[m[K id)
+                                        [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizePath(RrtNode* node)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:25:[m[K [01;31m[Kerror: [m[Kvariable or field ‘[01m[KvisualizePath[m[K’ declared void
+ void Rrt::visualizePath([01;31m[KRrtNode[m[K* node)
+                         [01;31m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:25:[m[K [01;31m[Kerror: [m[K‘[01m[KRrtNode[m[K’ was not declared in this scope
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:25:[m[K [01;36m[Knote: [m[Ksuggested alternative:
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/include/rrtplanner/rrt.h:21:8:[m[K [01;36m[Knote: [m[K  ‘[01m[Kaeplanner_ns::RrtNode[m[K’
+ struct [01;36m[KRrtNode[m[K
+        [01;36m[K^~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:34:[m[K [01;31m[Kerror: [m[K‘[01m[Knode[m[K’ was not declared in this scope
+ void Rrt::visualizePath(RrtNode* [01;31m[Knode[m[K)
+                                  [01;31m[K^~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:692:34:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Knice[m[K’
+ void Rrt::visualizePath(RrtNode* [01;36m[Knode[m[K)
+                                  [01;36m[K^~~~[m[K
+                                  [32m[Knice[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:734:6:[m[K [01;31m[Kerror: [m[K‘[01m[KRrt[m[K’ has not been declared
+ void [01;31m[KRrt[m[K::visualizeGoals(std::vector<geometry_msgs::Pose> goals)
+      [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In function ‘[01m[Kvoid visualizeGoals(std::vector<geometry_msgs::Pose_<std::allocator<void> > >)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:741:25:[m[K [01;31m[Kerror: [m[K‘[01m[Kframe_id_[m[K’ was not declared in this scope
+     a.header.frame_id = [01;31m[Kframe_id_[m[K;
+                         [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:757:5:[m[K [01;31m[Kerror: [m[K‘[01m[Kpath_pub_[m[K’ was not declared in this scope
+     [01;31m[Kpath_pub_[m[K.publish(a);
+     [01;31m[K^~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:761:1:[m[K [01;31m[Kerror: [m[Kexpected declaration before ‘[01m[K}[m[K’ token
+ [01;31m[K}[m[K  // namespace aeplanner_ns
+ [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/rrtplanner_node.dir/src/rrt.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrtplanner_node.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/rrtplanner.dir/src/rrt.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrtplanner.dir/all] Error 2
+make: *** [all] Error 2

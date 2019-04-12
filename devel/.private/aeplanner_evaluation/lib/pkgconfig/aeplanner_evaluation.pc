@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/devel/.private/aeplanner_evaluation
+
+Name: aeplanner_evaluation
+Description: Description of aeplanner_evaluation
+Version: 0.0.0
+Cflags: -I/home/idris/catkin_ws/devel/.private/aeplanner_evaluation/include
+Libs: -L/home/idris/catkin_ws/devel/.private/aeplanner_evaluation/lib 
+Requires: message_runtime

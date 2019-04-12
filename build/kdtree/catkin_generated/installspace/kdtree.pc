@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/install
+
+Name: kdtree
+Description: Description of kdtree
+Version: 0.0.0
+Cflags: -I/home/idris/catkin_ws/install/include
+Libs: -L/home/idris/catkin_ws/install/lib -lkdtree
+Requires: 

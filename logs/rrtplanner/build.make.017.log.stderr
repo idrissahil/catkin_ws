@@ -1,0 +1,14 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In constructor ‘[01m[Kaeplanner_ns::Rrt::Rrt(const ros::NodeHandle&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:23:3:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kprintf[m[K’
+   [01;31m[Kprintf[m[K ("Testing printf %f.\n", test2 );
+   [01;31m[K^~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:[m[K In constructor ‘[01m[Kaeplanner_ns::Rrt::Rrt(const ros::NodeHandle&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/rrtplanner/src/rrt.cpp:23:3:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kprintf[m[K’
+   [01;31m[Kprintf[m[K ("Testing printf %f.\n", test2 );
+   [01;31m[K^~~~~~[m[K
+make[2]: *** [CMakeFiles/rrtplanner.dir/src/rrt.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrtplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/rrtplanner_node.dir/src/rrt.cpp.o] Error 1
+make[1]: *** [CMakeFiles/rrtplanner_node.dir/all] Error 2
+make: *** [all] Error 2

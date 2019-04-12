@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/pigain/share/pigain/cmake/pigain-msg-paths.cmake

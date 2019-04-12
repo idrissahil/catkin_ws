@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/rrtplanner/share/roseus/ros/rrtplanner/manifest.l

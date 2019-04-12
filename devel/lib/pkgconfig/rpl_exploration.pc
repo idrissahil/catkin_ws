@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/rpl_exploration/lib/pkgconfig/rpl_exploration.pc

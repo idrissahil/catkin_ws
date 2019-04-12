@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/devel/.private/pigain
+
+Name: pigain
+Description: Description of pigain
+Version: 0.0.1
+Cflags: -I/home/idris/catkin_ws/devel/.private/pigain/include
+Libs: -L/home/idris/catkin_ws/devel/.private/pigain/lib 
+Requires: rospy std_msgs geometry_msgs message_runtime

@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/pigain/share/gennodejs/ros/pigain/msg/Node.js

@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/devel/.private/kdtree
+
+Name: kdtree
+Description: Description of kdtree
+Version: 0.0.0
+Cflags: -I/home/idris/catkin_ws/src/aeplanner/kdtree/include
+Libs: -L/home/idris/catkin_ws/devel/.private/kdtree/lib -lkdtree
+Requires: 

@@ -1,0 +1,1 @@
+/usr/bin/cc -fPIC -O2 -g -DNDEBUG  -shared -Wl,-soname,libkdtree.so -o /home/idris/catkin_ws/devel/.private/kdtree/lib/libkdtree.so CMakeFiles/kdtree.dir/src/kdtree.c.o 

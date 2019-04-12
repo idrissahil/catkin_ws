@@ -1,0 +1,267 @@
+// Auto-generated. Do not edit!
+
+// (in-package aeplanner.msg)
+
+
+"use strict";
+
+const _serializer = _ros_msg_utils.Serialize;
+const _arraySerializer = _serializer.Array;
+const _deserializer = _ros_msg_utils.Deserialize;
+const _arrayDeserializer = _deserializer.Array;
+const _finder = _ros_msg_utils.Find;
+const _getByteLength = _ros_msg_utils.getByteLength;
+let std_msgs = _finder('std_msgs');
+let geometry_msgs = _finder('geometry_msgs');
+
+//-----------------------------------------------------------
+
+class aeplannerResult {
+  constructor(initObj={}) {
+    if (initObj === null) {
+      // initObj === null is a special case for deserialization where we don't initialize fields
+      this.pose = null;
+      this.frontiers = null;
+      this.is_clear = null;
+      this.sampling_time = null;
+      this.planning_time = null;
+      this.collision_check_time = null;
+      this.tree_size = null;
+    }
+    else {
+      if (initObj.hasOwnProperty('pose')) {
+        this.pose = initObj.pose
+      }
+      else {
+        this.pose = new geometry_msgs.msg.PoseStamped();
+      }
+      if (initObj.hasOwnProperty('frontiers')) {
+        this.frontiers = initObj.frontiers
+      }
+      else {
+        this.frontiers = new geometry_msgs.msg.PoseArray();
+      }
+      if (initObj.hasOwnProperty('is_clear')) {
+        this.is_clear = initObj.is_clear
+      }
+      else {
+        this.is_clear = false;
+      }
+      if (initObj.hasOwnProperty('sampling_time')) {
+        this.sampling_time = initObj.sampling_time
+      }
+      else {
+        this.sampling_time = new std_msgs.msg.Duration();
+      }
+      if (initObj.hasOwnProperty('planning_time')) {
+        this.planning_time = initObj.planning_time
+      }
+      else {
+        this.planning_time = new std_msgs.msg.Duration();
+      }
+      if (initObj.hasOwnProperty('collision_check_time')) {
+        this.collision_check_time = initObj.collision_check_time
+      }
+      else {
+        this.collision_check_time = new std_msgs.msg.Duration();
+      }
+      if (initObj.hasOwnProperty('tree_size')) {
+        this.tree_size = initObj.tree_size
+      }
+      else {
+        this.tree_size = 0;
+      }
+    }
+  }
+
+  static serialize(obj, buffer, bufferOffset) {
+    // Serializes a message object of type aeplannerResult
+    // Serialize message field [pose]
+    bufferOffset = geometry_msgs.msg.PoseStamped.serialize(obj.pose, buffer, bufferOffset);
+    // Serialize message field [frontiers]
+    bufferOffset = geometry_msgs.msg.PoseArray.serialize(obj.frontiers, buffer, bufferOffset);
+    // Serialize message field [is_clear]
+    bufferOffset = _serializer.bool(obj.is_clear, buffer, bufferOffset);
+    // Serialize message field [sampling_time]
+    bufferOffset = std_msgs.msg.Duration.serialize(obj.sampling_time, buffer, bufferOffset);
+    // Serialize message field [planning_time]
+    bufferOffset = std_msgs.msg.Duration.serialize(obj.planning_time, buffer, bufferOffset);
+    // Serialize message field [collision_check_time]
+    bufferOffset = std_msgs.msg.Duration.serialize(obj.collision_check_time, buffer, bufferOffset);
+    // Serialize message field [tree_size]
+    bufferOffset = _serializer.int32(obj.tree_size, buffer, bufferOffset);
+    return bufferOffset;
+  }
+
+  static deserialize(buffer, bufferOffset=[0]) {
+    //deserializes a message object of type aeplannerResult
+    let len;
+    let data = new aeplannerResult(null);
+    // Deserialize message field [pose]
+    data.pose = geometry_msgs.msg.PoseStamped.deserialize(buffer, bufferOffset);
+    // Deserialize message field [frontiers]
+    data.frontiers = geometry_msgs.msg.PoseArray.deserialize(buffer, bufferOffset);
+    // Deserialize message field [is_clear]
+    data.is_clear = _deserializer.bool(buffer, bufferOffset);
+    // Deserialize message field [sampling_time]
+    data.sampling_time = std_msgs.msg.Duration.deserialize(buffer, bufferOffset);
+    // Deserialize message field [planning_time]
+    data.planning_time = std_msgs.msg.Duration.deserialize(buffer, bufferOffset);
+    // Deserialize message field [collision_check_time]
+    data.collision_check_time = std_msgs.msg.Duration.deserialize(buffer, bufferOffset);
+    // Deserialize message field [tree_size]
+    data.tree_size = _deserializer.int32(buffer, bufferOffset);
+    return data;
+  }
+
+  static getMessageSize(object) {
+    let length = 0;
+    length += geometry_msgs.msg.PoseStamped.getMessageSize(object.pose);
+    length += geometry_msgs.msg.PoseArray.getMessageSize(object.frontiers);
+    return length + 29;
+  }
+
+  static datatype() {
+    // Returns string type for a message object
+    return 'aeplanner/aeplannerResult';
+  }
+
+  static md5sum() {
+    //Returns md5sum for a message object
+    return '9455a2480a247f4ce7d9ba7774e790ba';
+  }
+
+  static messageDefinition() {
+    // Returns full string definition for message
+    return `
+    # ====== DO NOT MODIFY! AUTOGENERATED FROM AN ACTION DEFINITION ======
+    # Define the result
+    geometry_msgs/PoseStamped pose
+    geometry_msgs/PoseArray frontiers
+    bool is_clear
+    std_msgs/Duration sampling_time
+    std_msgs/Duration planning_time
+    std_msgs/Duration collision_check_time
+    int32 tree_size
+    
+    ================================================================================
+    MSG: geometry_msgs/PoseStamped
+    # A Pose with reference coordinate frame and timestamp
+    Header header
+    Pose pose
+    
+    ================================================================================
+    MSG: std_msgs/Header
+    # Standard metadata for higher-level stamped data types.
+    # This is generally used to communicate timestamped data 
+    # in a particular coordinate frame.
+    # 
+    # sequence ID: consecutively increasing ID 
+    uint32 seq
+    #Two-integer timestamp that is expressed as:
+    # * stamp.sec: seconds (stamp_secs) since epoch (in Python the variable is called 'secs')
+    # * stamp.nsec: nanoseconds since stamp_secs (in Python the variable is called 'nsecs')
+    # time-handling sugar is provided by the client library
+    time stamp
+    #Frame this data is associated with
+    # 0: no frame
+    # 1: global frame
+    string frame_id
+    
+    ================================================================================
+    MSG: geometry_msgs/Pose
+    # A representation of pose in free space, composed of position and orientation. 
+    Point position
+    Quaternion orientation
+    
+    ================================================================================
+    MSG: geometry_msgs/Point
+    # This contains the position of a point in free space
+    float64 x
+    float64 y
+    float64 z
+    
+    ================================================================================
+    MSG: geometry_msgs/Quaternion
+    # This represents an orientation in free space in quaternion form.
+    
+    float64 x
+    float64 y
+    float64 z
+    float64 w
+    
+    ================================================================================
+    MSG: geometry_msgs/PoseArray
+    # An array of poses with a header for global reference.
+    
+    Header header
+    
+    Pose[] poses
+    
+    ================================================================================
+    MSG: std_msgs/Duration
+    duration data
+    
+    `;
+  }
+
+  static Resolve(msg) {
+    // deep-construct a valid message object instance of whatever was passed in
+    if (typeof msg !== 'object' || msg === null) {
+      msg = {};
+    }
+    const resolved = new aeplannerResult(null);
+    if (msg.pose !== undefined) {
+      resolved.pose = geometry_msgs.msg.PoseStamped.Resolve(msg.pose)
+    }
+    else {
+      resolved.pose = new geometry_msgs.msg.PoseStamped()
+    }
+
+    if (msg.frontiers !== undefined) {
+      resolved.frontiers = geometry_msgs.msg.PoseArray.Resolve(msg.frontiers)
+    }
+    else {
+      resolved.frontiers = new geometry_msgs.msg.PoseArray()
+    }
+
+    if (msg.is_clear !== undefined) {
+      resolved.is_clear = msg.is_clear;
+    }
+    else {
+      resolved.is_clear = false
+    }
+
+    if (msg.sampling_time !== undefined) {
+      resolved.sampling_time = std_msgs.msg.Duration.Resolve(msg.sampling_time)
+    }
+    else {
+      resolved.sampling_time = new std_msgs.msg.Duration()
+    }
+
+    if (msg.planning_time !== undefined) {
+      resolved.planning_time = std_msgs.msg.Duration.Resolve(msg.planning_time)
+    }
+    else {
+      resolved.planning_time = new std_msgs.msg.Duration()
+    }
+
+    if (msg.collision_check_time !== undefined) {
+      resolved.collision_check_time = std_msgs.msg.Duration.Resolve(msg.collision_check_time)
+    }
+    else {
+      resolved.collision_check_time = new std_msgs.msg.Duration()
+    }
+
+    if (msg.tree_size !== undefined) {
+      resolved.tree_size = msg.tree_size;
+    }
+    else {
+      resolved.tree_size = 0
+    }
+
+    return resolved;
+    }
+};
+
+module.exports = aeplannerResult;

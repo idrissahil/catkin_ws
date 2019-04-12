@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/pigain/share/common-lisp/ros/pigain/msg/Node.lisp

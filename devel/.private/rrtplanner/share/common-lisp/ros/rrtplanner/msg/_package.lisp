@@ -1,0 +1,19 @@
+(cl:defpackage rrtplanner-msg
+  (:use )
+  (:export
+   "<RRTACTION>"
+   "RRTACTION"
+   "<RRTACTIONFEEDBACK>"
+   "RRTACTIONFEEDBACK"
+   "<RRTACTIONGOAL>"
+   "RRTACTIONGOAL"
+   "<RRTACTIONRESULT>"
+   "RRTACTIONRESULT"
+   "<RRTFEEDBACK>"
+   "RRTFEEDBACK"
+   "<RRTGOAL>"
+   "RRTGOAL"
+   "<RRTRESULT>"
+   "RRTRESULT"
+  ))
+

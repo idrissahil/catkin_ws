@@ -1,0 +1,1 @@
+/home/idris/catkin_ws/devel/.private/rpl_exploration/lib/python2.7/dist-packages/rpl_exploration/msg/__init__.py
