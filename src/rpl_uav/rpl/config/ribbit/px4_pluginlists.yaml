@@ -1,0 +1,14 @@
+plugin_blacklist:
+# common
+- safety_area
+# extras
+- image_pub
+
+plugin_whitelist:
+- 'sys_*'
+# extras
+- distance_sensor
+- px4flow
+- vision_pose_estimate
+- mocap_pose_estimate
+- vibration

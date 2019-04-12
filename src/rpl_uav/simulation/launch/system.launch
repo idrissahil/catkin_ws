@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<launch>
+<!--
+  <node pkg="nodelet" type="nodelet" name="collision_avoidance_manager" args="manager" output="screen" />
+
+  <node pkg="nodelet" type="nodelet" name="collision_avoidance_nodelet" args="load collision_avoidance/CA collision_avoidance_manager" output="screen">
+    <param name="radius" type="double" value="0.41" />
+    <param name="security_distance" type="double" value="0.61" />
+    <param name="epsilon" type="double" value="0.1" />
+
+    <param name="min_change_in_direction" type="double" value="-15.0" />
+    <param name="max_change_in_direction" type="double" value="45.0" />
+
+    <param name="min_opposite_direction" type="double" value="0.0" />
+    <param name="max_opposite_direction" type="double" value="60.0" />
+
+    <param name="ab" type="double" value="3.0" />
+    <param name="T" type="double" value="0.3" />
+
+    <param name="min_distance_hold" type="double" value="0.61" />
+
+    <param name="max_data_age" type="double" value="1.0" />
+    <param name="polar_size" type="int" value="360" />
+
+    <rosparam param="obstacle_topics">[/cloud]</rosparam>
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="laserscan_to_pointcloud_nodelet" args="load laserscan_to_pointcloud/LTP collision_avoidance_manager" output="screen">
+    <param name="scan_topic" type="str" value="scan" />
+    <param name="cloud_topic" type="str" value="cloud" />
+  </node>
+-->
+
+  <param name="robot_description" textfile="$(find simulation)/urdf/simulation.urdf" />
+
+  <node name="robot_state_publisher" pkg="robot_state_publisher"
+    type="robot_state_publisher" >
+  </node>
+  
+  <node name="dd_control" pkg="dd_control"
+    type="dd_control_node" >
+  </node>
+  
+  <node name="rviz" pkg="rviz" type="rviz" output="log" args="-d $(find simulation)/rviz/simulation.rviz" />
+    
+    <!-- x y z yaw pitch roll -->
+  <!--
+  <node pkg="tf" type="static_transform_publisher" name="hokuyo_broadcaster" args="0.02 0 0.08 0 0 0 dd_slam_link laser_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="primesense_broadcaster" args="0.05 0 0.13 -1.57079633 0 -1.57079633 dd_slam_link camera_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="sonar_up_broadcaster" args="-0.05 0 0.22 0 -1.57079633 0 dd_slam_link sonar_up_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="sonar_down_broadcaster" args="-0.05 0 -0.05 0 1.57079633 0 dd_slam_link sonar_down_link 100" />
+
+  <node pkg="tf" type="static_transform_publisher" name="teraranger_broadcaster" args="0 0 -0.05 0 1.57079633 0 dd_slam_link teraranger_link 100" />
+  -->
+</launch>

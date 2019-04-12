@@ -1,0 +1,44 @@
+<?xml version='1.0'?>
+<sdf version='1.6'>
+  <model name='router'>
+    <pose frame=''>0 0 0 0 0 0</pose>
+    <link name='router'>
+      <pose frame=''>0 0 0 0 0 0</pose>
+      <collision name='router_Collision'>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.05</size>
+          </box>
+        </geometry>
+        <pose frame=''>0 0 0.025 0 -0 0</pose>
+      </collision>
+      <visual name='router_Visual'>
+        <pose frame=''>0 0 0.025 0 -0 0</pose>
+        <geometry>
+          <box>
+            <size>0.2 0.2 0.05</size>
+          </box>
+        </geometry>
+        <material>
+          <script>
+            <uri>file://media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Blue</name>
+          </script>
+          <ambient>1 1 1 1</ambient>
+        </material>
+        <meta>
+          <layer>0</layer>
+        </meta>
+      </visual>
+    </link>
+
+    <plugin name="router" filename="librouter.so">
+      <robotNamespace></robotNamespace>
+      <topicName>router</topicName>
+      <updateRate>10.0</updateRate>
+      <range>18</range>
+    </plugin>
+
+    <static>1</static>
+  </model>
+</sdf>

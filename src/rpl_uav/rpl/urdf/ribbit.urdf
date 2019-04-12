@@ -1,0 +1,233 @@
+<!--
+  RPL
+  Author: Daniel Duberg
+-->
+
+<robot name="ribbit">
+
+  <link name="fcu">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="hokuyo_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="teraranger_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="primesense_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="sonar_up_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="sonar_down_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="optic_flow_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="imu_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <joint name="hokuyo_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="hokuyo_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+
+  <joint name="teraranger_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="teraranger_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+
+  <joint name="primesense_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="primesense_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+
+  <joint name="sonar_up_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="sonar_up_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+
+  <joint name="sonar_down_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="sonar_down_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+
+  <joint name="optic_flow_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="optic_flow_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link" />
+    <child link="imu_link" />
+    <origin xyz="0. 0. 0." rpy="0. 0. 0." />
+  </joint>
+  
+
+
+
+  <link name="prop_1">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.1" length="0.1" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="prop_2">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.1" length="0.1" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="prop_3">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.1" length="0.1" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="prop_4">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.1" length="0.1" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="prop_5">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.1" length="0.1" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="prop_6">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder radius="0.1" length="0.1" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+</robot>

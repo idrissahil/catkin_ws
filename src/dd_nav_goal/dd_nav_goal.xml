@@ -1,0 +1,9 @@
+<library path="lib/libdd_nav_goal">
+  <class name="dd_nav_goal/3D Nav Goal"
+         type="dd_nav_goal::DDNavGoalPanel"
+         base_class_type="rviz::Panel">
+    <description>
+      A panel widget allowing...
+    </description>
+  </class>
+</library>

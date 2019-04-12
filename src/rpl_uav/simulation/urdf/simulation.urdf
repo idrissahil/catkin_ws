@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<!--
+  RPL
+  Author: Daniel Duberg
+-->
+
+
+<robot name="simulation">
+
+  <link name="dd_slam_link" />
+
+  <material name="orange">
+    <color rgba="1.0 0.5 0.2 1" />
+  </material>
+  <material name="gray">
+    <color rgba="0.2 0.2 0.2 1" />
+  </material>
+
+<!--
+  <link name="fcu">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+
+  <link name="base_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.0 0.0 0.0" />
+      </geometry>
+      <material name="Cyan">
+        <color rgba="0 1.0 1.0 1.0"/>
+      </material>
+    </visual>
+  </link>
+-->
+
+  <link name="laser_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <box size="0.6 0.4 0.2" />
+      </geometry>
+      <material name="orange" />
+    </visual>
+  </link>
+  
+  <link name="camera_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+        <geometry>
+          <mesh filename="package://simulation/urdf/meshes/r200/r200_entire.dae"/>
+        </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+  
+  <link name="sonar_up_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.7" radius="0.5" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+  
+  <link name="sonar_down_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.7" radius="0.5" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+  
+  <link name="teraranger_link">
+    <visual>
+      <origin xyz="0.0 0.0 0.0" />
+      <geometry>
+        <cylinder length="0.7" radius="0.5" />
+      </geometry>
+      <material name="gray" />
+    </visual>
+  </link>
+  
+  <joint name="laser_joint" type="fixed">
+    <parent link="dd_slam_link" />
+    <child link="laser_link" />
+    <origin xyz="0.02 0 0.08" rpy="0.0 0.0 0.0" />
+  </joint>
+  
+  <joint name="camera_joint" type="fixed">
+    <parent link="dd_slam_link" />
+    <child link="camera_link" />
+    <origin xyz="0.05 0 0.13" rpy="-1.57079633 0 -1.57079633" />
+  </joint>
+  
+  <joint name="sonar_up_joint" type="fixed">
+    <parent link="dd_slam_link" />
+    <child link="sonar_up_link" />
+    <origin xyz="-0.05 0 0.22" rpy="0 -1.57079633 0" />
+  </joint>
+  
+  <joint name="sonar_down_joint" type="fixed">
+    <parent link="dd_slam_link" />
+    <child link="sonar_down_link" />
+    <origin xyz="-0.05 0 -0.05" rpy="0 1.57079633 0" />
+  </joint>
+  
+  <joint name="teraranger_joint" type="fixed">
+    <parent link="dd_slam_link" />
+    <child link="teraranger_link" />
+    <origin xyz="0 0 -0.05" rpy="0 1.57079633 0" />
+  </joint>  
+</robot>

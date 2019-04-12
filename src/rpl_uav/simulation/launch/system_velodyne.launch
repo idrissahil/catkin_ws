@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<launch>
+  <node pkg="nodelet" type="nodelet" name="dd_manager" args="manager" output="screen" />
+
+  <node pkg="nodelet" type="nodelet" name="collision_avoidance_nodelet" args="load collision_avoidance/CA dd_manager" output="screen">
+    <param name="robot_frame" type="str" value="base_link" />
+    <param name="robot_height" type="double" value="0.5" />
+
+    <param name="radius" type="double" value="0.41" />
+    <param name="security_distance" type="double" value="0.61" />
+    <param name="epsilon" type="double" value="0.1" />
+
+    <param name="min_distance_hold" type="double" value="0.61" />
+
+    <param name="min_change_in_direction" type="double" value="-15.0" />
+    <param name="max_change_in_direction" type="double" value="45.0" />
+
+    <param name="min_opposite_direction" type="double" value="0.0" />
+    <param name="max_opposite_direction" type="double" value="60.0" />
+
+    <param name="max_data_age" type="double" value="1.0" />
+    <param name="polar_size" type="int" value="360" />
+
+    <rosparam param="obstacle_topics">[/cloud, /velodyne_points]</rosparam>
+    <rosparam param="360_sensor">[false, true]</rosparam>
+  </node>
+
+  <node pkg="nodelet" type="nodelet" name="dd_control_nodelet" args="load dd_control/Control dd_manager" output="screen">
+  </node>
+</launch>

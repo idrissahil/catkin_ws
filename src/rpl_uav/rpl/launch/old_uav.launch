@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+
+<launch>    
+    <arg name="enable_mocap" default="true" />
+
+    <arg name="uav" default="$(env USER)" />
+    
+    <arg name="ribbit" default="true" />
+    <arg name="fugu" default="false" />
+    
+    <group if="$(arg ribbit)">
+        <arg name="fcu_device" default="/dev/serial/by-id/usb-FTDI_TTL232R-3V3_FT97O9G7-if00-port0" />
+        <arg name="tgt_system" default="12" />
+    </group>
+
+    <group if="$(arg fugu)">
+        <arg name="fcu_device" default="/dev/serial/by-id/usb-FTDI_TTL232R-3V3_FT97OAZ4-if00-port0"/>
+        <arg name="tgt_system" default="13" />
+    </group>
+    
+    <arg name="fcu_baud" default="921600" />
+    <arg name="fcu_url" default="$(arg fcu_device):$(arg fcu_baud)" />
+    <arg name="gcs_url" default="udp://@224.0.0.1:14550" />
+    <arg name="tgt_component" default="1" />
+    <arg name="px4_config_yaml" default="$(find rpl)/config/$(arg uav)/px4_config.yaml" />
+    <arg name="px4_pluginlists_yaml" default="$(find rpl)/config/$(arg uav)/px4_pluginlists.yaml" />
+
+    <node pkg="mavros" type="mavros_node" name="mavros" respawn="true" clear_params="true" output="screen">
+        <param name="fcu_url" value="$(arg fcu_url)" />
+        <param name="gcs_url" value="$(arg gcs_url)" />
+        <param name="target_system_id" value="$(arg tgt_system)" />
+        <param name="target_component_id" value="$(arg tgt_component)" />
+        <rosparam command="load" file="$(arg px4_config_yaml)" />
+        <rosparam command="load" file="$(arg px4_pluginlists_yaml)" />
+    </node>
+    
+    <arg name="mocap_config_file" default="$(find rpl)/config/mocap.yaml" />
+
+    <node pkg="mocap_optitrack" type="mocap_node" name="mocap" respawn="true" if="$(arg enable_mocap)">
+      <remap from="pose" to="~/pose" />
+      <rosparam file="$(arg mocap_config_file)" command="load" />
+    </node>
+
+    <param name="robot_description" textfile="$(find rpl)/urdf/$(arg uav).urdf" />
+    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+</launch>
