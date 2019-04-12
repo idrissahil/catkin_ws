@@ -1,0 +1,25 @@
+{
+    "configurations": [
+        {
+            "browse": {
+                "databaseFilename": "",
+                "limitSymbolsToIncludedHeaders": true
+            },
+            "includePath": [
+                "/home/dduberg/ros_ws/inkonova_ws/devel/include",
+                "/home/dduberg/ros_ws/rpl_ws/devel/include",
+                "/home/dduberg/ros_ws/catkin_ws/devel/include",
+                "/opt/ros/melodic/include",
+                "/home/dduberg/ros_ws/catkin_ws/src/dd_control/include",
+                "/home/dduberg/ros_ws/catkin_ws/src/dd_nav_goal/include",
+                "/home/dduberg/ros_ws/catkin_ws/src/dd_slam/include",
+                "/usr/include"
+            ],
+            "name": "Linux",
+            "compilerPath": "/usr/bin/clang",
+            "cStandard": "c11",
+            "cppStandard": "c++17"
+        }
+    ],
+    "version": 4
+}
