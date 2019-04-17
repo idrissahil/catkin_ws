@@ -1,0 +1,50 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::expandRRT()[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:185:34:[m[K [01;31m[Kerror: [m[K‘[01m[Kstate_[m[K’ was not declared in this scope
+       double search_location_x = [01;31m[Kstate_[m[K[0];
+                                  [01;31m[K^~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:185:34:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kstatic[m[K’
+       double search_location_x = [01;36m[Kstate_[m[K[0];
+                                  [01;36m[K^~~~~~[m[K
+                                  [32m[Kstatic[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:196:7:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+       [01;31m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:196:7:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+       [01;36m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;36m[K^~~~~~~~[m[K
+       [32m[Kiseqsig[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:211:69:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+     } while (!isInsideBoundaries(new_node->state_) or !ot_result or [01;31m[Kwifi_sig[m[K<0.5 or
+                                                                     [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:211:69:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+     } while (!isInsideBoundaries(new_node->state_) or !ot_result or [01;36m[Kwifi_sig[m[K<0.5 or
+                                                                     [01;36m[K^~~~~~~~[m[K
+                                                                     [32m[Kiseqsig[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::expandRRT()[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:185:34:[m[K [01;31m[Kerror: [m[K‘[01m[Kstate_[m[K’ was not declared in this scope
+       double search_location_x = [01;31m[Kstate_[m[K[0];
+                                  [01;31m[K^~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:185:34:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kstatic[m[K’
+       double search_location_x = [01;36m[Kstate_[m[K[0];
+                                  [01;36m[K^~~~~~[m[K
+                                  [32m[Kstatic[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:196:7:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+       [01;31m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:196:7:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+       [01;36m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;36m[K^~~~~~~~[m[K
+       [32m[Kiseqsig[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:211:69:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+     } while (!isInsideBoundaries(new_node->state_) or !ot_result or [01;31m[Kwifi_sig[m[K<0.5 or
+                                                                     [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:211:69:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+     } while (!isInsideBoundaries(new_node->state_) or !ot_result or [01;36m[Kwifi_sig[m[K<0.5 or
+                                                                     [01;36m[K^~~~~~~~[m[K
+                                                                     [32m[Kiseqsig[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make: *** [all] Error 2

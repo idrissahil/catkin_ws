@@ -1,0 +1,120 @@
+[  0%] Built target _aeplanner_generate_messages_check_deps_aeplannerFeedback
+[  0%] Built target std_msgs_generate_messages_cpp
+[  0%] Built target geometry_msgs_generate_messages_cpp
+[  0%] Built target _aeplanner_generate_messages_check_deps_aeplannerActionGoal
+[  0%] Built target actionlib_msgs_generate_messages_cpp
+[  0%] Built target visualization_msgs_generate_messages_cpp
+[  0%] Built target _aeplanner_generate_messages_check_deps_Node
+[  0%] Built target _aeplanner_generate_messages_check_deps_Reevaluate
+[  0%] Built target _aeplanner_generate_messages_check_deps_aeplannerActionFeedback
+[  0%] Built target _aeplanner_generate_messages_check_deps_aeplannerResult
+[  0%] Built target _aeplanner_generate_messages_check_deps_aeplannerGoal
+[  0%] Built target _aeplanner_generate_messages_check_deps_aeplannerActionResult
+[  0%] Built target geometry_msgs_generate_messages_lisp
+[  0%] Built target _aeplanner_generate_messages_check_deps_aeplannerAction
+[  0%] Built target std_msgs_generate_messages_lisp
+[  0%] Built target actionlib_msgs_generate_messages_lisp
+[  0%] Built target visualization_msgs_generate_messages_lisp
+[  0%] Built target dynamic_reconfigure_generate_messages_nodejs
+[  0%] Built target visualization_msgs_generate_messages_eus
+[  0%] Built target geometry_msgs_generate_messages_py
+[  0%] Built target std_msgs_generate_messages_nodejs
+[  0%] Built target sensor_msgs_generate_messages_cpp
+[  0%] Built target visualization_msgs_generate_messages_nodejs
+[  0%] Built target tf_generate_messages_nodejs
+[  0%] Built target sensor_msgs_generate_messages_lisp
+[  0%] Built target actionlib_msgs_generate_messages_nodejs
+[  0%] Built target roscpp_generate_messages_cpp
+[  0%] Built target actionlib_generate_messages_cpp
+[  0%] Built target sensor_msgs_generate_messages_nodejs
+[  0%] Built target roscpp_generate_messages_lisp
+[  0%] Built target roscpp_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_nodejs
+[  0%] Built target geometry_msgs_generate_messages_eus
+[  0%] Built target std_msgs_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_cpp
+[  0%] Built target roscpp_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_eus
+[  0%] Built target dynamic_reconfigure_generate_messages_cpp
+[  0%] Built target rosgraph_msgs_generate_messages_lisp
+[  0%] Built target tf_generate_messages_py
+[  0%] Built target sensor_msgs_generate_messages_py
+[  0%] Built target rosgraph_msgs_generate_messages_nodejs
+[  0%] Built target sensor_msgs_generate_messages_eus
+[  0%] Built target actionlib_generate_messages_eus
+[  0%] Built target actionlib_generate_messages_lisp
+[  0%] Built target tf_generate_messages_cpp
+[  0%] Built target actionlib_generate_messages_nodejs
+[  0%] Built target tf_generate_messages_eus
+[  0%] Built target roscpp_generate_messages_eus
+[  0%] Built target rosgraph_msgs_generate_messages_py
+[  0%] Built target actionlib_msgs_generate_messages_eus
+[  0%] Built target pigain_generate_messages_nodejs
+[  0%] Built target actionlib_msgs_generate_messages_py
+[  0%] Built target tf2_msgs_generate_messages_cpp
+[  0%] Built target tf2_msgs_generate_messages_eus
+[  0%] Built target actionlib_generate_messages_py
+[  0%] Built target tf2_msgs_generate_messages_nodejs
+[  0%] Built target tf2_msgs_generate_messages_py
+[  0%] Built target pigain_generate_messages_cpp
+[  0%] Built target std_msgs_generate_messages_eus
+[  0%] Built target tf_generate_messages_lisp
+[  0%] Built target pigain_generate_messages_lisp
+[  0%] Built target visualization_msgs_generate_messages_py
+[  0%] Built target pigain_generate_messages_py
+[  0%] Built target dynamic_reconfigure_generate_messages_eus
+[  0%] Built target dynamic_reconfigure_generate_messages_lisp
+[  0%] Built target dynamic_reconfigure_generate_messages_py
+[  0%] Built target tf2_msgs_generate_messages_lisp
+[  0%] Built target dynamic_reconfigure_gencfg
+[  0%] Built target pigain_generate_messages_eus
+[ 18%] Built target aeplanner_generate_messages_py
+[ 34%] Built target aeplanner_generate_messages_cpp
+[ 50%] Built target aeplanner_generate_messages_lisp
+[ 65%] Built target aeplanner_generate_messages_nodejs
+[ 82%] Built target aeplanner_generate_messages_eus
+[35m[1mScanning dependencies of target aeplanner[0m
+[35m[1mScanning dependencies of target aeplanner_node[0m
+[ 84%] [32mBuilding CXX object CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o[0m
+[ 86%] [32mBuilding CXX object CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o[0m
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:7:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+       [01;31m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:7:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+       [01;36m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;36m[K^~~~~~~~[m[K
+       [32m[Kiseqsig[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:17:[m[K [01;31m[Kerror: [m[K‘[01m[KAmp[m[K’ was not declared in this scope
+       wifi_sig =[01;31m[KAmp[m[K * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                 [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:17:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kbcmp[m[K’
+       wifi_sig =[01;36m[KAmp[m[K * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                 [01;36m[K^~~[m[K
+                 [32m[Kbcmp[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:7:[m[K [01;31m[Kerror: [m[K‘[01m[Kwifi_sig[m[K’ was not declared in this scope
+       [01;31m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;31m[K^~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:7:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kiseqsig[m[K’
+       [01;36m[Kwifi_sig[m[K =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+       [01;36m[K^~~~~~~~[m[K
+       [32m[Kiseqsig[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:17:[m[K [01;31m[Kerror: [m[K‘[01m[KAmp[m[K’ was not declared in this scope
+       wifi_sig =[01;31m[KAmp[m[K * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                 [01;31m[K^~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:365:17:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kbcmp[m[K’
+       wifi_sig =[01;36m[KAmp[m[K * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                 [01;36m[K^~~[m[K
+                 [32m[Kbcmp[m[K
+CMakeFiles/aeplanner_node.dir/build.make:86: recipe for target 'CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o' failed
+CMakeFiles/Makefile2:1986: recipe for target 'CMakeFiles/aeplanner_node.dir/all' failed
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+CMakeFiles/aeplanner.dir/build.make:86: recipe for target 'CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o' failed
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+CMakeFiles/Makefile2:132: recipe for target 'CMakeFiles/aeplanner.dir/all' failed
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+Makefile:140: recipe for target 'all' failed
+make: *** [all] Error 2

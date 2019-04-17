@@ -1,0 +1,4 @@
+make[2]: *** No rule to make target '/home/idris/catkin_ws/src/px4/.git/index', needed by 'src/lib/version/build_git_version.h'.  Stop.
+make[1]: *** [src/lib/version/CMakeFiles/ver_gen.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make: *** [all] Error 2

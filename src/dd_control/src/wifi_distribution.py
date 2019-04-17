@@ -13,13 +13,13 @@ rate = rospy.Rate(50)
 wifi_aware=True
 A=1
 
-sigma_x=2
-sigma_y=2
-sigma_z=2
+sigma_x=5
+sigma_y=5
+sigma_z=5
 
-x_my=3
-y_my=3
-z_my=3
+x_my=1
+y_my=1
+z_my=1
 
 
 def callback_gps(gps):

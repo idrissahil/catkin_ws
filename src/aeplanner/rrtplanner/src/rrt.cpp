@@ -152,9 +152,9 @@ Eigen::Vector3d Rrt::sample()
     do
     {
       x_samp[i] = 60 * (((double)rand()) / ((double)RAND_MAX) - 0.5);
-      ROS_INFO_STREAM("testing sample  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << 3);
 
     } while(x_samp[i] < boundary_min_[i] or x_samp[i] > boundary_max_[i]);
+    ROS_INFO_STREAM("testing sample  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!" << 3);
   }
 
   return x_samp;

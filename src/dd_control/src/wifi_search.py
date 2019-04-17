@@ -10,13 +10,13 @@ rospy.init_node('search_wifi_node')
 search_wifi_pub = rospy.Publisher('wifi_search', Temperature, queue_size=1)
 rate = rospy.Rate(50)
 
-sigma_x=2
-sigma_y=2
-sigma_z=2
+sigma_x=5
+sigma_y=5
+sigma_z=5
 
-x_my=3
-y_my=3
-z_my=3
+x_my=1
+y_my=1
+z_my=1
 
 A=1
 
@@ -36,7 +36,7 @@ def callback_setpoint(search_point):
 
 
 def main():
-    search_sub = rospy.Subscriber('/setpoint', PoseStamped, callback_setpoint)
+    search_sub = rospy.Subscriber('/mavros/setpoint_position/local', PoseStamped, callback_setpoint)
     rospy.spin()
 
 

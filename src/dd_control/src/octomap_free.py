@@ -2,6 +2,7 @@
 
 import rospy
 import math
+import octomap
 from sensor_msgs.msg import BatteryState
 from geometry_msgs.msg import Twist, PoseArray, Pose, PoseStamped
 from octomap_msgs.msg import Octomap

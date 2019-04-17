@@ -160,15 +160,17 @@ void AEPlanner::expandRRT()
     // (3) the path between the new node and it's parent does not contain any
     // (4) it is within the wifi range if wifi search enabled
     // obstacles
-
+    double wifi_sig;
     do
     {
       Eigen::Vector4d offset = sampleNewPoint();
       new_node->state_ = current_state_ + offset;
+      
 
       nearest = chooseParent(new_node, params_.extension_range);
 
       new_node->state_ = restrictDistance(nearest->state_, new_node->state_);
+      
 
       ROS_DEBUG_STREAM("Trying node (" << new_node->state_[0] << ", "
                                        << new_node->state_[1] << ", "
@@ -181,11 +183,34 @@ void AEPlanner::expandRRT()
         continue;
       ROS_DEBUG_STREAM("ot check done!");
 
+      double Amp=1;
+      double search_location_x = new_node->state_[0];
+      double search_location_y = new_node->state_[1];
+
+      double search_location_z = new_node->state_[2];
+
+      double sigma_x=wifi_dist_state_[0];
+      double sigma_y=wifi_dist_state_[1];
+      double sigma_z=wifi_dist_state_[2];
+      double x_my=1;
+      double y_my=1;
+      double z_my=1;
+      wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                ((search_location_z - z_my) *(search_location_z - z_my)) / (2 * sigma_z * sigma_z))));
+      //ROS_INFO_STREAM("Wifi Distribution  1 " << wifi_dist_state_[0]);
+      //ROS_INFO_STREAM("Wifi Distribution  2 " << wifi_dist_state_[1]);
+      //ROS_INFO_STREAM("Wifi Distribution  3 " << wifi_dist_state_[2]);
+      if (wifi_dist_state_[3] !=1)
+      {
+        wifi_sig=1;
+        ROS_INFO_STREAM("Wifi aware drone disabled " << wifi_dist_state_[3]);
+      }
+
       ROS_DEBUG_STREAM("Inside boundaries?  " << isInsideBoundaries(new_node->state_));
       ROS_DEBUG_STREAM("In known space?     " << ot_result);
       ROS_DEBUG_STREAM("Collision?          " << collisionLine(
                            nearest->state_, new_node->state_, params_.bounding_radius));
-    } while (!isInsideBoundaries(new_node->state_) or !ot_result or
+    } while (!isInsideBoundaries(new_node->state_) or !ot_result or wifi_sig<0.5 or
              collisionLine(nearest->state_, new_node->state_, params_.bounding_radius));
 
     ROS_DEBUG_STREAM("New node (" << new_node->state_[0] << ", " << new_node->state_[1]
@@ -232,7 +257,7 @@ Eigen::Vector4d AEPlanner::sampleNewPoint()
       point[i] = params_.max_sampling_radius * 2.0 *
                  (((double)rand()) / ((double)RAND_MAX) - 0.5);
     //ROS_INFO_STREAM("wifi signal test !!!!!!!!!!!!!!!!!!!!!   " << 1);
-    double Amp=1;
+    /*double Amp=1;
     double search_location_x = point[0];
     double search_location_y = point[1];
 
@@ -244,8 +269,11 @@ Eigen::Vector4d AEPlanner::sampleNewPoint()
     double x_my=1;
     double y_my=1;
     double z_my=1;
-    wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+    
+    //wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
               ((search_location_z - z_my) *(search_location_z - z_my)) / (2 * sigma_z * sigma_z))));
+    */
+    wifi_sig=1;
     //ROS_INFO_STREAM("Wifi Distribution  1 " << wifi_dist_state_[0]);
     //ROS_INFO_STREAM("Wifi Distribution  2 " << wifi_dist_state_[1]);
     //ROS_INFO_STREAM("Wifi Distribution  3 " << wifi_dist_state_[2]);
@@ -256,8 +284,8 @@ Eigen::Vector4d AEPlanner::sampleNewPoint()
     }
   }
    while ((pow(point[0], 2.0) + pow(point[1], 2.0) + pow(point[2], 2.0)) >
-           (pow(params_.max_sampling_radius, 2.0)) || wifi_sig<0.2);
-  ROS_INFO_STREAM("wifi stream aeplanner" << wifi_sig);
+           (pow(params_.max_sampling_radius, 2.0)) || wifi_sig<0.5);
+  //ROS_INFO_STREAM("wifi stream aeplanner" << wifi_sig);
   return point;
 }
 
@@ -353,7 +381,19 @@ std::pair<double, double> AEPlanner::getGain(RRTNode* node)
       double gain = srv.response.mu;
       //double wifi_sig = 0.55;
       double yaw = srv.response.yaw;
-      //ROS_INFO_STREAM("wifi signal: " << wifi_sig);
+      double Amp = 1;
+      double x_my=1;
+      double y_my=1;
+      double z_my=1;
+      double sigma_x=5;
+      double sigma_y=5;
+      double sigma_z=5;
+      double search_location_x =node->state_[0];
+      double search_location_y =node->state_[1];
+      double search_location_z =node->state_[2];
+      double wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+              ((search_location_z - z_my) *(search_location_z - z_my)) / (2 * sigma_z * sigma_z))));
+      ROS_INFO_STREAM("wifi signal: " << wifi_sig);
 
       ROS_INFO_STREAM("gain impl: " << gain);
       return std::make_pair(gain, yaw);
