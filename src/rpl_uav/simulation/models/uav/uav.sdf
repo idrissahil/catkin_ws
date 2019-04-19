@@ -590,5 +590,15 @@
 		<child>primesense::primesense_link</child>
 		<parent>base_link</parent>
 	</joint>
+	
+	<include>
+		<uri>model://teraranger</uri>
+		<pose>0 0 -0.05 0 1.57079633 0</pose>
+	</include>
+
+	<joint name='teraranger_joint' type='fixed'>
+		<child>teraranger::teraranger_link</child>
+		<parent>base_link</parent>
+	</joint>
   </model>
 </sdf>

@@ -31,6 +31,7 @@ wifi_list=[]
 past_locations_x=[]
 past_locations_y=[]
 past_locations_z=[]
+p=[]
 
 def myfunction(p, curr_location_x, curr_location_y, curr_location_z, f_list):
     x = p[0]
@@ -46,7 +47,7 @@ def myfunction(p, curr_location_x, curr_location_y, curr_location_z, f_list):
 
 
 def callback_gps(gps):
-    global first_set
+    global p
     if not curr_wifi==0:
         zGuess = array([initial_sigma_x, initial_sigma_y, initial_sigma_z])
         curr_location_x = gps.pose.position.x
@@ -76,10 +77,10 @@ def callback_gps(gps):
         distribution.pose.position.z =initial_sigma_z
         if wifi_aware==True:
             distribution.pose.orientation.w = 1
-        #if len(past_locations_x)>501:
-        #    distribution.pose.position.x = first_set[0]
-        #    distribution.pose.position.y = first_set[1]
-        #    distribution.pose.position.z = first_set[2]
+        if len(past_locations_x)>501:
+            distribution.pose.position.x = p[0]
+            distribution.pose.position.y = p[1]
+            distribution.pose.position.z = p[2]
         wifi_pub.publish(distribution)
 
 
