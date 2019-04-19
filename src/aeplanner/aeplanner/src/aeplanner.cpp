@@ -193,8 +193,8 @@ void AEPlanner::expandRRT()
       double sigma_y=wifi_dist_state_[1];
       double sigma_z=wifi_dist_state_[2];
       double x_my=1;
-      double y_my=1;
-      double z_my=1;
+      double y_my=2;
+      double z_my=3;
       wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
                 ((search_location_z - z_my) *(search_location_z - z_my)) / (2 * sigma_z * sigma_z))));
       //ROS_INFO_STREAM("Wifi Distribution  1 " << wifi_dist_state_[0]);
@@ -383,8 +383,8 @@ std::pair<double, double> AEPlanner::getGain(RRTNode* node)
       double yaw = srv.response.yaw;
       double Amp = 1;
       double x_my=1;
-      double y_my=1;
-      double z_my=1;
+      double y_my=2;
+      double z_my=3;
       double sigma_x=5;
       double sigma_y=5;
       double sigma_z=5;

@@ -15,8 +15,8 @@ sigma_y=5
 sigma_z=5
 
 x_my=1
-y_my=1
-z_my=1
+y_my=2
+z_my=3
 
 A=1
 

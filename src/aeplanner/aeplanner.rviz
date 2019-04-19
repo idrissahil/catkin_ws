@@ -63,14 +63,13 @@ Visualization Manager:
       Update Interval: 0
       Value: true
     - Class: rviz/MarkerArray
-      Enabled: true
+      Enabled: false
       Marker Topic: /aeplanner/rrtree
       Name: AEP-RRT
       Namespaces:
-        edges: true
-        nodes: true
+        {}
       Queue Size: 100
-      Value: true
+      Value: false
     - Class: rviz/Marker
       Enabled: false
       Marker Topic: /aeplanner/rrt_path

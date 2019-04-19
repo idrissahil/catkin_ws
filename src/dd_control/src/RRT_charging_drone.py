@@ -2,8 +2,9 @@
 
 import rospy
 from sensor_msgs.msg import BatteryState
-from geometry_msgs.msg import Twist, PoseArray, Pose, PoseStamped, TwistStamped
+from geometry_msgs.msg import Twist, PoseArray, Pose, PoseStamped, TwistStamped, Point
 from sensor_msgs.msg import LaserScan
+from visualization_msgs.msg import MarkerArray, Marker
 from mavros_msgs.msg import PositionTarget
 import random
 import math
@@ -12,36 +13,23 @@ import math
 
 rospy.init_node('rrt_charging_drone')
 
-rrt_pub = rospy.Publisher('/mavros/setpoint_position/local', PoseStamped, queue_size=1)
+rrt_pub = rospy.Publisher('/mavros/setpoint_position/local2', PoseStamped, queue_size=1)
 rate = rospy.Rate(50)
 
 ranges=[]
 #success_node=[]
 Node_list=[]
+goal_node_list=[]
+marks_list=[]
 
 
 state_drone=1
-index_rrt = 5
+index_rrt = 0
 
 x_charge=9
 y_charge=9
 z_charge=9
 
-start_x=0
-start_y=0
-start_z=0
-
-import random
-import math
-#import matplotlib.pyplot as plt
-
-x_charge=20
-y_charge=20
-z_charge=20
-
-start_x=0
-start_y=0
-start_z=0
 
 class Node():
     def __init__(self, x, y, z, x_diff, y_diff,z_diff,total_distance, parent_node = None ):
@@ -100,12 +88,34 @@ def find_velocity(closest_node, x_rand, y_rand, z_rand):
     x_diff=x_rand-closest_node.x #meter per second speed
     y_diff=y_rand-closest_node.y
     z_diff=z_rand-closest_node.z
+    max_speed_limit=1
+    if x_diff >max_speed_limit:  #max speed set to speed limit m/s
+        x_diff=max_speed_limit
+    if x_diff <-max_speed_limit:
+        x_diff=-max_speed_limit
+    if y_diff >max_speed_limit:
+        y_diff=max_speed_limit
+    if y_diff <-max_speed_limit:
+        y_diff=-max_speed_limit
+    if z_diff >max_speed_limit:
+        z_diff=max_speed_limit
+    if z_diff <-max_speed_limit:
+        z_diff=-max_speed_limit
 
     return x_diff, y_diff, z_diff
 
 
-def Collision(x, y, z):
+def Collision(x, y, z, obstacle_list):
     collision = True
+    for i in range(len(obstacle_list)):
+        dx = x - obstacle_list[i].x
+        dy = y - obstacle_list[i].y
+        dz = z - obstacle_list[i].z
+
+        dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
+        if dist <= 0.2:
+            collision=False
+            print("collision 111111111")
     if x <=-10  or x > 20:
         #print("2")
         collision = False
@@ -115,23 +125,24 @@ def Collision(x, y, z):
     if z < 0.01 or z > 20:
         #print("4")
         collision = False
-    #if x <6 and x > 4 and y<6 and y>4:
-        #print("5")
+    if x <6 and x > 4 and y<6 and y>4:
+        print("5")
     #    collision = False
     return collision
 
-def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff):
+def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     counter = 0
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
+    distance_time=0.0001
     collision = True
     while counter < 70:
-        curr_x = curr_x + x_diff*0.01  #Go to node for 70 ms
-        curr_y = curr_y + y_diff*0.01
-        curr_z = curr_z + z_diff*0.01
+        curr_x = curr_x + x_diff* distance_time #Go to node for 70 ms
+        curr_y = curr_y + y_diff*distance_time
+        curr_z = curr_z + z_diff*distance_time
         counter = counter + 1
-        collision = Collision(curr_x, curr_y, curr_z)
+        collision = Collision(curr_x, curr_y, curr_z, marks_list)
         if collision==False:
             break
     return curr_x, curr_y, curr_z, collision, counter
@@ -144,6 +155,7 @@ def backtracking(Node_List, final_node):
     x_drone =[]
     y_drone =[]
     z_drone =[]
+    goal_node_list=[]
 
     times = []
     #index = len(Node_List)
@@ -153,6 +165,7 @@ def backtracking(Node_List, final_node):
     for i in range(final_node.total_parents):
 
         true_node = Node_List[index]
+        goal_node_list.append(true_node)
         x_drone.append(true_node.x)
         y_drone.append(true_node.y)
         z_drone.append(true_node.z)
@@ -167,20 +180,21 @@ def backtracking(Node_List, final_node):
     controls_x.reverse()
     controls_y.reverse()
     controls_z.reverse()
-    return controls_x, controls_y,controls_z, x_drone, y_drone, z_drone
+    goal_node_list.reverse()
+    return controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list
 
-def main_rrt(start_x, start_y,start_z):
+def main_rrt(start_x, start_y,start_z, marks_list):
     start_node = Node(start_x, start_y, start_z, x_diff=0, y_diff=0, z_diff=0, total_distance=0)
     Node_List = [start_node]
     goal_reach_distance = 1
     goal_reached = False
-    goal_distance2=10
+    goal_distance2=1
     counter_boost=0
     while goal_reached == False:
         x_rand, y_rand, z_rand = rand_node(counter_boost, len(Node_List))
         closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand,z_rand, Node_List)
         x_diff, y_diff, z_diff = find_velocity(closest_node, x_rand, y_rand, z_rand)
-        curr_x, curr_y, curr_z, collision, counter = go_to_goal( closest_node.x , closest_node.y, closest_node.z, x_diff, y_diff, z_diff)
+        curr_x, curr_y, curr_z, collision, counter = go_to_goal( closest_node.x , closest_node.y, closest_node.z, x_diff, y_diff, z_diff, marks_list)
         distance_travelled = math.sqrt(math.pow((closest_node.x-curr_x), 2) + math.pow((closest_node.y-curr_y), 2) + math.pow((closest_node.z-curr_z), 2))
         Suc_Node = Node(x=curr_x, y=curr_y,z=curr_z, parent_node=closest_index, x_diff=x_diff, y_diff=y_diff, z_diff=z_diff, total_distance=0)
         #print(collision)
@@ -198,7 +212,7 @@ def main_rrt(start_x, start_y,start_z):
     controls_x2=[]
     controls_y2 =[]
     controls_z2=[]
-    controls_x, controls_y,controls_z, x_drone, y_drone, z_drone = backtracking(Node_List, Suc_Node)
+    controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list = backtracking(Node_List, Suc_Node)
 
     for i in range(len(controls_x)):
         counter=0
@@ -209,7 +223,7 @@ def main_rrt(start_x, start_y,start_z):
             counter=counter+1
     print("number of nodes",len(Node_List))
     print("boost number", boost_number)
-    print("sum x2", 0.01*sum(controls_x2))
+    print("sum x2", 0.001*sum(controls_x2))
     print("x last node", Suc_Node.x, "ylast node", Suc_Node.y, "z last node", Suc_Node.z)
     #print(70*0.0001*sum(controls_x)) # controls given in 70*0.0001
 
@@ -218,7 +232,7 @@ def main_rrt(start_x, start_y,start_z):
     #plt.plot(x_drone, y_drone, 'ro')
     #plt.axis([-10, 10, -10, 10])
     #plt.show()
-    return Suc_Node, Node_List
+    return Suc_Node, Node_List, goal_node_list
 
 
 def callback_gps(gps):
@@ -226,30 +240,43 @@ def callback_gps(gps):
     global angle_min
     global state_drone
     global Node_list
+    global goal_node_list
     global success_node
     global index_rrt
+    global marks_list
     print ("state drone", state_drone)
-    if state_drone==1:
-        success_node, Node_list = main_rrt(gps.pose.position.x, gps.pose.position.y, gps.pose.position.z )
+    if marks_list is not None:
+        if state_drone==1:
+            success_node, Node_list, goal_node_list = main_rrt(gps.pose.position.x, gps.pose.position.y, gps.pose.position.z, marks_list )
 
-        state_drone = 2
-    curr_rrt=PoseStamped()
-    curr_rrt.pose.position.x=Node_list[index_rrt].x
-    curr_rrt.pose.position.y=Node_list[index_rrt].y
-    curr_rrt.pose.position.z=Node_list[index_rrt].z
-    curr_rrt.header.frame_id = "map"
-    rrt_pub.publish(curr_rrt)
+            state_drone = 2
+        curr_rrt=PoseStamped()
+        curr_rrt.pose.position.x=goal_node_list[index_rrt].x
+        curr_rrt.pose.position.y=goal_node_list[index_rrt].y
+        curr_rrt.pose.position.z=goal_node_list[index_rrt].z
+        curr_rrt.header.frame_id = "map"
+        rrt_pub.publish(curr_rrt)
+        distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
+        if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
+            index_rrt=index_rrt+1
+        #print ("state drone2", state_drone)
+        #print("success node", Node_list[3].z)
 
-    print ("state drone2", state_drone)
-    print("success node", Node_list[3].z)
+def callback_markers(marks):
+    global marks_list
+    marks_unpacked=marks.markers[16].points
+    marks_list = marks.markers[16].points
 
-
+    #print("marks_unpacked first point", marks_unpacked[0].x)
+    #print(marks_unpacked)
 
 
 def main():
     gps_sub = rospy.Subscriber('/mavros/local_position/pose', PoseStamped, callback_gps)
+    vis_mark_sub = rospy.Subscriber('/aeplanner/occupied_cells_vis_array', MarkerArray, callback_markers)
     print('spinning')
     rospy.spin()
 
 if __name__ == '__main__':
     main()
+
