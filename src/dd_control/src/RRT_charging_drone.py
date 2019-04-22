@@ -1,6 +1,7 @@
 #! /usr/bin/env python
 
 import rospy
+import time
 from sensor_msgs.msg import BatteryState
 from geometry_msgs.msg import Twist, PoseArray, Pose, PoseStamped, TwistStamped, Point
 from sensor_msgs.msg import LaserScan
@@ -14,6 +15,8 @@ import math
 rospy.init_node('rrt_charging_drone')
 
 rrt_pub = rospy.Publisher('/mavros/setpoint_position/local2', PoseStamped, queue_size=1)
+rrt_vis_pub = rospy.Publisher('visual_marker_rrt', PoseArray, queue_size=1)
+
 rate = rospy.Rate(50)
 
 ranges=[]
@@ -27,8 +30,8 @@ state_drone=1
 index_rrt = 0
 
 x_charge=9
-y_charge=9
-z_charge=9
+y_charge=1
+z_charge=1
 
 
 class Node():
@@ -113,20 +116,20 @@ def Collision(x, y, z, obstacle_list):
         dz = z - obstacle_list[i].z
 
         dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
-        if dist <= 0.2:
+        if dist <= 0.4:
             collision=False
             print("collision 111111111")
     if x <=-10  or x > 20:
-        #print("2")
+        print("2")
         collision = False
     if y <= -10  or y > 20:
         #print("3")
         collision = False
-    if z < 0.01 or z > 20:
-        #print("4")
+    if z < -0.1 or z > 20:
+        print("4")
         collision = False
-    if x <6 and x > 4 and y<6 and y>4:
-        print("5")
+    #if x <7 and x > 3 and y<7 and y>3:
+    #    print("5")
     #    collision = False
     return collision
 
@@ -135,16 +138,16 @@ def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
-    distance_time=0.0001
+    distance_time=0.001
     collision = True
     while counter < 70:
         curr_x = curr_x + x_diff* distance_time #Go to node for 70 ms
         curr_y = curr_y + y_diff*distance_time
         curr_z = curr_z + z_diff*distance_time
         counter = counter + 1
-        collision = Collision(curr_x, curr_y, curr_z, marks_list)
-        if collision==False:
-            break
+    collision = Collision(curr_x, curr_y, curr_z, marks_list)
+        #if collision==False:
+            #break
     return curr_x, curr_y, curr_z, collision, counter
 
 
@@ -188,9 +191,10 @@ def main_rrt(start_x, start_y,start_z, marks_list):
     Node_List = [start_node]
     goal_reach_distance = 1
     goal_reached = False
-    goal_distance2=1
+    goal_distance2=3
     counter_boost=0
     while goal_reached == False:
+        start = time.time()
         x_rand, y_rand, z_rand = rand_node(counter_boost, len(Node_List))
         closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand,z_rand, Node_List)
         x_diff, y_diff, z_diff = find_velocity(closest_node, x_rand, y_rand, z_rand)
@@ -203,7 +207,10 @@ def main_rrt(start_x, start_y,start_z, marks_list):
             Suc_Node.total_distance= distance_travelled + closest_node.total_distance
             Node_List.append(Suc_Node)
             ignore1, goal_distance2, ignore2 = find_closest_node(x_charge, y_charge, z_charge, Node_List)
-            #print(goal_distance2)
+            end = time.time()
+            print("time per node", end - start)
+            #print("added node")
+        print("goal distance 2",goal_distance2)
         if goal_distance2 <= goal_reach_distance:
             #print("reached", goal_distance2)
             goal_reached = True
@@ -227,7 +234,7 @@ def main_rrt(start_x, start_y,start_z, marks_list):
     print("x last node", Suc_Node.x, "ylast node", Suc_Node.y, "z last node", Suc_Node.z)
     #print(70*0.0001*sum(controls_x)) # controls given in 70*0.0001
 
-    print('x_start',x_drone[0], 'x_end', x_drone[-1])
+    #print('x_start',x_drone[0], 'x_end', x_drone[-1])
     print("total distance",Suc_Node.total_distance)
     #plt.plot(x_drone, y_drone, 'ro')
     #plt.axis([-10, 10, -10, 10])
@@ -244,13 +251,17 @@ def callback_gps(gps):
     global success_node
     global index_rrt
     global marks_list
-    print ("state drone", state_drone)
+    #print ("state drone", state_drone)
     if marks_list is not None:
+        rrt_poses = PoseArray()
+        rrt_poses.header.stamp = rospy.Time.now()
+        rrt_poses.header.frame_id = 'map'
         if state_drone==1:
             success_node, Node_list, goal_node_list = main_rrt(gps.pose.position.x, gps.pose.position.y, gps.pose.position.z, marks_list )
-
+            #print("goal node",Node_list)
             state_drone = 2
         curr_rrt=PoseStamped()
+        print("index", index_rrt)
         curr_rrt.pose.position.x=goal_node_list[index_rrt].x
         curr_rrt.pose.position.y=goal_node_list[index_rrt].y
         curr_rrt.pose.position.z=goal_node_list[index_rrt].z
@@ -259,6 +270,17 @@ def callback_gps(gps):
         distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
             index_rrt=index_rrt+1
+        for i in range(len(goal_node_list)):
+            curr_point_rrt = Pose()
+            curr_point_rrt.position.x = goal_node_list[i].x
+            curr_point_rrt.position.y =  goal_node_list[i].y
+            curr_point_rrt.position.z =  goal_node_list[i].z
+
+            rrt_poses.poses.append(curr_point_rrt)
+        rrt_vis_pub.publish(rrt_poses)
+
+            #curr_point_rrt.orientation.z = -3.14 / 2
+            #curr_point_rrt.orientation.x = 2
         #print ("state drone2", state_drone)
         #print("success node", Node_list[3].z)
 
@@ -266,6 +288,7 @@ def callback_markers(marks):
     global marks_list
     marks_unpacked=marks.markers[16].points
     marks_list = marks.markers[16].points
+    #print("marks list", marks_list[2].x)
 
     #print("marks_unpacked first point", marks_unpacked[0].x)
     #print(marks_unpacked)
