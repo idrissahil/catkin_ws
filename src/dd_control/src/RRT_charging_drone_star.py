@@ -57,7 +57,7 @@ def rand_node(counter_boost, node_list_length):
 
     x_max = 20
     y_max = 20
-    z_max = 10
+    z_max = 5
     x_rand = random.uniform(x_min, x_max)
     y_rand = random.uniform(y_min, y_max)
     z_rand = random.uniform(z_min, z_max)
@@ -115,7 +115,7 @@ def Collision(x, y, z, obstacle_list):
         dy = y - obstacle_list[i].y
         dz = z - obstacle_list[i].z
 
-        if abs(dx)<0.25 and abs(dy)<0.25 and abs(dz)<0.25:
+        if abs(dx)<0.3 and abs(dy)<0.3 and abs(dz)<0.3:
             print("abs collision check")
             collision=True
 
@@ -129,7 +129,7 @@ def Collision(x, y, z, obstacle_list):
     if y <= -20  or y > 20:
         #print("3")
         collision = True
-    if z < -0.1 or z > 1.5:
+    if z < -0.1 or z > 5:
         print("4")
         collision = True
     return collision
@@ -139,10 +139,10 @@ def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
-    distance_time=0.005/2
+    distance_time=0.005
     collision = False
     while counter < 100:
-        curr_x = curr_x + x_diff* distance_time #Go to node for 100 *distance_time
+        curr_x = curr_x + x_diff* distance_time  #Go to node for 100 *distance_time
         curr_y = curr_y + y_diff*distance_time
         curr_z = curr_z + z_diff*distance_time
         counter = counter + 1
@@ -150,6 +150,8 @@ def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
         #if collision==False:
             #break
     return curr_x, curr_y, curr_z, collision, counter
+
+
 
 
 def backtracking(Node_List, final_node):
@@ -187,25 +189,55 @@ def backtracking(Node_List, final_node):
     goal_node_list.reverse()
     return controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list
 
+
+def choose_parent(rand_x, rand_y, rand_z, node_list):
+    bounding_radius=0.5
+    inside_bound_index=[]
+    parent_index=0
+    best_dist=100000
+    total_distance_constant=0.9
+
+    for i in range(len(node_list)):
+        dx = rand_x - node_list[i].x
+        dy = rand_y - node_list[i].y
+        dz = rand_z - node_list[i].z
+        dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
+        tot_dist=dist + node_list[i].total_distance*total_distance_constant
+        if i==0:
+            tot_dist=tot_dist+10
+        if tot_dist<best_dist:
+            #print("lowered", i)
+            parent_index=i
+            best_dist=tot_dist
+        #print("i", i, "tot_dist", tot_dist)
+    #print("best dist", best_dist, "index", parent_index)
+    parent_node=node_list[parent_index]
+    return parent_index, parent_node
+
 def main_rrt(start_x, start_y,start_z, marks_list):
     start_node = Node(start_x, start_y, start_z, x_diff=0, y_diff=0, z_diff=0, total_distance=0)
     Node_List = [start_node]
-    goal_reach_distance = 0.1
+    goal_reach_distance = 0.00000001
     goal_reached = False
-    goal_distance2=3
+    goal_distance2=100
     counter_boost=0
     while goal_reached == False:
+        if len(Node_List)>3000:
+            break
         start = time.time()
         x_rand, y_rand, z_rand = rand_node(counter_boost, len(Node_List))
-        closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand,z_rand, Node_List)
-        x_diff, y_diff, z_diff = find_velocity(closest_node, x_rand, y_rand, z_rand)
-        curr_x, curr_y, curr_z, collision, counter = go_to_goal( closest_node.x , closest_node.y, closest_node.z, x_diff, y_diff, z_diff, marks_list)
-        distance_travelled = math.sqrt(math.pow((closest_node.x-curr_x), 2) + math.pow((closest_node.y-curr_y), 2) + math.pow((closest_node.z-curr_z), 2))
-        Suc_Node = Node(x=curr_x, y=curr_y,z=curr_z, parent_node=closest_index, x_diff=x_diff, y_diff=y_diff, z_diff=z_diff, total_distance=0)
+        #closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand,z_rand, Node_List)
+        parent_index,  parent_node = choose_parent(x_rand, y_rand, z_rand, Node_List)
+
+        x_diff, y_diff, z_diff = find_velocity(parent_node, x_rand, y_rand, z_rand)
+        curr_x, curr_y, curr_z, collision, counter = go_to_goal( parent_node.x , parent_node.y, parent_node.z, x_diff, y_diff, z_diff, marks_list)
+        distance_travelled = math.sqrt(math.pow((parent_node.x-curr_x), 2) + math.pow((parent_node.y-curr_y), 2) + math.pow((parent_node.z-curr_z), 2))
+
+        Suc_Node = Node(x=curr_x, y=curr_y,z=curr_z, parent_node=parent_index, x_diff=x_diff, y_diff=y_diff, z_diff=z_diff, total_distance=0)
         #print(collision)
         if collision==False:
-            Suc_Node.total_parents = 1 + closest_node.total_parents
-            Suc_Node.total_distance= distance_travelled + closest_node.total_distance
+            Suc_Node.total_parents = 1 + parent_node.total_parents
+            Suc_Node.total_distance= distance_travelled + parent_node.total_distance
             Node_List.append(Suc_Node)
             ignore1, goal_distance2, ignore2 = find_closest_node(x_charge, y_charge, z_charge, Node_List)
             end = time.time()
@@ -262,28 +294,29 @@ def callback_gps(gps):
             #print("goal node",Node_list)
             state_drone = 2
         curr_rrt=PoseStamped()
-        print("index", index_rrt)
-        curr_rrt.pose.position.x=goal_node_list[index_rrt].x
-        curr_rrt.pose.position.y=goal_node_list[index_rrt].y
-        curr_rrt.pose.position.z=goal_node_list[index_rrt].z
-        curr_rrt.header.frame_id = "map"
-        rrt_pub.publish(curr_rrt)
-        distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
-        if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
-            index_rrt=index_rrt+1
-        for i in range(len(goal_node_list)):
-            curr_point_rrt = Pose()
-            curr_point_rrt.position.x = goal_node_list[i].x
-            curr_point_rrt.position.y =  goal_node_list[i].y
-            curr_point_rrt.position.z =  goal_node_list[i].z
-
-        #for i in range(len(Node_list)):
+        #print("index", index_rrt)
+        #curr_rrt.pose.position.x=goal_node_list[index_rrt].x
+        #curr_rrt.pose.position.y=goal_node_list[index_rrt].y
+        #curr_rrt.pose.position.z=goal_node_list[index_rrt].z
+        #curr_rrt.header.frame_id = "map"
+        #rrt_pub.publish(curr_rrt)
+        #distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
+        #if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
+        #    index_rrt=index_rrt+1
+        #for i in range(len(goal_node_list)):
          #   curr_point_rrt = Pose()
-          #  curr_point_rrt.position.x = Node_list[i].x
-            #curr_point_rrt.position.y = Node_list[i].y
-           # curr_point_rrt.position.z = Node_list[i].z
+          #  curr_point_rrt.position.x = goal_node_list[i].x
+           # curr_point_rrt.position.y =  goal_node_list[i].y
+            #curr_point_rrt.position.z =  goal_node_list[i].z
+            #rrt_poses.poses.append(curr_point_rrt)
 
+        for i in range(len(Node_list)):
+            curr_point_rrt = Pose()
+            curr_point_rrt.position.x = Node_list[i].x
+            curr_point_rrt.position.y = Node_list[i].y
+            curr_point_rrt.position.z = Node_list[i].z
             rrt_poses.poses.append(curr_point_rrt)
+
         rrt_vis_pub.publish(rrt_poses)
 
             #curr_point_rrt.orientation.z = -3.14 / 2

@@ -17,6 +17,9 @@ rate = rospy.Rate(50)
 ranges=[]
 
 
+
+
+
 def callback_lidar(scan):
     global ranges
     global angle_min
