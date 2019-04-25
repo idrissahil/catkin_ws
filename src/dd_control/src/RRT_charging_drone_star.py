@@ -61,7 +61,7 @@ def rand_node(counter_boost, node_list_length):
     x_rand = random.uniform(x_min, x_max)
     y_rand = random.uniform(y_min, y_max)
     z_rand = random.uniform(z_min, z_max)
-    if counter_boost%100==0: #Boost the search towards the goal
+    if counter_boost%10==0: #Boost the search towards the goal
         x_rand=x_charge
         y_rand = y_charge
         z_rand=z_charge
@@ -115,7 +115,7 @@ def Collision(x, y, z, obstacle_list):
         dy = y - obstacle_list[i].y
         dz = z - obstacle_list[i].z
 
-        if abs(dx)<0.3 and abs(dy)<0.3 and abs(dz)<0.3:
+        if abs(dx)<0.31 and abs(dy)<0.31 and abs(dz)<0.31:
             print("abs collision check")
             collision=True
 
@@ -129,27 +129,26 @@ def Collision(x, y, z, obstacle_list):
     if y <= -20  or y > 20:
         #print("3")
         collision = True
-    if z < -0.1 or z > 5:
+    if z < -0.1 or z > 2:
         print("4")
         collision = True
     return collision
 
 def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
-    counter = 0
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
-    distance_time=0.005
+    distance_time=0.01
+    step_num=100
+
     collision = False
-    while counter < 100:
-        curr_x = curr_x + x_diff* distance_time  #Go to node for 100 *distance_time
-        curr_y = curr_y + y_diff*distance_time
-        curr_z = curr_z + z_diff*distance_time
-        counter = counter + 1
+    curr_x = curr_x + x_diff* distance_time*step_num  #Go to node for 100 *distance_time
+    curr_y = curr_y + y_diff*distance_time*step_num
+    curr_z = curr_z + z_diff*distance_time*step_num
     collision = Collision(curr_x, curr_y, curr_z, marks_list)
         #if collision==False:
             #break
-    return curr_x, curr_y, curr_z, collision, counter
+    return curr_x, curr_y, curr_z, collision
 
 
 
@@ -190,25 +189,33 @@ def backtracking(Node_List, final_node):
     return controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list
 
 
-def choose_parent(rand_x, rand_y, rand_z, node_list):
-    bounding_radius=0.5
-    inside_bound_index=[]
+def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
+    bounding_radius=2
+    dist_list=[]
     parent_index=0
     best_dist=100000
-    total_distance_constant=0.9
+    total_distance_constant=1
 
     for i in range(len(node_list)):
-        dx = rand_x - node_list[i].x
-        dy = rand_y - node_list[i].y
-        dz = rand_z - node_list[i].z
+        dx = curr_x - node_list[i].x
+        dy = curr_y - node_list[i].y
+        dz = curr_z - node_list[i].z
         dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
-        tot_dist=dist + node_list[i].total_distance*total_distance_constant
-        if i==0:
-            tot_dist=tot_dist+10
-        if tot_dist<best_dist:
-            #print("lowered", i)
-            parent_index=i
-            best_dist=tot_dist
+
+        if dist<bounding_radius:
+            tot_dist=dist + node_list[i].total_distance*total_distance_constant
+            if i==0:
+                tot_dist=tot_dist+1
+            if tot_dist < best_dist:
+                #print("lowered", i)
+                parent_index = i
+                best_dist = tot_dist
+        dist_list.append(dist)
+        if min(dist_list)>bounding_radius:
+            #print("no nodes inside bouding area")
+            parent_index=closest_index
+
+
         #print("i", i, "tot_dist", tot_dist)
     #print("best dist", best_dist, "index", parent_index)
     parent_node=node_list[parent_index]
@@ -217,20 +224,23 @@ def choose_parent(rand_x, rand_y, rand_z, node_list):
 def main_rrt(start_x, start_y,start_z, marks_list):
     start_node = Node(start_x, start_y, start_z, x_diff=0, y_diff=0, z_diff=0, total_distance=0)
     Node_List = [start_node]
-    goal_reach_distance = 0.00000001
+    goal_reach_distance = 0.000000000001
     goal_reached = False
     goal_distance2=100
     counter_boost=0
     while goal_reached == False:
-        if len(Node_List)>3000:
+        if len(Node_List)>2000:
             break
         start = time.time()
         x_rand, y_rand, z_rand = rand_node(counter_boost, len(Node_List))
-        #closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand,z_rand, Node_List)
-        parent_index,  parent_node = choose_parent(x_rand, y_rand, z_rand, Node_List)
+        closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand,z_rand, Node_List)
+        x_diff, y_diff, z_diff = find_velocity(closest_node, x_rand, y_rand, z_rand)
+        curr_x, curr_y, curr_z, collision = go_to_goal( closest_node.x , closest_node.y, closest_node.z, x_diff, y_diff, z_diff, marks_list)
+        #print("x_rand", x_rand, "curr_x", curr_x, "closest node x",closest_node.x)
 
-        x_diff, y_diff, z_diff = find_velocity(parent_node, x_rand, y_rand, z_rand)
-        curr_x, curr_y, curr_z, collision, counter = go_to_goal( parent_node.x , parent_node.y, parent_node.z, x_diff, y_diff, z_diff, marks_list)
+        parent_index,  parent_node = choose_parent(curr_x, curr_y, curr_z, Node_List, closest_index)
+
+
         distance_travelled = math.sqrt(math.pow((parent_node.x-curr_x), 2) + math.pow((parent_node.y-curr_y), 2) + math.pow((parent_node.z-curr_z), 2))
 
         Suc_Node = Node(x=curr_x, y=curr_y,z=curr_z, parent_node=parent_index, x_diff=x_diff, y_diff=y_diff, z_diff=z_diff, total_distance=0)
@@ -249,21 +259,10 @@ def main_rrt(start_x, start_y,start_z, marks_list):
             goal_reached = True
         print("nodes", len(Node_List))
         counter_boost=counter_boost+1
-    controls_x2=[]
-    controls_y2 =[]
-    controls_z2=[]
     controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list = backtracking(Node_List, Suc_Node)
 
-    for i in range(len(controls_x)):
-        counter=0
-        while counter<70:
-            controls_x2.append(controls_x[i])
-            controls_y2.append(controls_y[i])
-            controls_z2.append(controls_z[i])
-            counter=counter+1
     print("number of nodes",len(Node_List))
     print("boost number", boost_number)
-    print("sum x2", 0.001*sum(controls_x2))
     print("x last node", Suc_Node.x, "ylast node", Suc_Node.y, "z last node", Suc_Node.z)
     #print(70*0.0001*sum(controls_x)) # controls given in 70*0.0001
 
