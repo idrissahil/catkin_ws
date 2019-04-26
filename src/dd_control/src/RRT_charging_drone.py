@@ -111,9 +111,9 @@ def find_velocity(closest_node, x_rand, y_rand, z_rand):
 def Collision(x, y, z, obstacle_list):
     collision = False
     for i in range(len(obstacle_list)):
-        dx = x - obstacle_list[i].x
-        dy = y - obstacle_list[i].y
-        dz = z - obstacle_list[i].z
+        dx = obstacle_list[i].x -x
+        dy =  obstacle_list[i].y - y
+        dz = obstacle_list[i].z - z
 
         if abs(dx)<0.25 and abs(dy)<0.25 and abs(dz)<0.25:
             print("abs collision check")
@@ -139,7 +139,7 @@ def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
-    distance_time=0.005/2
+    distance_time=0.0005/2
     collision = False
     while counter < 100:
         curr_x = curr_x + x_diff* distance_time #Go to node for 100 *distance_time
@@ -190,9 +190,9 @@ def backtracking(Node_List, final_node):
 def main_rrt(start_x, start_y,start_z, marks_list):
     start_node = Node(start_x, start_y, start_z, x_diff=0, y_diff=0, z_diff=0, total_distance=0)
     Node_List = [start_node]
-    goal_reach_distance = 1
+    goal_reach_distance = 0.00000000001
     goal_reached = False
-    goal_distance2=3
+    goal_distance2=4
     counter_boost=0
     while goal_reached == False:
         start = time.time()
@@ -271,17 +271,18 @@ def callback_gps(gps):
         distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
             index_rrt=index_rrt+1
+        '''
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
             curr_point_rrt.position.y =  goal_node_list[i].y
             curr_point_rrt.position.z =  goal_node_list[i].z
-
-        #for i in range(len(Node_list)):
-         #   curr_point_rrt = Pose()
-          #  curr_point_rrt.position.x = Node_list[i].x
-            #curr_point_rrt.position.y = Node_list[i].y
-           # curr_point_rrt.position.z = Node_list[i].z
+        '''
+        for i in range(len(Node_list)):
+            curr_point_rrt = Pose()
+            curr_point_rrt.position.x = Node_list[i].x
+            curr_point_rrt.position.y = Node_list[i].y
+            curr_point_rrt.position.z = Node_list[i].z
 
             rrt_poses.poses.append(curr_point_rrt)
         rrt_vis_pub.publish(rrt_poses)
