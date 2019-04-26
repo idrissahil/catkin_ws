@@ -61,7 +61,7 @@ def rand_node(counter_boost, node_list_length):
     x_rand = random.uniform(x_min, x_max)
     y_rand = random.uniform(y_min, y_max)
     z_rand = random.uniform(z_min, z_max)
-    if counter_boost%100==0: #Boost the search towards the goal
+    if counter_boost%10==0: #Boost the search towards the goal
         x_rand=x_charge
         y_rand = y_charge
         z_rand=z_charge
@@ -190,7 +190,7 @@ def backtracking(Node_List, final_node):
 def main_rrt(start_x, start_y,start_z, marks_list):
     start_node = Node(start_x, start_y, start_z, x_diff=0, y_diff=0, z_diff=0, total_distance=0)
     Node_List = [start_node]
-    goal_reach_distance = 0.1
+    goal_reach_distance = 1
     goal_reached = False
     goal_distance2=3
     counter_boost=0
@@ -262,7 +262,7 @@ def callback_gps(gps):
             #print("goal node",Node_list)
             state_drone = 2
         curr_rrt=PoseStamped()
-        print("index", index_rrt)
+        #print("index", index_rrt)
         curr_rrt.pose.position.x=goal_node_list[index_rrt].x
         curr_rrt.pose.position.y=goal_node_list[index_rrt].y
         curr_rrt.pose.position.z=goal_node_list[index_rrt].z
