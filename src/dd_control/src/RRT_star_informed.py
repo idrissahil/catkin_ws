@@ -72,18 +72,19 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation):
         #print("boost")
         boost_number[0]=boost_number[0]+1
     #informed rrt
-    x_max_i=c_best
-    y_max_i=math.sqrt(c_best*c_best - c_min*c_min)
-    rho_rand=random.uniform(0, 1)
-    phi_rand=random.uniform(0, 2*math.pi)
-    x_rot = math.sqrt(rho_rand) * math.cos(phi_rand)
-    y_rot = math.sqrt(rho_rand) * math.sin(phi_rand)
+    if c_best>0:
+        x_max_i=c_best
+        y_max_i=math.sqrt(c_best*c_best - c_min*c_min)
+        rho_rand=random.uniform(0, 1)
+        phi_rand=random.uniform(0, 2*math.pi)
+        x_rot = math.sqrt(rho_rand) * math.cos(phi_rand)
+        y_rot = math.sqrt(rho_rand) * math.sin(phi_rand)
 
-    x_rot = x_rot * x_max_i/2
-    y_rot= y_rot * y_max_i/2
-
-    x_rand=x_rot*math.cos(phi_rotation) - y_rot*math.sin(phi_rotation)
-    y_rand = x_rot * math.sin(phi_rotation) + y_rot * math.cos(phi_rotation)
+        x_rot = x_rot * x_max_i/2
+        y_rot= y_rot * y_max_i/2
+    
+        x_rand=x_rot*math.cos(phi_rotation) - y_rot*math.sin(phi_rotation)
+        y_rand = x_rot * math.sin(phi_rotation) + y_rot * math.cos(phi_rotation)
 
     return x_rand, y_rand, z_rand
 
@@ -259,7 +260,7 @@ def main_rrt(start_x, start_y,start_z, marks_list, best_total_distance=0, min_di
     Node_List = [start_node]
     goal_reach_distance = 1
     goal_reached = False
-    goal_distance2 = 10
+    goal_distance2 = 50
     counter_boost = 0
     while goal_reached == False and len(Node_List) < 3000:
         x_rand, y_rand, z_rand = rand_node(counter_boost, best_total_distance, min_distance, phi_rotation)
@@ -270,7 +271,7 @@ def main_rrt(start_x, start_y,start_z, marks_list, best_total_distance=0, min_di
         x_diff2, y_diff2, z_diff2 = find_velocity(parent_node, curr_x, curr_y, curr_z)
         curr_x, curr_y, curr_z, collision = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2, z_diff2 , marks_list)
         distance_travelled = math.sqrt(math.pow((curr_x - parent_node.x), 2) + math.pow((curr_y - parent_node.y), 2) + math.pow((curr_z - parent_node.z), 2))
-        print("distance travelled",distance_travelled)
+        #print("distance travelled",distance_travelled)
         if collision == False:
             Suc_Node = Node(x=curr_x, y=curr_y, z=curr_z, parent_node=parent_index, x_diff=x_diff, y_diff=y_diff, z_diff=z_diff, total_distance=0)
             Suc_Node.total_parents = 1 + parent_node.total_parents
@@ -279,7 +280,7 @@ def main_rrt(start_x, start_y,start_z, marks_list, best_total_distance=0, min_di
             goal_distance_curr = math.sqrt(math.pow((x_charge - Suc_Node.x), 2) + math.pow((y_charge - Suc_Node.y), 2) + math.pow((z_charge - Suc_Node.z), 2))
             if goal_distance_curr<goal_distance2:
                 goal_distance2=goal_distance_curr
-        print(goal_distance2)
+            print("goal distance", goal_distance2, "new node x", Suc_Node.x)
         if goal_distance2 <= goal_reach_distance:
             print("reached", goal_distance2)
             goal_reached = True
