@@ -17,6 +17,8 @@ old_location_x=1
 old_location_y=1
 old_location_z=1
 
+default_velocity=2
+
 x_charge=3
 y_charge=3
 z_charge = 1
@@ -27,6 +29,7 @@ def callback_gps(gps):
     global approx_curr
     global battery_percentage
     global stationary_drain
+    global default_velocity
     global old_location_x
     global old_location_y
     global old_location_z
@@ -50,7 +53,7 @@ def callback_gps(gps):
         new_location_y = gps.pose.position.y
         new_location_z = gps.pose.position.z
 
-        percentage_loss=approx_curr*(math.pow((new_location_x-old_location_x), 2) + math.pow((new_location_y-old_location_y), 2)+ math.pow((new_location_z-old_location_z), 2)) + stationary_drain
+        percentage_loss=approx_curr*(math.pow((new_location_x-old_location_x), 2) + math.pow((new_location_y-old_location_y), 2)+ math.pow((new_location_z-old_location_z), 2))/default_velocity + stationary_drain
         print("percentage lossp", percentage_loss)
         battery_percentage=battery_percentage-percentage_loss
         charge_diff=(math.pow((new_location_x-x_charge), 2) + math.pow((new_location_y-y_charge), 2)+ math.pow((new_location_z-z_charge), 2))
