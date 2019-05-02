@@ -29,8 +29,8 @@ marks_list=[]
 state_drone=1
 index_rrt = 0
 
-x_charge=19
-y_charge=-3
+x_charge= -6
+y_charge=10
 z_charge=1
 
 
@@ -112,7 +112,7 @@ def Collision(x, y, z, obstacle_list):
         dz = z - obstacle_list[i].z
 
         if abs(dx)<0.3 and abs(dy)<0.3 and abs(dz)<0.3:
-            print("abs collision check")
+            #print("abs collision check")
             collision=True
 
         #dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
@@ -134,7 +134,7 @@ def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
-    distance_time=0.001
+    distance_time=0.01
     step_num=100
     counter=0
     collision = False
@@ -198,7 +198,7 @@ def backtracking(Node_List, final_node):
     return controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list
 
 def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
-    bounding_radius=0.2
+    bounding_radius=1.2
     dist_list=[]
     parent_index=0
     best_dist=100000

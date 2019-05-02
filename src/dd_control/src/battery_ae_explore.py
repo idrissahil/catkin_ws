@@ -10,7 +10,8 @@ rospy.init_node('battery_ae_explore')
 ae_pub = rospy.Publisher('/mavros/setpoint_position/local2', PoseStamped, queue_size=1)
 rate = rospy.Rate(50)
 battery_percentage=1
-battery_constant=20
+approx_curr=20
+stationary_drain=0.01
 #save previous state of gps, calculate difference and use constant that calculates how much battery drained
 old_location_x=1
 old_location_y=1
@@ -23,8 +24,9 @@ def callback_gps(gps):
     global x_charge
     global y_charge
     global z_charge
-    global battery_constant
+    global approx_curr
     global battery_percentage
+    global stationary_drain
     global old_location_x
     global old_location_y
     global old_location_z
@@ -48,7 +50,7 @@ def callback_gps(gps):
         new_location_y = gps.pose.position.y
         new_location_z = gps.pose.position.z
 
-        percentage_loss=battery_constant*(math.pow((new_location_x-old_location_x), 2) + math.pow((new_location_y-old_location_y), 2)+ math.pow((new_location_z-old_location_z), 2))
+        percentage_loss=approx_curr*(math.pow((new_location_x-old_location_x), 2) + math.pow((new_location_y-old_location_y), 2)+ math.pow((new_location_z-old_location_z), 2)) + stationary_drain
         print("percentage lossp", percentage_loss)
         battery_percentage=battery_percentage-percentage_loss
         charge_diff=(math.pow((new_location_x-x_charge), 2) + math.pow((new_location_y-y_charge), 2)+ math.pow((new_location_z-z_charge), 2))
