@@ -44,6 +44,7 @@ private:
 
   // Current state of agent (x, y, z, yaw) and also wifi distribution
   Eigen::Vector4d wifi_dist_state_;
+  Eigen::Vector4d battery_perc;
   Eigen::Vector4d current_state_;
   bool current_state_initialized_;
 
@@ -60,6 +61,7 @@ private:
   ros::Subscriber octomap_sub_;
   ros::Subscriber agent_pose_sub_;
   ros::Subscriber wifi_dist_sub_;
+  ros::Subscriber battery_sub_;
 
   // Publishers
   ros::Publisher rrt_marker_pub_;
@@ -112,6 +114,7 @@ public:
   void octomapCallback(const octomap_msgs::Octomap& msg);
   void agentPoseCallback(const geometry_msgs::PoseStamped& msg);
   void wifiDistCallback(const geometry_msgs::PoseStamped& msg);
+  void batteryCallback(const geometry_msgs::PoseStamped& msg);
 };
 
 }  // namespace aeplanner

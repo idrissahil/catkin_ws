@@ -1,0 +1,85 @@
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner_node.cpp:2:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:116:43:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+   void batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg);
+                                           [01;31m[K^~~~~~~~~~~~[m[K
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:116:43:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+   void batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg);
+                                           [01;31m[K^~~~~~~~~~~~[m[K
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:116:43:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+   void batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg);
+                                           [01;31m[K^~~~~~~~~~~~[m[K
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner_nodelet.h:6:0[m[K,
+                 from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner_nodelet.cpp:1[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:116:43:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+   void batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg);
+                                           [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:635:52:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+ void AEPlanner::batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg)
+                                                    [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const int&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:638:27:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kpercentage[m[K’ in ‘[01m[Kmsg[m[K’, which is of non-class type ‘[01m[Kconst int[m[K’
+   double battery_perc=msg.[01;31m[Kpercentage[m[K
+                           [01;31m[K^~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:635:52:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+ void AEPlanner::batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg)
+                                                    [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const int&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:638:27:[m[K [01;31m[Kerror: [m[Krequest for member ‘[01m[Kpercentage[m[K’ in ‘[01m[Kmsg[m[K’, which is of non-class type ‘[01m[Kconst int[m[K’
+   double battery_perc=msg.[01;31m[Kpercentage[m[K
+                           [01;31m[K^~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner_node.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+In file included from [01m[K/opt/ros/melodic/include/ros/serialization.h:37:0[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/publisher.h:34[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/node_handle.h:32[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:4[m[K,
+                 from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:1[m[K:
+/opt/ros/melodic/include/ros/message_traits.h: In instantiation of ‘[01m[Kstatic const char* ros::message_traits::MD5Sum<M>::value() [with M = int][m[K’:
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:228:102:[m[K   required from ‘[01m[Kconst char* ros::message_traits::md5sum() [with M = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/subscribe_options.h:89:49:[m[K   required from ‘[01m[Kvoid ros::SubscribeOptions::initByFullCallbackType(const string&, uint32_t, const boost::function<void(P)>&, const boost::function<boost::shared_ptr<typename ros::ParameterAdapter<P>::Message>()>&) [with P = const int&; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int; typename ros::ParameterAdapter<P>::Message = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/node_handle.h:406:5:[m[K   required from ‘[01m[Kros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M), T*, const ros::TransportHints&) [with M = const int&; T = aeplanner::AEPlanner; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int][m[K’
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:12:90:[m[K   required from here
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:121:28:[m[K [01;31m[Kerror: [m[K‘[01m[K__s_getMD5Sum[m[K’ is not a member of ‘[01m[Kint[m[K’
+     return [01;31m[KM::__s_getMD5Sum()[m[K.c_str();
+            [01;31m[K~~~~~~~~~~~~~~~~^~[m[K
+/opt/ros/melodic/include/ros/message_traits.h: In instantiation of ‘[01m[Kstatic const char* ros::message_traits::DataType<M>::value() [with M = int][m[K’:
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:237:104:[m[K   required from ‘[01m[Kconst char* ros::message_traits::datatype() [with M = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/subscribe_options.h:90:53:[m[K   required from ‘[01m[Kvoid ros::SubscribeOptions::initByFullCallbackType(const string&, uint32_t, const boost::function<void(P)>&, const boost::function<boost::shared_ptr<typename ros::ParameterAdapter<P>::Message>()>&) [with P = const int&; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int; typename ros::ParameterAdapter<P>::Message = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/node_handle.h:406:5:[m[K   required from ‘[01m[Kros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M), T*, const ros::TransportHints&) [with M = const int&; T = aeplanner::AEPlanner; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int][m[K’
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:12:90:[m[K   required from here
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:138:30:[m[K [01;31m[Kerror: [m[K‘[01m[K__s_getDataType[m[K’ is not a member of ‘[01m[Kint[m[K’
+     return [01;31m[KM::__s_getDataType()[m[K.c_str();
+            [01;31m[K~~~~~~~~~~~~~~~~~~^~[m[K
+In file included from [01m[K/opt/ros/melodic/include/ros/serialization.h:37:0[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/publisher.h:34[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/node_handle.h:32[m[K,
+                 from [01m[K/opt/ros/melodic/include/ros/ros.h:45[m[K,
+                 from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:4[m[K,
+                 from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:1[m[K:
+/opt/ros/melodic/include/ros/message_traits.h: In instantiation of ‘[01m[Kstatic const char* ros::message_traits::MD5Sum<M>::value() [with M = int][m[K’:
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:228:102:[m[K   required from ‘[01m[Kconst char* ros::message_traits::md5sum() [with M = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/subscribe_options.h:89:49:[m[K   required from ‘[01m[Kvoid ros::SubscribeOptions::initByFullCallbackType(const string&, uint32_t, const boost::function<void(P)>&, const boost::function<boost::shared_ptr<typename ros::ParameterAdapter<P>::Message>()>&) [with P = const int&; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int; typename ros::ParameterAdapter<P>::Message = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/node_handle.h:406:5:[m[K   required from ‘[01m[Kros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M), T*, const ros::TransportHints&) [with M = const int&; T = aeplanner::AEPlanner; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int][m[K’
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:12:90:[m[K   required from here
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:121:28:[m[K [01;31m[Kerror: [m[K‘[01m[K__s_getMD5Sum[m[K’ is not a member of ‘[01m[Kint[m[K’
+     return [01;31m[KM::__s_getMD5Sum()[m[K.c_str();
+            [01;31m[K~~~~~~~~~~~~~~~~^~[m[K
+/opt/ros/melodic/include/ros/message_traits.h: In instantiation of ‘[01m[Kstatic const char* ros::message_traits::DataType<M>::value() [with M = int][m[K’:
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:237:104:[m[K   required from ‘[01m[Kconst char* ros::message_traits::datatype() [with M = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/subscribe_options.h:90:53:[m[K   required from ‘[01m[Kvoid ros::SubscribeOptions::initByFullCallbackType(const string&, uint32_t, const boost::function<void(P)>&, const boost::function<boost::shared_ptr<typename ros::ParameterAdapter<P>::Message>()>&) [with P = const int&; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int; typename ros::ParameterAdapter<P>::Message = int][m[K’
+[01m[K/opt/ros/melodic/include/ros/node_handle.h:406:5:[m[K   required from ‘[01m[Kros::Subscriber ros::NodeHandle::subscribe(const string&, uint32_t, void (T::*)(M), T*, const ros::TransportHints&) [with M = const int&; T = aeplanner::AEPlanner; std::__cxx11::string = std::__cxx11::basic_string<char>; uint32_t = unsigned int][m[K’
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:12:90:[m[K   required from here
+[01m[K/opt/ros/melodic/include/ros/message_traits.h:138:30:[m[K [01;31m[Kerror: [m[K‘[01m[K__s_getDataType[m[K’ is not a member of ‘[01m[Kint[m[K’
+     return [01;31m[KM::__s_getDataType()[m[K.c_str();
+            [01;31m[K~~~~~~~~~~~~~~~~~~^~[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner_nodelet.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make: *** [all] Error 2

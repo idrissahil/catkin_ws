@@ -1,0 +1,42 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:396:35:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[KEigen::Vector4d {aka Eigen::Matrix<double, 4, 1>}[m[K’ to ‘[01m[Kdouble[m[K’ in initialization
+       double battery_percentage = [01;31m[Kbattery_perc[m[K;
+                                   [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const BatteryState&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:645:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[0[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:646:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[1[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:647:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[2[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:648:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[3[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:396:35:[m[K [01;31m[Kerror: [m[Kcannot convert ‘[01m[KEigen::Vector4d {aka Eigen::Matrix<double, 4, 1>}[m[K’ to ‘[01m[Kdouble[m[K’ in initialization
+       double battery_percentage = [01;31m[Kbattery_perc[m[K;
+                                   [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const BatteryState&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:645:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[0[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:646:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[1[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:647:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[2[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:648:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[3[01;31m[K][m[K  = msg.percentage;
+                 [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make: *** [all] Error 2

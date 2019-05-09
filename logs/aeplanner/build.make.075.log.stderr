@@ -1,0 +1,20 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const PoseStamped&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:640:27:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst PoseStamped {aka const struct geometry_msgs::PoseStamped_<std::allocator<void> >}[m[K’ has no member named ‘[01m[Kpercentage[m[K’
+   double battery_perc=msg.[01;31m[Kpercentage[m[K;
+                           [01;31m[K^~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:642:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[0[01;31m[K][m[K  = msg.pose.position.x;
+                 [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const PoseStamped&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:640:27:[m[K [01;31m[Kerror: [m[K‘[01m[Kconst PoseStamped {aka const struct geometry_msgs::PoseStamped_<std::allocator<void> >}[m[K’ has no member named ‘[01m[Kpercentage[m[K’
+   double battery_perc=msg.[01;31m[Kpercentage[m[K;
+                           [01;31m[K^~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:642:17:[m[K [01;31m[Kerror: [m[Kinvalid types ‘[01m[Kdouble[int][m[K’ for array subscript
+   battery_perc[0[01;31m[K][m[K  = msg.pose.position.x;
+                 [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make: *** [all] Error 2

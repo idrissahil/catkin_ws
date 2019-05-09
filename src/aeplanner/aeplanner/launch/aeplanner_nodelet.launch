@@ -6,5 +6,6 @@
     <remap from="octomap" to="octomap_full"/>
     <remap from="agent_pose" to="/mavros/local_position/pose"/>
     <remap from="wifi_dist" to="/wifi_dist"/>
+    <remap from="battery_percentage" to="/battery_percentage"/>
   </node>
 </launch>

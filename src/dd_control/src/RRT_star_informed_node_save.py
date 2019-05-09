@@ -66,12 +66,7 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         y_rand = random.uniform(y_min, y_max)
         z_rand = random.uniform(z_min, z_max)
 
-    if counter_boost % 10 == 0:  # Boost the search towards the goal
-        x_rand = x_charge
-        y_rand = y_charge
-        z_rand = z_charge
-        # print("boost")
-        boost_number[0] = boost_number[0] + 1
+
 
     #informed rrt
     if c_best<3000:
@@ -95,7 +90,12 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         z_rand = random.uniform(z_min, z_max)
         #print("x rand", x_rand)
 
-
+    if counter_boost % 10 == 0:  # Boost the search towards the goal
+        x_rand = x_charge
+        y_rand = y_charge
+        z_rand = z_charge
+        # print("boost")
+        boost_number[0] = boost_number[0] + 1
 
 
 
@@ -119,7 +119,7 @@ def find_velocity(closest_node, x_rand, y_rand, z_rand):
     x_diff=x_rand-closest_node.x #meter per second speed
     y_diff=y_rand-closest_node.y
     z_diff=z_rand-closest_node.z
-    speed_limit=5
+    speed_limit=1
     if x_diff >speed_limit:  #max speed set to 5 m/s
         x_diff=speed_limit
     if x_diff <-speed_limit:
@@ -331,7 +331,7 @@ def informed_rrt(start_x, start_y,start_z, marks_list):
     phi_rotation = math.atan2(y_charge-start_y, x_charge - start_x)
     start_node = Node(start_x, start_y, start_z, x_diff=0, y_diff=0, z_diff=0, total_distance=0)
     Node_List = [start_node]
-    for i in range(4): #100 iterations of rrt
+    for i in range(1): #100 iterations of rrt
         print("informed rrt iteration", i)
         print("node list length", len(Node_List))
         '''
@@ -382,7 +382,7 @@ def callback_gps(gps):
         #distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         #if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-        '''
+
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
@@ -397,7 +397,7 @@ def callback_gps(gps):
             curr_point_rrt.position.y = Node_list[i].y
             curr_point_rrt.position.z = Node_list[i].z
             rrt_poses.poses.append(curr_point_rrt)
-
+        '''
 
 
 

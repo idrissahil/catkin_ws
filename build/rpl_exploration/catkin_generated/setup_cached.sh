@@ -8,6 +8,9 @@
 
 # modified environment variables
 export CMAKE_PREFIX_PATH="/home/idris/catkin_ws/devel/.private/rpl_exploration:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/idris/catkin_ws/devel/.private/rpl_exploration/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/idris/catkin_ws/devel/.private/rpl_exploration/lib/pkgconfig:$PKG_CONFIG_PATH"
 export PWD="/home/idris/catkin_ws/build/rpl_exploration"
+export PYTHONPATH="/home/idris/catkin_ws/devel/.private/rpl_exploration/lib/python2.7/dist-packages:$PYTHONPATH"
 export ROSLISP_PACKAGE_DIRECTORIES="/home/idris/catkin_ws/devel/.private/rpl_exploration/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
 export ROS_PACKAGE_PATH="/home/idris/catkin_ws/src/aeplanner/rpl_exploration:$ROS_PACKAGE_PATH"

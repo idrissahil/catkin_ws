@@ -1,0 +1,28 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:640:52:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+ void AEPlanner::batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg)
+                                                    [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:640:6:[m[K [01;31m[Kerror: [m[Kprototype for ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const int&)[m[K’ does not match any in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void [01;31m[KAEPlanner[m[K::batteryCallback(const sensor_msgs::BatteryState& msg)
+      [01;31m[K^~~~~~~~~[m[K
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:117:8:[m[K [01;31m[Kerror: [m[Kcandidate is: void aeplanner::AEPlanner::batteryCallback(const PoseStamped&)
+   void [01;31m[KbatteryCallback[m[K(const geometry_msgs::PoseStamped& msg);
+        [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:640:52:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+ void AEPlanner::batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg)
+                                                    [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:640:6:[m[K [01;31m[Kerror: [m[Kprototype for ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const int&)[m[K’ does not match any in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void [01;31m[KAEPlanner[m[K::batteryCallback(const sensor_msgs::BatteryState& msg)
+      [01;31m[K^~~~~~~~~[m[K
+In file included from [01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:1:0[m[K:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/include/aeplanner/aeplanner.h:117:8:[m[K [01;31m[Kerror: [m[Kcandidate is: void aeplanner::AEPlanner::batteryCallback(const PoseStamped&)
+   void [01;31m[KbatteryCallback[m[K(const geometry_msgs::PoseStamped& msg);
+        [01;31m[K^~~~~~~~~~~~~~~[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make: *** [all] Error 2

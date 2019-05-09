@@ -1,0 +1,36 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:396:35:[m[K [01;31m[Kerror: [m[K‘[01m[Kbattery_perc[m[K’ was not declared in this scope
+       double battery_percentage = [01;31m[Kbattery_perc[m[K
+                                   [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:396:35:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kbattery_sub_[m[K’
+       double battery_percentage = [01;36m[Kbattery_perc[m[K
+                                   [01;36m[K^~~~~~~~~~~~[m[K
+                                   [32m[Kbattery_sub_[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:400:39:[m[K [01;31m[Kerror: [m[K‘[01m[Ksearch_location_x[m[K’ was not declared in this scope
+       double wifi_sig =Amp * exp(-(((([01;31m[Ksearch_location_x[m[K - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                                       [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:400:39:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Ksearch_location_z[m[K’
+       double wifi_sig =Amp * exp(-(((([01;36m[Ksearch_location_x[m[K - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                                       [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+                                       [32m[Ksearch_location_z[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:396:35:[m[K [01;31m[Kerror: [m[K‘[01m[Kbattery_perc[m[K’ was not declared in this scope
+       double battery_percentage = [01;31m[Kbattery_perc[m[K
+                                   [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:396:35:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kbattery_sub_[m[K’
+       double battery_percentage = [01;36m[Kbattery_perc[m[K
+                                   [01;36m[K^~~~~~~~~~~~[m[K
+                                   [32m[Kbattery_sub_[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:400:39:[m[K [01;31m[Kerror: [m[K‘[01m[Ksearch_location_x[m[K’ was not declared in this scope
+       double wifi_sig =Amp * exp(-(((([01;31m[Ksearch_location_x[m[K - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                                       [01;31m[K^~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:400:39:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Ksearch_location_z[m[K’
+       double wifi_sig =Amp * exp(-(((([01;36m[Ksearch_location_x[m[K - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
+                                       [01;36m[K^~~~~~~~~~~~~~~~~[m[K
+                                       [32m[Ksearch_location_z[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make: *** [all] Error 2

@@ -6,12 +6,12 @@ from sensor_msgs.msg import BatteryState
 from geometry_msgs.msg import Twist, PoseArray, Pose, PoseStamped
 
 rospy.init_node('battery_ae_explore')
-
+battery_pub = rospy.Publisher('battery_percentage', PoseStamped, queue_size=1)
 ae_pub = rospy.Publisher('/mavros/setpoint_position/local2', PoseStamped, queue_size=1)
 rate = rospy.Rate(50)
 battery_percentage=1
-approx_curr=20
-stationary_drain=0.01
+approx_curr=1
+stationary_drain=0.0001
 #save previous state of gps, calculate difference and use constant that calculates how much battery drained
 old_location_x=1
 old_location_y=1
@@ -33,7 +33,7 @@ def callback_gps(gps):
     global old_location_x
     global old_location_y
     global old_location_z
-    time_begin = rospy.Time(960)
+    time_begin = rospy.Time(720)
     time_now = rospy.get_rostime()
 
     if time_now<time_begin:
@@ -42,10 +42,10 @@ def callback_gps(gps):
         old_location_y=gps.pose.position.y
         old_location_z=gps.pose.position.z
 
-        #battery = BatteryState()
-        battery_percentage=100
-        #battery.percentage = battery_percentage
-        #battery_pub.publish(battery)
+        battery = PoseStamped()
+        battery_percentage=1
+        battery.pose.position.x = battery_percentage
+        battery_pub.publish(battery)
 
     if time_now>time_begin:
         print('started')
@@ -66,9 +66,10 @@ def callback_gps(gps):
                 battery_percentage=100
                 print("fully charged")
 
-        #battery = BatteryState()
-        #battery.percentage = battery_percentage
-        #battery_pub.publish(battery)
+        battery = PoseStamped()
+        battery.pose.position.x = battery_percentage
+        battery_pub.publish(battery)
+
         charging_setpoint=PoseStamped()
         charging_setpoint.pose.position.x=3
         charging_setpoint.pose.position.y=3

@@ -1,0 +1,56 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:397:7:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kdouble[m[K’
+       [01;31m[Kdouble[m[K curr_location_y = current_state_[1]
+       [01;31m[K^~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:80:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurr_location_y[m[K’ was not declared in this scope
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + ([01;31m[Kcurr_location_y[m[K-y_my)*(curr_location_y-y_my) + (curr_location_z-z_my)*(curr_location_z-z_my));
+                                                                                [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:80:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kcurr_location_x[m[K’
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + ([01;36m[Kcurr_location_y[m[K-y_my)*(curr_location_y-y_my) + (curr_location_z-z_my)*(curr_location_z-z_my));
+                                                                                [01;36m[K^~~~~~~~~~~~~~~[m[K
+                                                                                [32m[Kcurr_location_x[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:128:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurr_location_z[m[K’ was not declared in this scope
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + (curr_location_y-y_my)*(curr_location_y-y_my) + ([01;31m[Kcurr_location_z[m[K-z_my)*(curr_location_z-z_my));
+                                                                                                                                [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:128:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kcurr_location_x[m[K’
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + (curr_location_y-y_my)*(curr_location_y-y_my) + ([01;36m[Kcurr_location_z[m[K-z_my)*(curr_location_z-z_my));
+                                                                                                                                [01;36m[K^~~~~~~~~~~~~~~[m[K
+                                                                                                                                [32m[Kcurr_location_x[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:415:49:[m[K [01;31m[Kerror: [m[K‘[01m[Kbattery_percentage[m[K’ was not declared in this scope
+       double gain2 =gain-dist_home*battery_gain/[01;31m[Kbattery_percentage[m[K;
+                                                 [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:415:49:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kbattery_perc[m[K’
+       double gain2 =gain-dist_home*battery_gain/[01;36m[Kbattery_percentage[m[K;
+                                                 [01;36m[K^~~~~~~~~~~~~~~~~~[m[K
+                                                 [32m[Kbattery_perc[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In member function ‘[01m[Kstd::pair<double, double> aeplanner::AEPlanner::getGain(aeplanner::RRTNode*)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:397:7:[m[K [01;31m[Kerror: [m[Kexpected ‘[01m[K,[m[K’ or ‘[01m[K;[m[K’ before ‘[01m[Kdouble[m[K’
+       [01;31m[Kdouble[m[K curr_location_y = current_state_[1]
+       [01;31m[K^~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:80:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurr_location_y[m[K’ was not declared in this scope
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + ([01;31m[Kcurr_location_y[m[K-y_my)*(curr_location_y-y_my) + (curr_location_z-z_my)*(curr_location_z-z_my));
+                                                                                [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:80:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kcurr_location_x[m[K’
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + ([01;36m[Kcurr_location_y[m[K-y_my)*(curr_location_y-y_my) + (curr_location_z-z_my)*(curr_location_z-z_my));
+                                                                                [01;36m[K^~~~~~~~~~~~~~~[m[K
+                                                                                [32m[Kcurr_location_x[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:128:[m[K [01;31m[Kerror: [m[K‘[01m[Kcurr_location_z[m[K’ was not declared in this scope
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + (curr_location_y-y_my)*(curr_location_y-y_my) + ([01;31m[Kcurr_location_z[m[K-z_my)*(curr_location_z-z_my));
+                                                                                                                                [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:406:128:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kcurr_location_x[m[K’
+       double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + (curr_location_y-y_my)*(curr_location_y-y_my) + ([01;36m[Kcurr_location_z[m[K-z_my)*(curr_location_z-z_my));
+                                                                                                                                [01;36m[K^~~~~~~~~~~~~~~[m[K
+                                                                                                                                [32m[Kcurr_location_x[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:415:49:[m[K [01;31m[Kerror: [m[K‘[01m[Kbattery_percentage[m[K’ was not declared in this scope
+       double gain2 =gain-dist_home*battery_gain/[01;31m[Kbattery_percentage[m[K;
+                                                 [01;31m[K^~~~~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:415:49:[m[K [01;36m[Knote: [m[Ksuggested alternative: ‘[01m[Kbattery_perc[m[K’
+       double gain2 =gain-dist_home*battery_gain/[01;36m[Kbattery_percentage[m[K;
+                                                 [01;36m[K^~~~~~~~~~~~~~~~~~[m[K
+                                                 [32m[Kbattery_perc[m[K
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make: *** [all] Error 2

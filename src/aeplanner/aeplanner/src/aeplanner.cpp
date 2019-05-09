@@ -9,6 +9,7 @@ AEPlanner::AEPlanner(const ros::NodeHandle& nh)
   , octomap_sub_(nh_.subscribe("octomap", 1, &AEPlanner::octomapCallback, this))
   , agent_pose_sub_(nh_.subscribe("agent_pose", 1, &AEPlanner::agentPoseCallback, this))
   , wifi_dist_sub_(nh_.subscribe("wifi_dist", 1, &AEPlanner::wifiDistCallback, this))
+  , battery_sub_(nh_.subscribe("battery_percentage", 1, &AEPlanner::batteryCallback, this))
   , rrt_marker_pub_(nh_.advertise<visualization_msgs::MarkerArray>("rrtree", 1000))
   , gain_pub_(nh_.advertise<pigain::Node>("gain_node", 1000))
   , gp_query_client_(nh_.serviceClient<pigain::Query>("gp_query_server"))
@@ -203,7 +204,7 @@ void AEPlanner::expandRRT()
       if (wifi_dist_state_[3] !=1)
       {
         wifi_sig=1;
-        ROS_INFO_STREAM("Wifi aware drone disabled " << wifi_dist_state_[3]);
+        //ROS_INFO_STREAM("Wifi aware drone disabled " << wifi_dist_state_[3]);
       }
 
       ROS_DEBUG_STREAM("Inside boundaries?  " << isInsideBoundaries(new_node->state_));
@@ -280,7 +281,7 @@ Eigen::Vector4d AEPlanner::sampleNewPoint()
     if (wifi_dist_state_[3] !=1)
     {
       wifi_sig=1;
-      ROS_INFO_STREAM("Wifi aware drone disabled " << wifi_dist_state_[3]);
+      ///ROS_INFO_STREAM("Wifi aware drone disabled " << wifi_dist_state_[3]);
     }
   }
    while ((pow(point[0], 2.0) + pow(point[1], 2.0) + pow(point[2], 2.0)) >
@@ -385,17 +386,35 @@ std::pair<double, double> AEPlanner::getGain(RRTNode* node)
       double x_my=1;
       double y_my=2;
       double z_my=3;
-      double sigma_x=5;
-      double sigma_y=5;
-      double sigma_z=5;
+
+      double battery_gain = 1;
+
+      double sigma_x=wifi_dist_state_[0];
+      double sigma_y=wifi_dist_state_[1];
+      double sigma_z=wifi_dist_state_[2];
+
+      double curr_location_x = current_state_[0];
+      double curr_location_y = current_state_[1];
+      double curr_location_z = current_state_[2];
+
+
+      double battery_percentage = battery_perc[0];
       double search_location_x =node->state_[0];
       double search_location_y =node->state_[1];
       double search_location_z =node->state_[2];
+
+      double dist_home = sqrt((curr_location_x-x_my)*(curr_location_x-x_my) + (curr_location_y-y_my)*(curr_location_y-y_my) + (curr_location_z-z_my)*(curr_location_z-z_my));
+
       double wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
               ((search_location_z - z_my) *(search_location_z - z_my)) / (2 * sigma_z * sigma_z))));
       ROS_INFO_STREAM("wifi signal: " << wifi_sig);
 
       ROS_INFO_STREAM("gain impl: " << gain);
+
+
+      double gain2 =gain-(dist_home*battery_gain/battery_percentage);
+      ROS_INFO_STREAM("battery gain: " << gain2);
+
       return std::make_pair(gain, yaw);
     }
   }
@@ -625,6 +644,12 @@ void AEPlanner::wifiDistCallback(const geometry_msgs::PoseStamped& msg)
   wifi_dist_state_[2]  = msg.pose.position.z;
   wifi_dist_state_[3]  = msg.pose.orientation.w;
 
+  
+}
+
+void AEPlanner::batteryCallback(const geometry_msgs::PoseStamped& msg)
+{
+  battery_perc[0]  = msg.pose.position.x;
   
 }
 

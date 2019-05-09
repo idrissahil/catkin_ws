@@ -1,0 +1,30 @@
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In constructor ‘[01m[Kaeplanner::AEPlanner::AEPlanner(const ros::NodeHandle&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:12:69:[m[K [01;31m[Kerror: [m[K‘[01m[KbatteryCallback[m[K’ is not a member of ‘[01m[Kaeplanner::AEPlanner[m[K’
+   , battery_sub_(nh_.subscribe("battery_percentage", 1, &AEPlanner::[01;31m[KbatteryCallback[m[K, this))
+                                                                     [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K In constructor ‘[01m[Kaeplanner::AEPlanner::AEPlanner(const ros::NodeHandle&)[m[K’:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:12:69:[m[K [01;31m[Kerror: [m[K‘[01m[KbatteryCallback[m[K’ is not a member of ‘[01m[Kaeplanner::AEPlanner[m[K’
+   , battery_sub_(nh_.subscribe("battery_percentage", 1, &AEPlanner::[01;31m[KbatteryCallback[m[K, this))
+                                                                     [01;31m[K^~~~~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:635:52:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+ void AEPlanner::batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg)
+                                                    [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:635:69:[m[K [01;31m[Kerror: [m[Kno ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const int&)[m[K’ member function declared in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void AEPlanner::batteryCallback(const sensor_msgs::BatteryState& msg[01;31m[K)[m[K
+                                                                     [01;31m[K^[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:[m[K At global scope:
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:635:52:[m[K [01;31m[Kerror: [m[K‘[01m[KBatteryState[m[K’ in namespace ‘[01m[Ksensor_msgs[m[K’ does not name a type
+ void AEPlanner::batteryCallback(const sensor_msgs::[01;31m[KBatteryState[m[K& msg)
+                                                    [01;31m[K^~~~~~~~~~~~[m[K
+[01m[K/home/idris/catkin_ws/src/aeplanner/aeplanner/src/aeplanner.cpp:635:69:[m[K [01;31m[Kerror: [m[Kno ‘[01m[Kvoid aeplanner::AEPlanner::batteryCallback(const int&)[m[K’ member function declared in class ‘[01m[Kaeplanner::AEPlanner[m[K’
+ void AEPlanner::batteryCallback(const sensor_msgs::BatteryState& msg[01;31m[K)[m[K
+                                                                     [01;31m[K^[m[K
+make[2]: *** [CMakeFiles/aeplanner_node.dir/src/aeplanner.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[2]: *** [CMakeFiles/aeplanner.dir/src/aeplanner.cpp.o] Error 1
+make[2]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/aeplanner_node.dir/all] Error 2
+make[1]: *** Waiting for unfinished jobs....
+make[1]: *** [CMakeFiles/aeplanner.dir/all] Error 2
+make: *** [all] Error 2
