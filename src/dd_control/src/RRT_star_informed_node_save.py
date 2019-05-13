@@ -29,8 +29,8 @@ marks_list=[]
 state_drone=1
 index_rrt = 0
 
-x_charge= -15
-y_charge=-15
+x_charge= 7
+y_charge= -9
 z_charge=1
 
 
@@ -50,7 +50,7 @@ class Node():
 
 boost_number=[0]
 def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_half, y_half):
-
+    start_rand = time.time()
     c_best=best_total_distance
     c_min=min_distance
     if c_best==3000:
@@ -97,14 +97,14 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         # print("boost")
         boost_number[0] = boost_number[0] + 1
 
-
-
-
+    end_rand = time.time()
+    print("rand_node", end_rand - start_rand)
 
 
     return x_rand, y_rand, z_rand
 
 def find_closest_node(x_rand, y_rand, z_rand, node_list):
+    start = time.time()
     dist_list = []
     for node in node_list:
         distance = math.sqrt(math.pow((node.x - x_rand), 2) + math.pow((node.y - y_rand), 2)+ math.pow((node.z - z_rand), 2))
@@ -112,10 +112,13 @@ def find_closest_node(x_rand, y_rand, z_rand, node_list):
     goal_distance = min(dist_list)
     closest_index = dist_list.index(min(dist_list))
     closest_node = node_list[closest_index]
+
+    end= time.time()
+    print("find_closest_node", end - start)
     return closest_node, goal_distance, closest_index
 
 def find_velocity(closest_node, x_rand, y_rand, z_rand):
-
+    start = time.time()
     x_diff=x_rand-closest_node.x #meter per second speed
     y_diff=y_rand-closest_node.y
     z_diff=z_rand-closest_node.z
@@ -132,17 +135,20 @@ def find_velocity(closest_node, x_rand, y_rand, z_rand):
         z_diff=speed_limit
     if z_diff <-speed_limit:
         z_diff=-speed_limit
+    end= time.time()
+    print("find_velocity", end - start)
 
     return x_diff, y_diff, z_diff
 
 def Collision(x, y, z, obstacle_list):
+    start = time.time()
     collision = False
     for i in range(len(obstacle_list)):
         dx = x - obstacle_list[i].x
         dy = y - obstacle_list[i].y
         dz = z - obstacle_list[i].z
 
-        if abs(dx)<0.3 and abs(dy)<0.3 and abs(dz)<0.3:
+        if abs(dx)<0.30 and abs(dy)<0.30 and abs(dz)<0.2:
             #print("abs collision check")
             collision=True
 
@@ -159,9 +165,13 @@ def Collision(x, y, z, obstacle_list):
     if z < -0.1 or z > 4.1:
         #print("4")
         collision = True
+
+    end= time.time()
+    #print("Collision", end - start)
     return collision
 
 def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
+    start=time.time()
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
@@ -175,9 +185,12 @@ def go_to_goal(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     collision = Collision(curr_x, curr_y, curr_z, marks_list)
         #if collision==False:
             #break
+    end= time.time()
+    print("go_to_goal", end - start)
     return curr_x, curr_y, curr_z, collision
 
 def go_to_goal2(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
+    start=time.time()
     curr_x=near_x
     curr_y=near_y
     curr_z=near_z
@@ -185,24 +198,52 @@ def go_to_goal2(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     step_num=100
     counter=0
     collision = False
-    while counter < 100:
+    while counter < step_num:
         curr_x = curr_x + x_diff* distance_time #Go to node for 100 *distance_time
         curr_y = curr_y + y_diff*distance_time
         curr_z = curr_z + z_diff*distance_time
         counter = counter + 1
-        collision = Collision(curr_x, curr_y, curr_z, marks_list)
+        if counter%10==0:
+            collision = Collision(curr_x, curr_y, curr_z, marks_list)
         if collision==True:
-            curr_x = curr_x -10* x_diff * distance_time  # Go to node for 100 *distance_time
-            curr_y = curr_y -10* y_diff * distance_time
-            curr_z = curr_z -10* z_diff * distance_time
+            curr_x = curr_x -int(counter/2)* x_diff * distance_time  # Go to node for 100 *distance_time
+            curr_y = curr_y -int(counter/2)* y_diff * distance_time
+            curr_z = curr_z -int(counter/2)* z_diff * distance_time
             collision = Collision(curr_x, curr_y, curr_z, marks_list)
             #print(collision)
             break
+    end= time.time()
+    print("go_to_goal2", end - start)
     return curr_x, curr_y, curr_z, collision
+'''
 
-
+def go_to_goal2(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
+    start=time.time()
+    curr_x=near_x
+    curr_y=near_y
+    curr_z=near_z
+    distance_time=0.002
+    step_num=100
+    counter=0
+    collision = False
+    curr_x = curr_x + step_num*x_diff* distance_time #Go to node for 100 *distance_time
+    curr_y = curr_y + step_num*y_diff*distance_time
+    curr_z = curr_z + step_num*z_diff*distance_time
+    counter = counter + 1
+    collision = Collision(curr_x, curr_y, curr_z, marks_list)
+    if collision==True:
+        curr_x = curr_x -int(step_num/2)* x_diff * distance_time  # Go to node for 100 *distance_time
+        curr_y = curr_y -int(step_num/2)* y_diff * distance_time
+        curr_z = curr_z -int(step_num/2)* z_diff * distance_time
+        collision = Collision(curr_x, curr_y, curr_z, marks_list)
+        #print(collision)
+    end= time.time()
+    print("go_to_goal2", end - start)
+    return curr_x, curr_y, curr_z, collision
+'''
 
 def backtracking(Node_List, final_node):
+    start=time.time()
     controls_x = []
     controls_y = []
     controls_z = []
@@ -235,11 +276,14 @@ def backtracking(Node_List, final_node):
     controls_y.reverse()
     controls_z.reverse()
     goal_node_list.reverse()
+    end= time.time()
+    print("backtracking", end - start)
     return controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list
 
 
 def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
-    bounding_radius=1.2
+    start=time.time()
+    bounding_radius=1
     dist_list=[]
     parent_index=0
     best_dist=100000
@@ -272,6 +316,8 @@ def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
         #print("i", i, "tot_dist", tot_dist)
     #print("best dist", best_dist, "index", parent_index)
     parent_node=node_list[parent_index]
+    end= time.time()
+    print("choose_parent", end - start)
     return parent_index, parent_node
 
 max_nodes_limit=2000
@@ -303,9 +349,9 @@ def main_rrt(Node_List, start_x, start_y,start_z, marks_list, best_total_distanc
             if goal_distance_curr<goal_distance2:
                 goal_distance2=goal_distance_curr
             print("goal distance", goal_distance2, "new node x", Suc_Node.x)
-        if goal_distance_curr <= goal_reach_distance and Suc_Node.total_distance<best_total_distance:
-            print("reached !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", goal_distance_curr)
-            goal_reached = True
+            if goal_distance_curr <= goal_reach_distance and Suc_Node.total_distance<best_total_distance:
+                print("reached !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", goal_distance_curr)
+                goal_reached = True
         print("nodes", len(Node_List))
         counter_boost = counter_boost + 1
     controls_x, controls_y,controls_z, x_drone, y_drone, z_drone, goal_node_list = backtracking(Node_List, Suc_Node)
@@ -365,11 +411,12 @@ def callback_gps(gps):
     global index_rrt
     global marks_list
     #print ("state drone", state_drone)
-    if marks_list is not None:
+    if  not len(marks_list) ==0:
         rrt_poses = PoseArray()
         rrt_poses.header.stamp = rospy.Time.now()
         rrt_poses.header.frame_id = 'map'
         if state_drone==1:
+            print("length marks list", len(marks_list))
             success_node, Node_list, goal_node_list = informed_rrt(gps.pose.position.x, gps.pose.position.y, gps.pose.position.z, marks_list )
             state_drone = 2
         curr_rrt=PoseStamped()
@@ -397,6 +444,7 @@ def callback_gps(gps):
             curr_point_rrt.position.y = Node_list[i].y
             curr_point_rrt.position.z = Node_list[i].z
             rrt_poses.poses.append(curr_point_rrt)
+        
         '''
 
 

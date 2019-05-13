@@ -412,8 +412,8 @@ std::pair<double, double> AEPlanner::getGain(RRTNode* node)
       ROS_INFO_STREAM("gain impl: " << gain);
 
 
-      double gain2 =gain-(dist_home*battery_gain/battery_percentage);
-      ROS_INFO_STREAM("battery gain: " << gain2);
+      //double gain2 =gain-(dist_home*battery_gain/battery_percentage);
+      //ROS_INFO_STREAM("battery gain: " << gain2);
 
       return std::make_pair(gain, yaw);
     }
