@@ -89,7 +89,7 @@ print(round_of_rating(5.7))
 list_0=[]
 list_1=[2,2,5]
 list_2=[3,3,4]
-list_0.append(list_1)
+list_0.extend(list_1)
 list_0.append(list_2)
 print(list_0)
 

@@ -29,8 +29,8 @@ marks_list=[]
 state_drone=1
 index_rrt = 0
 
-x_charge= 7
-y_charge= -9
+x_charge= 0
+y_charge= 0
 z_charge=1
 
 
@@ -150,7 +150,7 @@ def round_of_rating(number, min_val):
 
 def index_collision_list(obstacle_list):
     min_x=-30
-    min_y=-20
+    min_y=-30
     min_z = -2
 
     max_x=30
@@ -184,6 +184,27 @@ def index_collision_list(obstacle_list):
 
     return indexed_list
 
+
+def local_marks_list_finder(x_rounded, y_rounded, z_rounded, indexed_list):
+    local_marks_list=[]
+    local_marks_list.extend(indexed_list[x_rounded-1][y_rounded-1][z_rounded-1])
+    local_marks_list.extend(indexed_list[x_rounded-1][y_rounded][z_rounded-1])
+    local_marks_list.extend(indexed_list[x_rounded-1][y_rounded-1][z_rounded])
+    local_marks_list.extend(indexed_list[x_rounded][y_rounded-1][z_rounded-1])
+    local_marks_list.extend(indexed_list[x_rounded-1][y_rounded][z_rounded])
+    local_marks_list.extend(indexed_list[x_rounded][y_rounded-1][z_rounded])
+    local_marks_list.extend(indexed_list[x_rounded][y_rounded][z_rounded-1])
+
+    local_marks_list.extend(indexed_list[x_rounded][y_rounded][z_rounded])
+    local_marks_list.extend(indexed_list[x_rounded+1][y_rounded+1][z_rounded+1])
+    local_marks_list.extend(indexed_list[x_rounded+1][y_rounded][z_rounded+1])
+    local_marks_list.extend(indexed_list[x_rounded+1][y_rounded+1][z_rounded])
+    local_marks_list.extend(indexed_list[x_rounded][y_rounded+1][z_rounded+1])
+    local_marks_list.extend(indexed_list[x_rounded+1][y_rounded][z_rounded])
+    local_marks_list.extend(indexed_list[x_rounded][y_rounded+1][z_rounded])
+    local_marks_list.extend(indexed_list[x_rounded][y_rounded][z_rounded+1])
+
+    return local_marks_list
 
 
 
@@ -371,13 +392,14 @@ def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
     print("choose_parent", end - start)
     return parent_index, parent_node
 
-max_nodes_limit=2000
+max_nodes_limit = 1000
 def main_rrt(Node_List, start_x, start_y,start_z, marks_list, best_total_distance=3000, min_distance=0, phi_rotation=0):
     goal_reach_distance = 1
     if best_total_distance<2000:
         goal_reach_distance = 1
     goal_reached = False
     goal_distance2 = 50
+
     counter_boost = 0
     x_half=(x_charge-start_x)/2
     y_half = (y_charge - start_y)/2
@@ -385,16 +407,27 @@ def main_rrt(Node_List, start_x, start_y,start_z, marks_list, best_total_distanc
 
     indexed_list=index_collision_list(marks_list)
 
-    print("indexed_list", indexed_list[63][35][4])
+    #print("indexed_list", indexed_list[63][35][4])
     #print("indexed list", indexed_list)
     while goal_reached == False and len(Node_List) < max_nodes_limit:
         x_rand, y_rand, z_rand = rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_half, y_half)
         closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand, z_rand, Node_List)
         x_diff, y_diff, z_diff = find_velocity(closest_node, x_rand, y_rand, z_rand)
-        curr_x, curr_y, curr_z, collision = go_to_goal(closest_node.x, closest_node.y, closest_node.z, x_diff, y_diff, z_diff, marks_list)
+        x_round=round_of_rating(closest_node.x, -30)
+        y_round=round_of_rating(closest_node.y, -30)
+        z_round=round_of_rating(closest_node.z, -2)
+        local_marks_list1=local_marks_list_finder(x_round, y_round, z_round, indexed_list)
+
+        curr_x, curr_y, curr_z, collision = go_to_goal(closest_node.x, closest_node.y, closest_node.z, x_diff, y_diff, z_diff, local_marks_list1)
         parent_index, parent_node = choose_parent(curr_x, curr_y, curr_z, Node_List, closest_index)
         x_diff2, y_diff2, z_diff2 = find_velocity(parent_node, curr_x, curr_y, curr_z)
-        curr_x, curr_y, curr_z, collision = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2, z_diff2 , marks_list)
+
+        x_round2=round_of_rating(parent_node.x, -30)
+        y_round2=round_of_rating(parent_node.y, -30)
+        z_round2=round_of_rating(parent_node.z, -2)
+        local_marks_list2=local_marks_list_finder(x_round2, y_round2, z_round2, indexed_list)
+
+        curr_x, curr_y, curr_z, collision = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2, z_diff2 , local_marks_list2)
         distance_travelled = math.sqrt(math.pow((curr_x - parent_node.x), 2) + math.pow((curr_y - parent_node.y), 2) + math.pow((curr_z - parent_node.z), 2))
         #print("distance travelled",distance_travelled)
         if collision == False:
@@ -486,7 +519,7 @@ def callback_gps(gps):
         #distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         #if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-
+        '''
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
@@ -502,7 +535,7 @@ def callback_gps(gps):
             curr_point_rrt.position.z = Node_list[i].z
             rrt_poses.poses.append(curr_point_rrt)
         
-        '''
+
 
 
 
