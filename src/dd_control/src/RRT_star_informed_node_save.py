@@ -140,6 +140,57 @@ def find_velocity(closest_node, x_rand, y_rand, z_rand):
 
     return x_diff, y_diff, z_diff
 
+
+def round_of_rating(number, min_val):
+    round_num=round(number * 2) / 2
+    round_num= int((round_num-min_val)*2)
+
+
+    return round_num
+
+def index_collision_list(obstacle_list):
+    min_x=-30
+    min_y=-20
+    min_z = -2
+
+    max_x=30
+    max_y=30
+    max_z=20
+    indexed_list=[]
+
+    for ix in range((max_x-min_x)*2):
+        curr_list_x=[]
+        for iy in range((max_y-min_y)*2):
+            curr_list_y = []
+            for iz in range((max_z-min_z)*2):
+                curr_list_z = []
+                curr_list_y.append(curr_list_z)
+            curr_list_x.append(curr_list_y)
+        indexed_list.append(curr_list_x)
+
+
+
+
+
+    for i in range(len(obstacle_list)):
+        curr_x=obstacle_list[i].x
+        curr_y=obstacle_list[i].y
+        curr_z=obstacle_list[i].z
+        rounded_x=round_of_rating(curr_x, min_x)
+        rounded_y=round_of_rating(curr_y, min_y)
+        rounded_z=round_of_rating(curr_z, min_z)
+
+        indexed_list[rounded_x][rounded_y][rounded_z].append(obstacle_list[i])
+
+    return indexed_list
+
+
+
+
+
+
+
+
 def Collision(x, y, z, obstacle_list):
     start = time.time()
     collision = False
@@ -330,6 +381,12 @@ def main_rrt(Node_List, start_x, start_y,start_z, marks_list, best_total_distanc
     counter_boost = 0
     x_half=(x_charge-start_x)/2
     y_half = (y_charge - start_y)/2
+    print("marks list", marks_list[1])
+
+    indexed_list=index_collision_list(marks_list)
+
+    print("indexed_list", indexed_list[63][35][4])
+    #print("indexed list", indexed_list)
     while goal_reached == False and len(Node_List) < max_nodes_limit:
         x_rand, y_rand, z_rand = rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_half, y_half)
         closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand, z_rand, Node_List)
