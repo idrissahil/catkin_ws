@@ -48,7 +48,7 @@ boost_number = [0]
 
 
 def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_half, y_half):
-    start_rand = time.time()
+    #start_rand = time.time()
     c_best = best_total_distance
     c_min = min_distance
     if c_best == 3000:
@@ -93,14 +93,14 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         # print("boost")
         boost_number[0] = boost_number[0] + 1
 
-    end_rand = time.time()
-    print("rand_node", end_rand - start_rand)
+    #end_rand = time.time()
+    #print("rand_node", end_rand - start_rand)
 
     return x_rand, y_rand, z_rand
 
 
 def find_closest_node(x_rand, y_rand, z_rand, node_list):
-    start = time.time()
+    #start = time.time()
     dist_list = []
     for node in node_list:
         distance = math.sqrt(
@@ -110,13 +110,13 @@ def find_closest_node(x_rand, y_rand, z_rand, node_list):
     closest_index = dist_list.index(min(dist_list))
     closest_node = node_list[closest_index]
 
-    end = time.time()
-    print("find_closest_node", end - start)
+    #end = time.time()
+    #print("find_closest_node", end - start)
     return closest_node, goal_distance, closest_index
 
 
 def find_velocity(closest_node, x_rand, y_rand, z_rand):
-    start = time.time()
+    #start = time.time()
     x_diff = x_rand - closest_node.x  # meter per second speed
     y_diff = y_rand - closest_node.y
     z_diff = z_rand - closest_node.z
@@ -133,8 +133,8 @@ def find_velocity(closest_node, x_rand, y_rand, z_rand):
         z_diff = speed_limit
     if z_diff < -speed_limit:
         z_diff = -speed_limit
-    end = time.time()
-    print("find_velocity", end - start)
+    #end = time.time()
+    #print("find_velocity", end - start)
 
     return x_diff, y_diff, z_diff
 
@@ -205,7 +205,7 @@ def local_marks_list_finder(x_rounded, y_rounded, z_rounded, indexed_list):
 
 
 def Collision(x, y, z, obstacle_list):
-    start = time.time()
+    #start = time.time()
     collision = False
     for i in range(len(obstacle_list)):
         dx = x - obstacle_list[i].x
@@ -230,13 +230,13 @@ def Collision(x, y, z, obstacle_list):
         print("4")
         collision = True
 
-    end = time.time()
+    #end = time.time()
     # print("Collision", end - start)
     return collision
 
 
 def go_to_goal(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
-    start = time.time()
+    #start = time.time()
     curr_x = near_x
     curr_y = near_y
     curr_z = near_z
@@ -250,13 +250,13 @@ def go_to_goal(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     #collision = Collision(curr_x, curr_y, curr_z, marks_list)
     # if collision==False:
     # break
-    end = time.time()
-    print("go_to_goal", end - start)
+    #end = time.time()
+    #print("go_to_goal", end - start)
     return curr_x, curr_y, curr_z, collision
 
 
 def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
-    start = time.time()
+    #start = time.time()
     curr_x = near_x
     curr_y = near_y
     curr_z = near_z
@@ -278,8 +278,8 @@ def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
             collision = Collision(curr_x, curr_y, curr_z, marks_list)
             # print(collision)
             break
-    end = time.time()
-    print("go_to_goal2", end - start)
+    #end = time.time()
+    #print("go_to_goal2", end - start)
     return curr_x, curr_y, curr_z, collision
 
 
@@ -311,7 +311,7 @@ def go_to_goal2(near_x , near_y, near_z, x_diff, y_diff, z_diff, marks_list):
 
 
 def backtracking(Node_List, final_node):
-    start = time.time()
+    #start = time.time()
     controls_x = []
     controls_y = []
     controls_z = []
@@ -345,13 +345,13 @@ def backtracking(Node_List, final_node):
     controls_y.reverse()
     controls_z.reverse()
     goal_node_list.reverse()
-    end = time.time()
-    print("backtracking", end - start)
+    #end = time.time()
+    #print("backtracking", end - start)
     return controls_x, controls_y, controls_z, x_drone, y_drone, z_drone, goal_node_list
 
 
 def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
-    start = time.time()
+    #start = time.time()
     bounding_radius = 1
     dist_list = []
     parent_index = 0
@@ -383,8 +383,8 @@ def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
         # print("i", i, "tot_dist", tot_dist)
     # print("best dist", best_dist, "index", parent_index)
     parent_node = node_list[parent_index]
-    end = time.time()
-    print("choose_parent", end - start)
+    #end = time.time()
+    #print("choose_parent", end - start)
     return parent_index, parent_node
 
 
