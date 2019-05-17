@@ -32,7 +32,7 @@ int main(int argc, char** argv)
 
   ros::Publisher pub(nh.advertise<geometry_msgs::PoseStamped>("/mavros/"
                                                               "setpoint_position/"
-                                                              "local",
+                                                              "local1",
                                                               1000));
 
   ros::ServiceClient coverage_srv =

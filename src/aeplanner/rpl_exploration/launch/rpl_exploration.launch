@@ -26,7 +26,7 @@
   -->
 
   <node name="fly_to_server" pkg="rpl_exploration" type="fly_to">
-    <remap from="fly_to_cmd" to="/mavros/setpoint_position/local"/>
+    <remap from="fly_to_cmd" to="/mavros/setpoint_position/local1"/>
   </node>
 
   <node name="rrtplanner_node" pkg="rrtplanner" type="rrtplanner_node"/>

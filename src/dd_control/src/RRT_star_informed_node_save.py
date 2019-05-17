@@ -53,12 +53,12 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
     c_min = min_distance
     if c_best == 3000:
         # print(goal_distance) #regular rrt and first iteration
-        x_min = -10
-        y_min = -10
+        x_min = -40
+        y_min = -40
         z_min = -10
 
-        x_max = 10
-        y_max = 10
+        x_max = 40
+        y_max = 40
         z_max = 4
         x_rand = random.uniform(x_min, x_max)
         y_rand = random.uniform(y_min, y_max)
@@ -147,12 +147,12 @@ def round_of_rating(number, min_val):
 
 
 def index_collision_list(obstacle_list):
-    min_x = -30
-    min_y = -30
+    min_x = -40
+    min_y = -40
     min_z = -2
 
-    max_x = 30
-    max_y = 30
+    max_x = 40
+    max_y = 40
     max_z = 20
     indexed_list = []
 
@@ -210,21 +210,21 @@ def Collision(x, y, z, obstacle_list):
         dz = z - obstacle_list[i].z
 
         if abs(dx) < 0.30 and abs(dy) < 0.30 and abs(dz) < 0.2:
-            # print("abs collision check")
+            print("abs collision check")
             collision = True
 
         # dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
         # if dist <= 0.5:
         #    collision=True
         #    print("collision 111111111")
-    if x <= -20 or x > 20:
+    if x <= -40 or x > 40:
         print("2")
         collision = True
-    if y <= -20 or y > 20:
+    if y <= -40 or y > 40:
         print("3")
         collision = True
     if z < -0.1 or z > 4.1:
-        # print("4")
+        print("4")
         collision = True
 
     end = time.time()
@@ -387,7 +387,7 @@ def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
     return parent_index, parent_node
 
 
-max_nodes_limit = 1000
+max_nodes_limit = 500
 
 
 def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distance=3000, min_distance=0,
@@ -401,9 +401,11 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distan
     counter_boost = 0
     x_half = (x_charge - start_x) / 2
     y_half = (y_charge - start_y) / 2
-    print("marks list", marks_list[1])
+    #print("marks list", marks_list[1])
 
     indexed_list = index_collision_list(marks_list)
+    #print("indexed list", indexed_list)
+
 
     # print("indexed_list", indexed_list[63][35][4])
     # print("indexed list", indexed_list)
@@ -412,8 +414,8 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distan
                                            y_half)
         closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand, z_rand, Node_List)
         x_diff, y_diff, z_diff = find_velocity(closest_node, x_rand, y_rand, z_rand)
-        x_round = round_of_rating(closest_node.x, -30)
-        y_round = round_of_rating(closest_node.y, -30)
+        x_round = round_of_rating(closest_node.x, -40)
+        y_round = round_of_rating(closest_node.y, -40)
         z_round = round_of_rating(closest_node.z, -2)
         local_marks_list1 = local_marks_list_finder(x_round, y_round, z_round, indexed_list)
 
@@ -422,8 +424,8 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distan
         parent_index, parent_node = choose_parent(curr_x, curr_y, curr_z, Node_List, closest_index)
         x_diff2, y_diff2, z_diff2 = find_velocity(parent_node, curr_x, curr_y, curr_z)
 
-        x_round2 = round_of_rating(parent_node.x, -30)
-        y_round2 = round_of_rating(parent_node.y, -30)
+        x_round2 = round_of_rating(parent_node.x, -40)
+        y_round2 = round_of_rating(parent_node.y, -40)
         z_round2 = round_of_rating(parent_node.z, -2)
         local_marks_list2 = local_marks_list_finder(x_round2, y_round2, z_round2, indexed_list)
 
@@ -528,12 +530,13 @@ def callback_gps(gps):
         # distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         # if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-        '''
+
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
             curr_point_rrt.position.y =  goal_node_list[i].y
             curr_point_rrt.position.z =  goal_node_list[i].z
+            curr_point_rrt.orientation.x =  1
             rrt_poses.poses.append(curr_point_rrt)
         '''
 
@@ -543,7 +546,7 @@ def callback_gps(gps):
             curr_point_rrt.position.y = Node_list[i].y
             curr_point_rrt.position.z = Node_list[i].z
             rrt_poses.poses.append(curr_point_rrt)
-
+        '''
         rrt_vis_pub.publish(rrt_poses)
 
         # curr_point_rrt.orientation.z = -3.14 / 2

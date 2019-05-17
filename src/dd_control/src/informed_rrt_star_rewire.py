@@ -58,12 +58,12 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
     c_min=min_distance
     if c_best==3000:
         #print(goal_distance) #regular rrt and first iteration
-        x_min = -10
-        y_min = -10
-        z_min = -10
+        x_min = -40
+        y_min = -40
+        z_min = -0.1
 
-        x_max = 10
-        y_max = 10
+        x_max = 40
+        y_max = 40
         z_max = 4
         x_rand = random.uniform(x_min, x_max)
         y_rand = random.uniform(y_min, y_max)
@@ -93,7 +93,7 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         z_rand = random.uniform(z_min, z_max)
         #print("x rand", x_rand)
 
-    if counter_boost % 10 == 0:  # Boost the search towards the goal
+    if counter_boost % 100 == 0:  # Boost the search towards the goal
         x_rand = x_charge
         y_rand = y_charge
         z_rand = z_charge
@@ -145,13 +145,13 @@ def round_of_rating(number, min_val):
     return round_num
 
 def index_collision_list(obstacle_list):
-    min_x=-30
-    min_y=-30
-    min_z = -2
+    min_x=-40
+    min_y=-40
+    min_z = -1
 
-    max_x=30
-    max_y=30
-    max_z=20
+    max_x=40
+    max_y=40
+    max_z=40
     indexed_list=[]
 
     for ix in range((max_x-min_x)*2):
@@ -423,18 +423,18 @@ def main_rrt(Node_List, start_x, start_y,start_z, marks_list, best_total_distanc
         x_rand, y_rand, z_rand = rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_half, y_half)
         closest_node, goal_distance, closest_index = find_closest_node(x_rand, y_rand, z_rand, Node_List)
         x_diff, y_diff, z_diff = find_velocity(closest_node, x_rand, y_rand, z_rand)
-        x_round=round_of_rating(closest_node.x, -30)
-        y_round=round_of_rating(closest_node.y, -30)
-        z_round=round_of_rating(closest_node.z, -2)
+        x_round=round_of_rating(closest_node.x, -40)
+        y_round=round_of_rating(closest_node.y, -40)
+        z_round=round_of_rating(closest_node.z, -1)
         local_marks_list1=local_marks_list_finder(x_round, y_round, z_round, indexed_list)
 
         curr_x, curr_y, curr_z, collision = go_to_goal(closest_node.x, closest_node.y, closest_node.z, x_diff, y_diff, z_diff, local_marks_list1)
         parent_index, parent_node, inside_bound_list, dist_list_inside = choose_parent(curr_x, curr_y, curr_z, Node_List, closest_index)
         x_diff2, y_diff2, z_diff2 = find_velocity(parent_node, curr_x, curr_y, curr_z)
 
-        x_round2=round_of_rating(parent_node.x, -30)
-        y_round2=round_of_rating(parent_node.y, -30)
-        z_round2=round_of_rating(parent_node.z, -2)
+        x_round2=round_of_rating(parent_node.x, -40)
+        y_round2=round_of_rating(parent_node.y, -40)
+        z_round2=round_of_rating(parent_node.z, -1)
         local_marks_list2=local_marks_list_finder(x_round2, y_round2, z_round2, indexed_list)
 
         curr_x, curr_y, curr_z, collision = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2, z_diff2 , local_marks_list2)
@@ -533,12 +533,13 @@ def callback_gps(gps):
         #distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         #if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-
+        '''
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
             curr_point_rrt.position.y =  goal_node_list[i].y
             curr_point_rrt.position.z =  goal_node_list[i].z
+            curr_point_rrt.orientation.x =  1
             rrt_poses.poses.append(curr_point_rrt)
         '''
 
@@ -548,7 +549,7 @@ def callback_gps(gps):
             curr_point_rrt.position.y = Node_List[i].y
             curr_point_rrt.position.z = Node_List[i].z
             rrt_poses.poses.append(curr_point_rrt)
-        '''
+
 
 
 
