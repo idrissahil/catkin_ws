@@ -9,15 +9,20 @@ rospy.init_node('control_decision_drone')
 
 control_decision_pub = rospy.Publisher('/mavros/setpoint_position/local', PoseStamped, queue_size=1)
 
-
 state=1
 curr_pos = [0,0,0]
+rrt_ori=0
+rrt_list=[]
 
-
-def callback_battery(rrt_list):
-    global state
+def callback_gps(gps):
     global curr_pos
-    if rrt_list.poses[1].orientation.x==1:
+    global rrt_list
+    global state
+    curr_pos[0]=gps.pose.position.x
+    curr_pos[1]=gps.pose.position.y
+    curr_pos[2]=gps.pose.position.z
+
+    if rrt_ori==1:
         state=2
         print(state)
         hold_position=PoseStamped()
@@ -27,6 +32,13 @@ def callback_battery(rrt_list):
         hold_position.header.frame_id = "map"
         control_decision_pub.publish(hold_position)
 
+def callback_battery(rrt):
+    global state
+    global curr_pos
+    global rrt_ori
+    rrt_ori=rrt.poses[1].orientation.x
+    if rrt_ori==0:
+        state = 1
 
 def callback_exploration(explore):
     global state
@@ -36,11 +48,6 @@ def callback_exploration(explore):
     if state ==1:
         control_decision_pub.publish(explore)
 
-def callback_gps(gps):
-    global curr_pos
-    curr_pos[0]=gps.pose.position.x
-    curr_pos[1]=gps.pose.position.y
-    curr_pos[2]=gps.pose.position.z
 
 
 def main():

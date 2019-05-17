@@ -350,7 +350,7 @@ def backtracking(Node_List, final_node):
 
 def choose_parent(curr_x, curr_y, curr_z, Node_List, closest_index):
     #start=time.time()
-    bounding_radius=1.5
+    bounding_radius=1
     dist_list=[]
     dist_list_inside=[]
     inside_bound_list=[]
@@ -397,7 +397,7 @@ def rewire(inside_bound_list, Suc_node, Node_List, dist_list, local_marks_list):
             if collision==False and abs(curr_x-curr_node.x)<0.1 and abs(curr_y-curr_node.y)<0.1 and abs(curr_z==curr_node.z) <0.1:
                 curr_node.total_distance = new_total_distance
                 curr_node.parent_node = index_Suc
-                print("rewired 2")
+                print("rewired 2 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     return Node_List
 
 
@@ -521,7 +521,10 @@ def callback_gps(gps):
         rrt_poses.header.frame_id = 'map'
         if state_drone==1:
             print("length marks list", len(marks_list))
+            start=time.time()
             success_node, Node_List, goal_node_list = informed_rrt(gps.pose.position.x, gps.pose.position.y, gps.pose.position.z, marks_list )
+            end=time.time()
+            print("total time", end-start)
             state_drone = 2
         curr_rrt=PoseStamped()
         #print("index", index_rrt)
@@ -533,7 +536,7 @@ def callback_gps(gps):
         #distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         #if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-        '''
+
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
@@ -548,8 +551,9 @@ def callback_gps(gps):
             curr_point_rrt.position.x = Node_List[i].x
             curr_point_rrt.position.y = Node_List[i].y
             curr_point_rrt.position.z = Node_List[i].z
+            curr_point_rrt.orientation.x = 1
             rrt_poses.poses.append(curr_point_rrt)
-
+        '''
 
 
 

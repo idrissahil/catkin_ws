@@ -155,16 +155,18 @@ def index_collision_list(obstacle_list):
     max_y = 40
     max_z = 20
     indexed_list = []
-
+    indexed_list_append=indexed_list.append
     for ix in range((max_x - min_x) * 2):
         curr_list_x = []
+        curr_list_x_append=curr_list_x.append
         for iy in range((max_y - min_y) * 2):
             curr_list_y = []
+            curr_list_y_append=curr_list_y.append
             for iz in range((max_z - min_z) * 2):
                 curr_list_z = []
-                curr_list_y.append(curr_list_z)
-            curr_list_x.append(curr_list_y)
-        indexed_list.append(curr_list_x)
+                curr_list_y_append(curr_list_z)
+            curr_list_x_append(curr_list_y)
+        indexed_list_append(curr_list_x)
 
     for i in range(len(obstacle_list)):
         curr_x = obstacle_list[i].x
@@ -181,22 +183,23 @@ def index_collision_list(obstacle_list):
 
 def local_marks_list_finder(x_rounded, y_rounded, z_rounded, indexed_list):
     local_marks_list = []
-    local_marks_list.extend(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded - 1])
-    local_marks_list.extend(indexed_list[x_rounded - 1][y_rounded][z_rounded - 1])
-    local_marks_list.extend(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded])
-    local_marks_list.extend(indexed_list[x_rounded][y_rounded - 1][z_rounded - 1])
-    local_marks_list.extend(indexed_list[x_rounded - 1][y_rounded][z_rounded])
-    local_marks_list.extend(indexed_list[x_rounded][y_rounded - 1][z_rounded])
-    local_marks_list.extend(indexed_list[x_rounded][y_rounded][z_rounded - 1])
+    extend_local_marks=local_marks_list.extend
+    extend_local_marks(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1][y_rounded][z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded])
+    extend_local_marks(indexed_list[x_rounded][y_rounded - 1][z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1][y_rounded][z_rounded])
+    extend_local_marks(indexed_list[x_rounded][y_rounded - 1][z_rounded])
+    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded - 1])
 
-    local_marks_list.extend(indexed_list[x_rounded][y_rounded][z_rounded])
-    local_marks_list.extend(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded + 1])
-    local_marks_list.extend(indexed_list[x_rounded + 1][y_rounded][z_rounded + 1])
-    local_marks_list.extend(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded])
-    local_marks_list.extend(indexed_list[x_rounded][y_rounded + 1][z_rounded + 1])
-    local_marks_list.extend(indexed_list[x_rounded + 1][y_rounded][z_rounded])
-    local_marks_list.extend(indexed_list[x_rounded][y_rounded + 1][z_rounded])
-    local_marks_list.extend(indexed_list[x_rounded][y_rounded][z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded])
+    extend_local_marks(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1][y_rounded][z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded])
+    extend_local_marks(indexed_list[x_rounded][y_rounded + 1][z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1][y_rounded][z_rounded])
+    extend_local_marks(indexed_list[x_rounded][y_rounded + 1][z_rounded])
+    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded + 1])
 
     return local_marks_list
 
@@ -244,7 +247,7 @@ def go_to_goal(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     curr_x = curr_x + x_diff * distance_time * step_num  # Go to node for 100 *distance_time
     curr_y = curr_y + y_diff * distance_time * step_num
     curr_z = curr_z + z_diff * distance_time * step_num
-    collision = Collision(curr_x, curr_y, curr_z, marks_list)
+    #collision = Collision(curr_x, curr_y, curr_z, marks_list)
     # if collision==False:
     # break
     end = time.time()
@@ -266,7 +269,7 @@ def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
         curr_y = curr_y + y_diff * distance_time
         curr_z = curr_z + z_diff * distance_time
         counter = counter + 1
-        if counter % 10 == 0:
+        if counter % 20 == 0:
             collision = Collision(curr_x, curr_y, curr_z, marks_list)
         if collision == True:
             curr_x = curr_x - int(counter / 2) * x_diff * distance_time  # Go to node for 100 *distance_time
@@ -354,8 +357,6 @@ def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
     parent_index = 0
     best_dist = 100000
     total_distance_constant = 1
-    goal_distance_curr = math.sqrt(
-        math.pow((curr_x - x_charge), 2) + math.pow((curr_y - y_charge), 2) + math.pow((curr_z - z_charge), 2))
 
     # if goal_distance_curr<1:
     #    parent_index=closest_index
@@ -406,7 +407,7 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distan
     indexed_list = index_collision_list(marks_list)
     #print("indexed list", indexed_list)
 
-
+    Node_List_append=Node_List.append
     # print("indexed_list", indexed_list[63][35][4])
     # print("indexed list", indexed_list)
     while goal_reached == False and len(Node_List) < max_nodes_limit:
@@ -440,7 +441,7 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distan
                             z_diff=z_diff, total_distance=0)
             Suc_Node.total_parents = 1 + parent_node.total_parents
             Suc_Node.total_distance = distance_travelled + parent_node.total_distance
-            Node_List.append(Suc_Node)
+            Node_List_append(Suc_Node)
             goal_distance_curr = math.sqrt(
                 math.pow((x_charge - Suc_Node.x), 2) + math.pow((y_charge - Suc_Node.y), 2) + math.pow(
                     (z_charge - Suc_Node.z), 2))
@@ -475,6 +476,8 @@ def informed_rrt(start_x, start_y, start_z, marks_list):
     phi_rotation = math.atan2(y_charge - start_y, x_charge - start_x)
     start_node = Node(start_x, start_y, start_z, x_diff=0, y_diff=0, z_diff=0, total_distance=0)
     Node_List = [start_node]
+    nodelist_append = total_node_list.append
+    total_distance_append=total_distance_list.append
     for i in range(1):  # 100 iterations of rrt
         print("informed rrt iteration", i)
         print("node list length", len(Node_List))
@@ -487,13 +490,13 @@ def informed_rrt(start_x, start_y, start_z, marks_list):
         if i == 0:
             success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list, 40,
                                                                min_distance, phi_rotation)
-            total_node_list.append(len(Node_List))
-            total_distance_list.append(success_node.total_distance)
+            nodelist_append(len(Node_List))
+            total_distance_append(success_node.total_distance)
         if i > 0:
             success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,
                                                                success_node.total_distance, min_distance, phi_rotation)
-            total_node_list.append(len(Node_List))
-            total_distance_list.append(success_node.total_distance)
+            nodelist_append(len(Node_List))
+            total_distance_append(success_node.total_distance)
         if len(Node_List) == max_nodes_limit:
             break
     print("total node list", total_node_list)
@@ -517,8 +520,11 @@ def callback_gps(gps):
         rrt_poses.header.frame_id = 'map'
         if state_drone == 1:
             print("length marks list", len(marks_list))
+            start=time.time()
             success_node, Node_list, goal_node_list = informed_rrt(gps.pose.position.x, gps.pose.position.y,
                                                                    gps.pose.position.z, marks_list)
+            end=time.time()
+            print("total time", end-start)
             state_drone = 2
         curr_rrt = PoseStamped()
         # print("index", index_rrt)
@@ -530,7 +536,6 @@ def callback_gps(gps):
         # distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         # if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
