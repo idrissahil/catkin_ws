@@ -22,13 +22,11 @@ ranges = []
 Node_list = []
 goal_node_list = []
 marks_list = []
-free_list = []
-
 state_drone = 1
 index_rrt = 0
 
-x_charge = 2
-y_charge = 2
+x_charge = 3
+y_charge = 1
 z_charge = 1
 
 
@@ -87,7 +85,7 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         z_rand = random.uniform(z_min, z_max)
         # print("x rand", x_rand)
 
-    if counter_boost % 10 == 0:  # Boost the search towards the goal
+    if counter_boost % 10 == 0 or counter_boost==0:  # Boost the search towards the goal
         x_rand = x_charge
         y_rand = y_charge
         z_rand = z_charge
@@ -237,20 +235,6 @@ def Collision(x, y, z, obstacle_list):
     return collision
 
 
-def in_free_cell(x_pos, y_pos, z_pos, free_cell_list):
-    inside_free=False
-    for i in range(len(free_cell_list)):
-        dx = x_pos - free_cell_list[i].x
-        dy = y_pos - free_cell_list[i].y
-        dz = z_pos - free_cell_list[i].z
-
-        if abs(dx) < 0.20 and abs(dy) < 0.20 and abs(dz) < 0.2:
-            print("abs free check")
-            inside_free = True
-            break
-
-    return inside_free
-
 
 
 def go_to_goal(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
@@ -273,7 +257,7 @@ def go_to_goal(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     return curr_x, curr_y, curr_z, collision
 
 
-def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free_cell_list):
+def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     #start = time.time()
     curr_x = near_x
     curr_y = near_y
@@ -282,7 +266,6 @@ def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free
     step_num = 100
     counter = 0
     collision = False
-    inside_free =True
     while counter < step_num:
         curr_x = curr_x + x_diff * distance_time  # Go to node for 100 *distance_time
         curr_y = curr_y + y_diff * distance_time
@@ -290,18 +273,16 @@ def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free
         counter = counter + 1
         if counter % 20 == 0:
             collision = Collision(curr_x, curr_y, curr_z, marks_list)
-            inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list)
-        if collision == True or inside_free==False:
+        if collision == True:
             curr_x = curr_x - int(counter / 2) * x_diff * distance_time  # Go to node for 100 *distance_time
             curr_y = curr_y - int(counter / 2) * y_diff * distance_time
             curr_z = curr_z - int(counter / 2) * z_diff * distance_time
             collision = Collision(curr_x, curr_y, curr_z, marks_list)
-            inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list)
             # print(collision)
             break
     #end = time.time()
     #print("go_to_goal2", end - start)
-    return curr_x, curr_y, curr_z, collision, inside_free
+    return curr_x, curr_y, curr_z, collision
 
 
 
@@ -419,7 +400,7 @@ def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
 max_nodes_limit = 500
 
 
-def main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, best_total_distance=3000, min_distance=0,
+def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distance=3000, min_distance=0,
              phi_rotation=0):
     goal_reach_distance = 1
     if best_total_distance < 2000:
@@ -433,7 +414,6 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, best_to
     #print("marks list", marks_list[1])
 
     indexed_list = index_collision_list(marks_list)
-    free_indexed_list = index_collision_list(free_list)
     #print("indexed list", indexed_list)
 
     Node_List_append=Node_List.append
@@ -458,10 +438,9 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, best_to
         y_round2 = round_of_rating(parent_node.y, -40)
         z_round2 = round_of_rating(parent_node.z, -2)
         local_marks_list2 = local_marks_list_finder(x_round2, y_round2, z_round2, indexed_list)
-        local_free_list = local_marks_list_finder(x_round2, y_round2, z_round2, free_indexed_list)
 
-        curr_x, curr_y, curr_z, collision, inside_free = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2,
-                                                        z_diff2, local_marks_list2, local_free_list)
+        curr_x, curr_y, curr_z, collision = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2,
+                                                        z_diff2, local_marks_list2)
         distance_travelled = math.sqrt(
             math.pow((curr_x - parent_node.x), 2) + math.pow((curr_y - parent_node.y), 2) + math.pow(
                 (curr_z - parent_node.z), 2))
@@ -498,7 +477,7 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, best_to
     return Suc_Node, Node_List, goal_node_list
 
 
-def informed_rrt(start_x, start_y, start_z, marks_list, free_list):
+def informed_rrt(start_x, start_y, start_z, marks_list):
     total_distance_list = []
     total_node_list = []
     min_distance = math.sqrt(math.pow((x_charge - start_x), 2) + math.pow((y_charge - start_y), 2)) - 1
@@ -518,12 +497,12 @@ def informed_rrt(start_x, start_y, start_z, marks_list, free_list):
             total_distance_list.append(success_node.total_distance)
         '''
         if i == 0:
-            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, 40,
+            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list, 40,
                                                                min_distance, phi_rotation)
             nodelist_append(len(Node_List))
             total_distance_append(success_node.total_distance)
         if i > 0:
-            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list,
+            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,
                                                                success_node.total_distance, min_distance, phi_rotation)
             nodelist_append(len(Node_List))
             total_distance_append(success_node.total_distance)
@@ -543,7 +522,6 @@ def callback_gps(gps):
     global success_node
     global index_rrt
     global marks_list
-    global free_list
     # print ("state drone", state_drone)
     if not len(marks_list) == 0:
         rrt_poses = PoseArray()
@@ -553,7 +531,7 @@ def callback_gps(gps):
             print("length marks list", len(marks_list))
             start=time.time()
             success_node, Node_list, goal_node_list = informed_rrt(gps.pose.position.x, gps.pose.position.y,
-                                                                   gps.pose.position.z, marks_list, free_list)
+                                                                   gps.pose.position.z, marks_list)
             end=time.time()
             print("total time", end-start)
             state_drone = 2
@@ -600,17 +578,12 @@ def callback_markers(marks):
     # print("marks_unpacked first point", marks_unpacked[0].x)
     # print(marks_unpacked)
 
-def callback_free(vis_free):
-    global free_list
-    free_list = vis_free.markers[16].points
-    #print(free_list)
 
 
 
 def main():
     gps_sub = rospy.Subscriber('/mavros/local_position/pose', PoseStamped, callback_gps)
     vis_mark_sub = rospy.Subscriber('/aeplanner/occupied_cells_vis_array', MarkerArray, callback_markers)
-    free_vis_mark_sub = rospy.Subscriber('/aeplanner/free_cells_vis_array', MarkerArray, callback_free)
     rospy.spin()
 
 
