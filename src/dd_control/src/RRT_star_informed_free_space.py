@@ -9,6 +9,7 @@ from visualization_msgs.msg import MarkerArray, Marker
 from mavros_msgs.msg import PositionTarget
 import random
 import math
+import tf
 
 rospy.init_node('rrt_charging_drone')
 
@@ -28,12 +29,12 @@ state_drone = 1
 index_rrt = 0
 
 x_charge = 3
-y_charge = 1
+y_charge = 4
 z_charge = 1
 
 
 class Node():
-    def __init__(self, x, y, z, x_diff, y_diff, z_diff, total_distance, parent_node=None):
+    def __init__(self, x, y, z, x_diff, y_diff, z_diff, total_distance, parent_node=None, x_ori=0, y_ori=0, z_ori=0, w_ori=0):
         self.x = x
         self.y = y
         self.z = z
@@ -43,6 +44,10 @@ class Node():
         self.y_diff = y_diff
         self.z_diff = z_diff
         self.total_distance = total_distance
+        self.x_ori = x_ori
+        self.y_ori = y_ori
+        self.z_ori = z_ori
+        self.w_ori = w_ori
 
 
 boost_number = [0]
@@ -343,7 +348,7 @@ def backtracking(Node_List, final_node):
     y_drone = []
     z_drone = []
     goal_node_list = []
-
+    next_node=None
     times = []
     # index = len(Node_List)
     index = len(Node_List) - 1
@@ -353,6 +358,22 @@ def backtracking(Node_List, final_node):
         if index==None:
             break
         true_node = Node_List[index]
+        if next_node is not None:
+            dx = next_node.x - true_node.x
+            dy =  next_node.y -true_node.y
+            dz =  next_node.z -true_node.z
+            print("dx orientation",dx)
+            print("dy orientation",dy)
+            print("dz orientation",dz)
+
+            yaw=math.atan2(dy, dx)
+            pitch = math.atan2(math.sqrt(dz * dz + dx * dx), dy) + math.pi
+            quat = tf.transformations.quaternion_from_euler(0, 0, yaw, 'syxz')
+            true_node.x_ori = quat[0]
+            true_node.y_ori = quat[1]
+            true_node.z_ori = quat[2]
+            true_node.w_ori = quat[3]
+
         goal_node_list.append(true_node)
         x_drone.append(true_node.x)
         y_drone.append(true_node.y)
@@ -362,6 +383,7 @@ def backtracking(Node_List, final_node):
         controls_y.append(true_node.y_diff)
         controls_z.append(true_node.z_diff)
         index = true_node.parent_node
+        next_node=true_node
     x_drone.reverse()
     y_drone.reverse()
     z_drone.reverse()
@@ -574,13 +596,16 @@ def callback_gps(gps):
         # distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         # if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-        '''
+
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
             curr_point_rrt.position.y =  goal_node_list[i].y
             curr_point_rrt.position.z =  goal_node_list[i].z
-            curr_point_rrt.orientation.x =  1
+            curr_point_rrt.orientation.x =  goal_node_list[i].x_ori
+            curr_point_rrt.orientation.y =  goal_node_list[i].y_ori
+            curr_point_rrt.orientation.z =  goal_node_list[i].z_ori
+            curr_point_rrt.orientation.w =  goal_node_list[i].w_ori
             rrt_poses.poses.append(curr_point_rrt)
         '''
 
@@ -589,9 +614,12 @@ def callback_gps(gps):
             curr_point_rrt.position.x = Node_list[i].x
             curr_point_rrt.position.y = Node_list[i].y
             curr_point_rrt.position.z = Node_list[i].z
-            curr_point_rrt.orientation.x =  1
+            curr_point_rrt.orientation.x =  Node_list[i].x_ori
+            curr_point_rrt.orientation.y =  Node_list[i].y_ori
+            curr_point_rrt.orientation.z =  Node_list[i].z_ori
+            curr_point_rrt.orientation.w =  Node_list[i].w_ori
             rrt_poses.poses.append(curr_point_rrt)
-
+        '''
         rrt_vis_pub.publish(rrt_poses)
 
         # curr_point_rrt.orientation.z = -3.14 / 2

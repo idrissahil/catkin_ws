@@ -11,7 +11,6 @@ control_decision_pub = rospy.Publisher('/mavros/setpoint_position/local', PoseSt
 
 state=1
 curr_pos = [0,0,0]
-rrt_ori=0
 rrt_list=[]
 
 def callback_gps(gps):
@@ -23,7 +22,7 @@ def callback_gps(gps):
         curr_pos[1]=gps.pose.position.y
         curr_pos[2]=gps.pose.position.z
 
-    if rrt_ori==1:
+    if len(rrt_list)>1:
         state=2
         print(state)
         hold_position=PoseStamped()
@@ -40,10 +39,8 @@ def callback_gps(gps):
 def callback_battery(rrt):
     global state
     global curr_pos
-    global rrt_ori
-    rrt_ori=rrt.poses[1].orientation.x
-    if rrt_ori==0:
-        state = 1
+    global rrt_list
+    rrt_list=rrt.poses
 
 def callback_exploration(explore):
     global state

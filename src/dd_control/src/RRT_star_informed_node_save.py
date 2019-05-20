@@ -25,8 +25,8 @@ marks_list = []
 state_drone = 1
 index_rrt = 0
 
-x_charge = 3
-y_charge = 1
+x_charge = 0
+y_charge = 0
 z_charge = 1
 
 
