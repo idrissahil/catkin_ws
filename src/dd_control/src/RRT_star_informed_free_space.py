@@ -241,16 +241,16 @@ def Collision(x, y, z, obstacle_list):
 
 
 def in_free_cell(x_pos, y_pos, z_pos, free_cell_list):
-    inside_free=True
+    inside_free=False
     for i in range(len(free_cell_list)):
         dx = x_pos - free_cell_list[i].x
         dy = y_pos - free_cell_list[i].y
         dz = z_pos - free_cell_list[i].z
 
-        if abs(dx) > 0.45 and abs(dy) > 0.45 and abs(dz) > 0.45:
+        if abs(dx) < 0.6 and abs(dy) < 0.6 and abs(dz) < 0.6:
             #print("dx", dx, "dy", dy, "dz", dz)
             #print("abs free check")
-            inside_free = False
+            inside_free = True
     return inside_free
 
 
@@ -367,8 +367,8 @@ def backtracking(Node_List, final_node):
             print("dz orientation",dz)
 
             yaw=math.atan2(dy, dx)
-            pitch = math.atan2(math.sqrt(dz * dz + dx * dx), dy) + math.pi
-            quat = tf.transformations.quaternion_from_euler(0, 0, yaw, 'syxz')
+            pitch = math.atan2(math.sqrt(dy * dy + dx * dx), dz)
+            quat = tf.transformations.quaternion_from_euler(0, pitch, yaw, 'syxz')
             true_node.x_ori = quat[0]
             true_node.y_ori = quat[1]
             true_node.z_ori = quat[2]
@@ -596,7 +596,7 @@ def callback_gps(gps):
         # distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         # if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-
+        '''
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
@@ -619,7 +619,7 @@ def callback_gps(gps):
             curr_point_rrt.orientation.z =  Node_list[i].z_ori
             curr_point_rrt.orientation.w =  Node_list[i].w_ori
             rrt_poses.poses.append(curr_point_rrt)
-        '''
+
         rrt_vis_pub.publish(rrt_poses)
 
         # curr_point_rrt.orientation.z = -3.14 / 2
