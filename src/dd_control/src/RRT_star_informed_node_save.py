@@ -9,6 +9,8 @@ from visualization_msgs.msg import MarkerArray, Marker
 from mavros_msgs.msg import PositionTarget
 import random
 import math
+from collections import defaultdict
+
 
 rospy.init_node('rrt_charging_drone')
 
@@ -26,7 +28,7 @@ state_drone = 1
 index_rrt = 0
 
 x_charge = 0
-y_charge = 0
+y_charge = -14
 z_charge = 1
 
 
@@ -85,7 +87,7 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         z_rand = random.uniform(z_min, z_max)
         # print("x rand", x_rand)
 
-    if counter_boost % 10 == 0 or counter_boost==0:  # Boost the search towards the goal
+    if counter_boost % 50 == 0 or counter_boost==0:  # Boost the search towards the goal
         x_rand = x_charge
         y_rand = y_charge
         z_rand = z_charge
@@ -149,56 +151,37 @@ def index_collision_list(obstacle_list):
     min_x = -40
     min_y = -40
     min_z = -2
+    by_rounded_coords = defaultdict(list)
 
-    max_x = 40
-    max_y = 40
-    max_z = 20
-    indexed_list = []
-    indexed_list_append=indexed_list.append
-    for ix in range((max_x - min_x) * 2):
-        curr_list_x = []
-        curr_list_x_append=curr_list_x.append
-        for iy in range((max_y - min_y) * 2):
-            curr_list_y = []
-            curr_list_y_append=curr_list_y.append
-            for iz in range((max_z - min_z) * 2):
-                curr_list_z = []
-                curr_list_y_append(curr_list_z)
-            curr_list_x_append(curr_list_y)
-        indexed_list_append(curr_list_x)
-
-    for i in range(len(obstacle_list)):
-        curr_x = obstacle_list[i].x
-        curr_y = obstacle_list[i].y
-        curr_z = obstacle_list[i].z
-        rounded_x = round_of_rating(curr_x, min_x)
-        rounded_y = round_of_rating(curr_y, min_y)
-        rounded_z = round_of_rating(curr_z, min_z)
-
-        indexed_list[rounded_x][rounded_y][rounded_z].append(obstacle_list[i])
-
-    return indexed_list
-
+    for obstacle in obstacle_list:
+        rounded_x = round_of_rating(obstacle.x, min_x)
+        rounded_y = round_of_rating(obstacle.y, min_y)
+        rounded_z = round_of_rating(obstacle.z, min_z)
+        #print("rounded x", rounded_x,"rounded y", rounded_y,"rounded z", rounded_z)
+        by_rounded_coords[rounded_x, rounded_y, rounded_z].append(obstacle)
+    #print(by_rounded_coords[80,80,4])
+    return by_rounded_coords
 
 def local_marks_list_finder(x_rounded, y_rounded, z_rounded, indexed_list):
     local_marks_list = []
+    #print("x_rounded", x_rounded, "y rounded", y_rounded, "z rounded", z_rounded)
     extend_local_marks=local_marks_list.extend
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded - 1])
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded][z_rounded - 1])
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded - 1][z_rounded - 1])
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded - 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded - 1,z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded,z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded - 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded - 1,z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded - 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded,z_rounded - 1])
 
-    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded + 1])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded][z_rounded + 1])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded + 1][z_rounded + 1])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded + 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded,y_rounded,z_rounded])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded + 1,z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded,z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded + 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded + 1,z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded + 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded,z_rounded + 1])
 
     return local_marks_list
 
@@ -441,6 +424,7 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list, best_total_distan
 
         curr_x, curr_y, curr_z, collision = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2,
                                                         z_diff2, local_marks_list2)
+
         distance_travelled = math.sqrt(
             math.pow((curr_x - parent_node.x), 2) + math.pow((curr_y - parent_node.y), 2) + math.pow(
                 (curr_z - parent_node.z), 2))
@@ -545,6 +529,7 @@ def callback_gps(gps):
         # distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         # if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
+        '''
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
@@ -560,7 +545,7 @@ def callback_gps(gps):
             curr_point_rrt.position.y = Node_list[i].y
             curr_point_rrt.position.z = Node_list[i].z
             rrt_poses.poses.append(curr_point_rrt)
-        '''
+
         rrt_vis_pub.publish(rrt_poses)
 
         # curr_point_rrt.orientation.z = -3.14 / 2

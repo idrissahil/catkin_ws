@@ -10,6 +10,7 @@ from mavros_msgs.msg import PositionTarget
 import random
 import math
 import tf
+from collections import defaultdict
 
 rospy.init_node('rrt_charging_drone')
 
@@ -28,8 +29,8 @@ free_list = []
 state_drone = 1
 index_rrt = 0
 
-x_charge = 3
-y_charge = 4
+x_charge = 0
+y_charge = 0
 z_charge = 1
 
 
@@ -92,7 +93,7 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         z_rand = random.uniform(z_min, z_max)
         # print("x rand", x_rand)
 
-    if counter_boost % 10 == 0:  # Boost the search towards the goal
+    if counter_boost % 100 == 0:  # Boost the search towards the goal
         x_rand = x_charge
         y_rand = y_charge
         z_rand = z_charge
@@ -127,7 +128,7 @@ def find_velocity(closest_node, x_rand, y_rand, z_rand):
     y_diff = y_rand - closest_node.y
     z_diff = z_rand - closest_node.z
     speed_limit = 1
-    if x_diff > speed_limit:  # max speed set to 5 m/s
+    if x_diff > speed_limit:  # max speed set to 1 m/s
         x_diff = speed_limit
     if x_diff < -speed_limit:
         x_diff = -speed_limit
@@ -151,7 +152,7 @@ def round_of_rating(number, min_val):
 
     return round_num
 
-
+'''
 def index_collision_list(obstacle_list):
     min_x = -40
     min_y = -40
@@ -185,27 +186,43 @@ def index_collision_list(obstacle_list):
         indexed_list[rounded_x][rounded_y][rounded_z].append(obstacle_list[i])
 
     return indexed_list
+'''
 
+def index_collision_list(obstacle_list):
+    min_x = -40
+    min_y = -40
+    min_z = -2
+    by_rounded_coords = defaultdict(list)
+
+    for obstacle in obstacle_list:
+        rounded_x = round_of_rating(obstacle.x, min_x)
+        rounded_y = round_of_rating(obstacle.y, min_y)
+        rounded_z = round_of_rating(obstacle.z, min_z)
+        #print("rounded x", rounded_x,"rounded y", rounded_y,"rounded z", rounded_z)
+        by_rounded_coords[rounded_x, rounded_y, rounded_z].append(obstacle)
+    #print(by_rounded_coords[80,80,4])
+    return by_rounded_coords
 
 def local_marks_list_finder(x_rounded, y_rounded, z_rounded, indexed_list):
     local_marks_list = []
+    #print("x_rounded", x_rounded, "y rounded", y_rounded, "z rounded", z_rounded)
     extend_local_marks=local_marks_list.extend
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded - 1])
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded][z_rounded - 1])
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded - 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded - 1][z_rounded - 1])
-    extend_local_marks(indexed_list[x_rounded - 1][y_rounded][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded - 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded - 1,z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded,z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded - 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded - 1,z_rounded - 1])
+    extend_local_marks(indexed_list[x_rounded - 1,y_rounded,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded - 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded,z_rounded - 1])
 
-    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded + 1])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded][z_rounded + 1])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded + 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded + 1][z_rounded + 1])
-    extend_local_marks(indexed_list[x_rounded + 1][y_rounded][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded + 1][z_rounded])
-    extend_local_marks(indexed_list[x_rounded][y_rounded][z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded,y_rounded,z_rounded])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded + 1,z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded,z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded + 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded + 1,z_rounded + 1])
+    extend_local_marks(indexed_list[x_rounded + 1,y_rounded,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded + 1,z_rounded])
+    extend_local_marks(indexed_list[x_rounded,y_rounded,z_rounded + 1])
 
     return local_marks_list
 
@@ -218,7 +235,7 @@ def Collision(x, y, z, obstacle_list):
         dy = y - obstacle_list[i].y
         dz = z - obstacle_list[i].z
 
-        if abs(dx) < 0.30 and abs(dy) < 0.30 and abs(dz) < 0.2:
+        if abs(dx) < 0.32 and abs(dy) < 0.32 and abs(dz) < 0.32:
             print("abs collision check")
             collision = True
         # dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
@@ -240,14 +257,35 @@ def Collision(x, y, z, obstacle_list):
     return collision
 
 
-def in_free_cell(x_pos, y_pos, z_pos, free_cell_list):
+def in_free_cell(x_pos, y_pos, z_pos, free_cell_list, start_x, start_y, start_z):
     inside_free=False
+    if len(free_cell_list)==0:
+        print("empty free cell list")
+    dx_start = x_pos - start_x
+    dy_start = y_pos - start_y
+    dz_start = z_pos - start_z
+    dist_start = math.sqrt(dx_start * dx_start + dy_start * dy_start + dz_start * dz_start)
+    if dist_start < 1:
+        inside_free = True
+
     for i in range(len(free_cell_list)):
         dx = x_pos - free_cell_list[i].x
         dy = y_pos - free_cell_list[i].y
         dz = z_pos - free_cell_list[i].z
 
-        if abs(dx) < 0.6 and abs(dy) < 0.6 and abs(dz) < 0.6:
+        '''
+        if abs(dx)<0.7:
+            print("dx free", dx)
+        if abs(dy)<0.7:
+            print("dy free", dy)
+        if abs(dz)<0.7:
+            print("dz free", dz)
+        '''
+        #print("dx free", abs(dx))
+        #print("dy free", abs(dy))
+        #print("dz free", abs(dz))
+
+        if abs(dx) < 0.7 and abs(dy) < 0.7 and abs(dz) < 0.7:
             #print("dx", dx, "dy", dy, "dz", dz)
             #print("abs free check")
             inside_free = True
@@ -275,7 +313,7 @@ def go_to_goal(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list):
     return curr_x, curr_y, curr_z, collision
 
 
-def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free_cell_list):
+def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free_cell_list, start_x, start_y, start_z):
     #start = time.time()
     curr_x = near_x
     curr_y = near_y
@@ -292,15 +330,15 @@ def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free
         counter = counter + 1
         if counter % 20 == 0:
             collision = Collision(curr_x, curr_y, curr_z, marks_list)
-            inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list)
+            inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list, start_x, start_y, start_z)
             print("inside free gotogoal1", inside_free)
 
-            if collision == True:
+            if collision == True or inside_free==False:
                 curr_x = curr_x - int(counter / 2) * x_diff * distance_time  # Go to node for 100 *distance_time
                 curr_y = curr_y - int(counter / 2) * y_diff * distance_time
                 curr_z = curr_z - int(counter / 2) * z_diff * distance_time
                 collision = Collision(curr_x, curr_y, curr_z, marks_list)
-                inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list)
+                inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list, start_x, start_y, start_z)
                 # print(collision)
                 print("inside free gotogoal2", inside_free)
                 break
@@ -362,9 +400,9 @@ def backtracking(Node_List, final_node):
             dx = next_node.x - true_node.x
             dy =  next_node.y -true_node.y
             dz =  next_node.z -true_node.z
-            print("dx orientation",dx)
-            print("dy orientation",dy)
-            print("dz orientation",dz)
+            #print("dx orientation",dx)
+            #print("dy orientation",dy)
+            #print("dz orientation",dz)
 
             yaw=math.atan2(dy, dx)
             pitch = math.atan2(math.sqrt(dy * dy + dx * dx), dz)
@@ -398,7 +436,7 @@ def backtracking(Node_List, final_node):
 
 def choose_parent(curr_x, curr_y, curr_z, node_list, closest_index):
     #start = time.time()
-    bounding_radius = 1
+    bounding_radius = 0.4
     dist_list = []
     parent_index = 0
     best_dist = 100000
@@ -484,14 +522,16 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, best_to
         z_round2 = round_of_rating(parent_node.z, -2)
         local_marks_list2 = local_marks_list_finder(x_round2, y_round2, z_round2, indexed_list)
         local_free_list = local_marks_list_finder(x_round2, y_round2, z_round2, free_indexed_list)
-        #print("local free list", free_indexed_list)
+        #print("local free list", local_free_list)
 
         curr_x, curr_y, curr_z, collision, inside_free = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2,
-                                                        z_diff2, local_marks_list2, local_free_list)
+                                                        z_diff2, local_marks_list2, local_free_list, start_x, start_y, start_z)
         distance_travelled = math.sqrt(
             math.pow((curr_x - parent_node.x), 2) + math.pow((curr_y - parent_node.y), 2) + math.pow(
                 (curr_z - parent_node.z), 2))
         # print("distance travelled",distance_travelled)
+        if inside_free==False:
+            print("inside free false and length of free", len(free_indexed_list))
         if collision == False and inside_free==True:
             print("inside free", inside_free)
             Suc_Node = Node(x=curr_x, y=curr_y, z=curr_z, parent_node=parent_index, x_diff=x_diff, y_diff=y_diff,
@@ -545,7 +585,7 @@ def informed_rrt(start_x, start_y, start_z, marks_list, free_list):
             total_distance_list.append(success_node.total_distance)
         '''
         if i == 0:
-            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, 40,
+            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, min_distance *2,
                                                                min_distance, phi_rotation)
             nodelist_append(len(Node_List))
             total_distance_append(success_node.total_distance)
@@ -630,12 +670,14 @@ def callback_gps(gps):
 
 def callback_markers(marks):
     global marks_list
-    #marks_unpacked = marks.markers[16].points
-    marks_list = marks.markers[16].points
-    # print("marks list", marks_list[2].x)
+    global free_list
+    if not len(free_list)==0:
+        #marks_unpacked = marks.markers[16].points
+        marks_list = marks.markers[16].points
+        # print("marks list", marks_list[2].x)
 
-    # print("marks_unpacked first point", marks_unpacked[0].x)
-    # print(marks_unpacked)
+        # print("marks_unpacked first point", marks_unpacked[0].x)
+        # print(marks_unpacked)
 
 def callback_free(vis_free):
     global free_list
