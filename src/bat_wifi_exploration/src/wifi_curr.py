@@ -14,9 +14,9 @@ sigma_x=5
 sigma_y=5
 sigma_z=5
 
-x_my=1
-y_my=2
-z_my=3
+x_my=0
+y_my=0
+z_my=0
 
 A=1
 
@@ -31,7 +31,6 @@ def callback_gps(gps):
     wifi.header.frame_id="map"
     wifi.temperature=wifi_strength
     wifi_pub.publish(wifi)
-
 
 
 def main():

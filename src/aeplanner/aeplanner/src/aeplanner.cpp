@@ -193,9 +193,9 @@ void AEPlanner::expandRRT()
       double sigma_x=wifi_dist_state_[0];
       double sigma_y=wifi_dist_state_[1];
       double sigma_z=wifi_dist_state_[2];
-      double x_my=1;
-      double y_my=2;
-      double z_my=3;
+      double x_my=0;
+      double y_my=0;
+      double z_my=0;
       wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
                 ((search_location_z - z_my) *(search_location_z - z_my)) / (2 * sigma_z * sigma_z))));
       //ROS_INFO_STREAM("Wifi Distribution  1 " << wifi_dist_state_[0]);
@@ -211,7 +211,7 @@ void AEPlanner::expandRRT()
       ROS_DEBUG_STREAM("In known space?     " << ot_result);
       ROS_DEBUG_STREAM("Collision?          " << collisionLine(
                            nearest->state_, new_node->state_, params_.bounding_radius));
-    } while (!isInsideBoundaries(new_node->state_) or !ot_result or wifi_sig<0.5 or
+    } while (!isInsideBoundaries(new_node->state_) or !ot_result or wifi_sig<0.6 or
              collisionLine(nearest->state_, new_node->state_, params_.bounding_radius));
 
     ROS_DEBUG_STREAM("New node (" << new_node->state_[0] << ", " << new_node->state_[1]
@@ -267,9 +267,9 @@ Eigen::Vector4d AEPlanner::sampleNewPoint()
     double sigma_x=wifi_dist_state_[0];
     double sigma_y=wifi_dist_state_[1];
     double sigma_z=wifi_dist_state_[2];
-    double x_my=1;
-    double y_my=1;
-    double z_my=1;
+    double x_my=0;
+    double y_my=0;
+    double z_my=0;
     
     //wifi_sig =Amp * exp(-((((search_location_x - x_my) * (search_location_x - x_my)) / (2 * sigma_x * sigma_x)) + (((search_location_y - y_my) *(search_location_y - y_my)) / (2 * sigma_y * sigma_y)) + (
               ((search_location_z - z_my) *(search_location_z - z_my)) / (2 * sigma_z * sigma_z))));
@@ -383,9 +383,9 @@ std::pair<double, double> AEPlanner::getGain(RRTNode* node)
       //double wifi_sig = 0.55;
       double yaw = srv.response.yaw;
       double Amp = 1;
-      double x_my=1;
-      double y_my=2;
-      double z_my=3;
+      double x_my=0;
+      double y_my=0;
+      double z_my=0;
 
       double battery_gain = 1;
 

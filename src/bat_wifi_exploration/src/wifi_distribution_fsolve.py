@@ -19,13 +19,13 @@ initial_sigma_x=2
 initial_sigma_y=2
 initial_sigma_z=2
 
-x_my=1
-y_my=2
-z_my=3
+x_my=0
+y_my=0
+z_my=0
 
 A=1
 
-wifi_aware=False
+wifi_aware=True
 
 wifi_list=[]
 past_locations_x=[]
