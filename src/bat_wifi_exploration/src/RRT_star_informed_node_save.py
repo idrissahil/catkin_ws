@@ -28,7 +28,7 @@ state_drone = 1
 index_rrt = 0
 
 x_charge = 0
-y_charge = -14
+y_charge = 0
 z_charge = 1
 
 
@@ -529,7 +529,7 @@ def callback_gps(gps):
         # distance_curr_rrt = math.sqrt(math.pow((gps.pose.position.x - goal_node_list[index_rrt].x), 2) + math.pow((gps.pose.position.y - goal_node_list[index_rrt].y), 2) + math.pow((gps.pose.position.z - goal_node_list[index_rrt].z), 2))
         # if distance_curr_rrt<0.5 and index_rrt<len(goal_node_list)-1:
         #    index_rrt=index_rrt+1
-        '''
+
         for i in range(len(goal_node_list)):
             curr_point_rrt = Pose()
             curr_point_rrt.position.x = goal_node_list[i].x
@@ -545,9 +545,9 @@ def callback_gps(gps):
             curr_point_rrt.position.y = Node_list[i].y
             curr_point_rrt.position.z = Node_list[i].z
             rrt_poses.poses.append(curr_point_rrt)
-
+            '''
         rrt_vis_pub.publish(rrt_poses)
-
+        
         # curr_point_rrt.orientation.z = -3.14 / 2
         # curr_point_rrt.orientation.x = 2
         # print ("state drone2", state_drone)

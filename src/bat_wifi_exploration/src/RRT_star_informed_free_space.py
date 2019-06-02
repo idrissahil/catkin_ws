@@ -29,8 +29,8 @@ free_list = []
 state_drone = 1
 index_rrt = 0
 
-x_charge = 4
-y_charge = 2
+x_charge = 0
+y_charge = 0
 z_charge = 1
 
 
@@ -93,7 +93,7 @@ def rand_node(counter_boost, best_total_distance, min_distance, phi_rotation, x_
         z_rand = random.uniform(z_min, z_max)
         # print("x rand", x_rand)
 
-    if counter_boost % 100 == 0:  # Boost the search towards the goal
+    if counter_boost % 300 == 0:  # Boost the search towards the goal
         x_rand = x_charge
         y_rand = y_charge
         z_rand = z_charge
@@ -235,7 +235,12 @@ def Collision(x, y, z, obstacle_list):
         dy = y - obstacle_list[i].y
         dz = z - obstacle_list[i].z
 
-        if abs(dx) < 0.32 and abs(dy) < 0.32 and abs(dz) < 0.32:
+        #print("dx", dx)
+        #print("dy", dy)
+        #print("dz", dz)
+
+
+        if abs(dx) < 0.35 and abs(dy) < 0.35 and abs(dz) < 0.35:
             print("abs collision check")
             collision = True
         # dist = math.sqrt(math.pow(dx, 2) + math.pow(dy, 2)+ math.pow(dz, 2))
@@ -265,7 +270,7 @@ def in_free_cell(x_pos, y_pos, z_pos, free_cell_list, start_x, start_y, start_z)
     dy_start = y_pos - start_y
     dz_start = z_pos - start_z
     dist_start = math.sqrt(dx_start * dx_start + dy_start * dy_start + dz_start * dz_start)
-    if dist_start < 1:
+    if dist_start < 1.5:
         inside_free = True
 
     for i in range(len(free_cell_list)):
@@ -273,19 +278,7 @@ def in_free_cell(x_pos, y_pos, z_pos, free_cell_list, start_x, start_y, start_z)
         dy = y_pos - free_cell_list[i].y
         dz = z_pos - free_cell_list[i].z
 
-        '''
-        if abs(dx)<0.7:
-            print("dx free", dx)
-        if abs(dy)<0.7:
-            print("dy free", dy)
-        if abs(dz)<0.7:
-            print("dz free", dz)
-        '''
-        #print("dx free", abs(dx))
-        #print("dy free", abs(dy))
-        #print("dz free", abs(dz))
-
-        if abs(dx) < 0.7 and abs(dy) < 0.7 and abs(dz) < 0.7:
+        if abs(dx) < 0.4 and abs(dy) < 0.4 and abs(dz) < 0.4:
             #print("dx", dx, "dy", dy, "dz", dz)
             #print("abs free check")
             inside_free = True
@@ -330,16 +323,12 @@ def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free
         counter = counter + 1
         if counter % 20 == 0:
             collision = Collision(curr_x, curr_y, curr_z, marks_list)
-            inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list, start_x, start_y, start_z)
-            print("inside free gotogoal1", inside_free)
-
-            if collision == True or inside_free==False:
+            if collision == True:
                 curr_x = curr_x - int(counter / 2) * x_diff * distance_time  # Go to node for 100 *distance_time
                 curr_y = curr_y - int(counter / 2) * y_diff * distance_time
                 curr_z = curr_z - int(counter / 2) * z_diff * distance_time
                 collision = Collision(curr_x, curr_y, curr_z, marks_list)
                 inside_free = in_free_cell(curr_x, curr_y, curr_z, free_cell_list, start_x, start_y, start_z)
-                # print(collision)
                 print("inside free gotogoal2", inside_free)
                 break
     #end = time.time()
@@ -520,9 +509,19 @@ def main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, best_to
         x_round2 = round_of_rating(parent_node.x, -40)
         y_round2 = round_of_rating(parent_node.y, -40)
         z_round2 = round_of_rating(parent_node.z, -2)
+
+        #x_start_round = round_of_rating(start_x, -40)
+        #y_start_round = round_of_rating(start_y, -40)
+        #z_start_round = round_of_rating(start_z, -2)
+
+
         local_marks_list2 = local_marks_list_finder(x_round2, y_round2, z_round2, indexed_list)
         local_free_list = local_marks_list_finder(x_round2, y_round2, z_round2, free_indexed_list)
+        #local_free_list_start = local_marks_list_finder(x_start_round, y_start_round, z_start_round, free_indexed_list)
+
         #print("local free list", local_free_list)
+
+        #print("start free list", local_free_list_start, "x start", start_x, "y_start", start_y, "z start", start_z)
 
         curr_x, curr_y, curr_z, collision, inside_free = go_to_goal2(parent_node.x, parent_node.y, parent_node.z, x_diff2, y_diff2,
                                                         z_diff2, local_marks_list2, local_free_list, start_x, start_y, start_z)
@@ -585,7 +584,7 @@ def informed_rrt(start_x, start_y, start_z, marks_list, free_list):
             total_distance_list.append(success_node.total_distance)
         '''
         if i == 0:
-            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, min_distance *2,
+            success_node, Node_List, goal_node_list = main_rrt(Node_List, start_x, start_y, start_z, marks_list,free_list, min_distance *3,
                                                                min_distance, phi_rotation)
             nodelist_append(len(Node_List))
             total_distance_append(success_node.total_distance)
@@ -612,7 +611,7 @@ def callback_gps(gps):
     global marks_list
     global free_list
     # print ("state drone", state_drone)
-    if not len(marks_list) == 0:
+    if not len(marks_list) == 0 and not len(free_list)==0:
         rrt_poses = PoseArray()
         rrt_poses.header.stamp = rospy.Time.now()
         rrt_poses.header.frame_id = 'map'

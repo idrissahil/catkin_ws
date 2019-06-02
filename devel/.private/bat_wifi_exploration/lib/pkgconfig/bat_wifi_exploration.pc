@@ -1,0 +1,8 @@
+prefix=/home/idris/catkin_ws/devel/.private/bat_wifi_exploration
+
+Name: bat_wifi_exploration
+Description: Description of bat_wifi_exploration
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/idris/catkin_ws/devel/.private/bat_wifi_exploration/lib 
+Requires: 
