@@ -311,7 +311,7 @@ def go_to_goal2(near_x, near_y, near_z, x_diff, y_diff, z_diff, marks_list, free
     curr_x = near_x
     curr_y = near_y
     curr_z = near_z
-    distance_time = 0.01/2
+    distance_time = 0.01
     step_num = 100
     counter = 0
     collision = False
@@ -658,7 +658,7 @@ def callback_gps(gps):
             curr_point_rrt.orientation.z =  Node_list[i].z_ori
             curr_point_rrt.orientation.w =  Node_list[i].w_ori
             rrt_poses.poses.append(curr_point_rrt)
-        '''
+'''
         rrt_vis_pub.publish(rrt_poses)
 
         # curr_point_rrt.orientation.z = -3.14 / 2
